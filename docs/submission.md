@@ -65,5 +65,8 @@ CJ-DocGuard 是以仓颉原生实现的文档与示例验证工具。它从真�
 
 ```bash
 mkdir -p build/release
-git archive --format=zip --prefix=cj-docguard/ HEAD > build/release/cj-docguard-0.1.0-source.zip
+git archive --format=zip --prefix=cj-docguard/ \
+  --output="build/release/cj-docguard-source-$(git rev-parse --short HEAD).zip" HEAD
 ```
+
+导出文件按提交身份命名；保留 0.1.0 基线包，后续优化另存新包。最新代码与验证范围见 [持续优化记录](optimization-log.md)。

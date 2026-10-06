@@ -38,7 +38,7 @@ python3 scripts/real_projects.py --fetch
 
 原生模块每个 SDK 的最终记录：基础 86 个断言、AST 37 项人工符号及边界、报告 40 个断言、平台 46 个断言，以及证据筛选状态/不完整字段/最新尝试回归。不能将不同测试数量相加成产品普遍准确率。
 
-最终 39 项 Python 测试通过且无跳过；详细退出码、二进制身份和交付边界见 [最终验证](verification.md)。Python 测试包括真实 CLI 集成、报告差异/归档、只读 MCP、C 监督器与安装安全检查。当前日志：`build/test-results/summary.json`、`build/test-results/*-run.log`、`build/test-results/python-integration.log`；最终次数与退出码以日志为准。安装测试明确区分官方归档实际校验、合成攻击样本与未提供归档时的跳过项。
+R01 的 **41 项 Python 测试通过且无跳过**，两个 SDK 的 10 个原生测试程序通过，健康矩阵重新验证为 28 格当前匹配；详细退出码、二进制身份和交付边界见 [持续优化记录](optimization-log.md)。首次交付的 39 项记录保留在 [0.1.0 基线归档](verification.md)。Python 测试包括真实 CLI 集成、报告差异/归档、命令参数拒绝且无文件副作用、只读 MCP、C 监督器与安装安全检查。最新日志在 `build/test-results/`；本轮另存 `build/optimization-r01/test-results/`，避免后续覆盖。安装测试明确区分官方归档实际校验、合成攻击样本与未提供归档时的跳过项。
 
 健康报告：`examples/healthy/.docguard/report.json`；原始快照、尝试及日志均在旁边目录。第三方固定版本及原始检查清单见 [真实项目报告](real-projects.md)。干净目录复验见 [独立复验](clean-reproduction.md)。
 

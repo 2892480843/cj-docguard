@@ -90,6 +90,8 @@ required = true
 | `history --report REPORT.json [--example ID] [--sdk VERSION]` | 显式读取归档，统一标为 `FROZEN`、`eligible=false` |
 | `diff --old A.json --new B.json` | 对比两个固定报告的输入、状态和符号变化 |
 
+参数必须适用于所选命令。无效参数、重复参数和 `init` 同时指定 `--project` / `--config` 会返回 `2`；命令不再静默忽略其他命令的参数。选择当前查询项目使用 `--config FILE`；`--project` 仅用于初始化。`evidence` 固定查询运行证据，不接受 `--tool`。
+
 严格门禁的退出码：`0` 必需范围满足，`1` 失败/过期/未知/跳过/未执行或链接问题，`2` 配置/环境/工具错误。`--sdk` 只限制本次执行范围，严格门禁仍检查配置的完整目标矩阵；只执行一个版本时，其他必需格未验证会返回 1。
 
 验证状态与输入匹配状态分别记录。只有最新登记尝试满足 `RUN_VERIFIED + COMPLETED + CURRENT + 实际SDK/平台一致 + 完整证据 + 必需断言通过`，才能返回 `eligible=true`。无断言、仅编译、过期、未知、缺日志、较新失败或进行中的尝试均不返回旧成功。
@@ -124,7 +126,7 @@ python3 scripts/real_projects.py --fetch
 
 输出保存在 `build/test-results`。原生模块覆盖 JSON/TOML/SHA、AST 提取、证据筛选、报告和平台执行；集成测试通过真实编译器验证错误分类、输入变更、验证中修改、取消、日志完整性、最新尝试优先和严格退出码。MCP 单元测试使用明确标注的协议替身，另有真实 CLI 查询测试，二者分开记录。
 
-参见 [最终验证](docs/verification.md)、[验收映射](docs/acceptance.md)、[真实项目接入](docs/real-projects.md)、[工具链来源](docs/toolchains.md)、[支持范围](docs/support.md)、[演示与提交材料](docs/submission.md)。
+参见 [持续优化与最新验证](docs/optimization-log.md)、[0.1.0 基线验证](docs/verification.md)、[验收映射](docs/acceptance.md)、[真实项目接入](docs/real-projects.md)、[工具链来源](docs/toolchains.md)、[支持范围](docs/support.md)、[演示与提交材料](docs/submission.md)。
 
 ## 已知边界
 

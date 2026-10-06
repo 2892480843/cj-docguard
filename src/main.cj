@@ -21,6 +21,30 @@ func options(args: Array<String>): HashMap<String, String> {
 }
 func opt(options: HashMap<String, String>, key: String, fallback: String): String { options.get(key) ?? fallback }
 
+func validateOptions(command: String, parsed: HashMap<String, String>): Unit {
+    let allowed: Array<String> = match (command) {
+        case "init" => ["--config", "--project"]
+        case "doctor" | "build" => ["--config"]
+        case "verify" => ["--config", "--sdk", "--matrix"]
+        case "check" => ["--config", "--strict"]
+        case "query" => ["--config", "--tool", "--symbol", "--example", "--sdk", "--platform"]
+        case "evidence" => ["--config", "--symbol", "--example", "--sdk", "--platform"]
+        case "history" => ["--report", "--example", "--sdk"]
+        case "diff" => ["--old", "--new"]
+        case "--help" | "help" | "--version" => []
+        case _ => throw Exception("unknown command: " + command)
+    }
+    // Reject ignored arguments before loading configuration or creating project files.
+    for ((key, _) in parsed) {
+        var accepted = false
+        for (option in allowed) { if (option == key) { accepted = true } }
+        if (!accepted) { throw Exception("option " + key + " is not valid for " + command) }
+    }
+    if (command == "init" && parsed.contains("--config") && parsed.contains("--project")) {
+        throw Exception("--config and --project are mutually exclusive for init")
+    }
+}
+
 func initialize(path: String): Unit {
     if (exists(path)) { throw Exception("configuration already exists; refusing overwrite") }
     let root = Path(path).parent.toString()
@@ -187,8 +211,13 @@ func operate(command: String, options: HashMap<String, String>): Int64 {
 }
 
 main(args: Array<String>): Int64 {
-    if (args.isEmpty() || args[0] == "--help" || args[0] == "help") { print(HELP); return 0 }
-    if (args[0] == "--version") { println(ENGINE_VERSION); return 0 }
-    try { return operate(args[0], options(args)) }
+    if (args.isEmpty()) { print(HELP); return 0 }
+    try {
+        let parsed = options(args)
+        validateOptions(args[0], parsed)
+        if (args[0] == "--help" || args[0] == "help") { print(HELP); return 0 }
+        if (args[0] == "--version") { println(ENGINE_VERSION); return 0 }
+        return operate(args[0], parsed)
+    }
     catch (error: Exception) { println(J.obj().put("error", J.str(error.message)).put("exit_code", J.num(2)).dump()); return 2 }
 }
