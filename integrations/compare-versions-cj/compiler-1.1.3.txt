@@ -1,0 +1,140 @@
+error: 'matchStr' is not a member of struct 'MatchData'
+   ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/satisfies.cj:113:20:
+    | 
+113 |             op = s.matchStr(1)
+    |                    ^^^^^^^^ 
+    | 
+
+error: 'matchStr' is not a member of struct 'MatchData'
+   ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/satisfies.cj:126:35:
+    | 
+126 |                 res = r.replace(s.matchStr(1), 0)
+    |                                   ^^^^^^^^ 
+    | 
+
+error: 'append' is not a member of class 'ArrayList<Struct-String>'
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/util.cj:83:21:
+   | 
+83 |                 arr.append(s.matchStr(i))
+   |                     ^^^^^^ 
+   | 
+
+error: 'append' is not a member of class 'ArrayList<Struct-String>'
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/util.cj:90:13:
+   | 
+90 |         arr.append('')
+   |             ^^^^^^ 
+   | 
+
+error: mismatched types
+   ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/util.cj:100:25:
+    | 
+100 |             this.remove(idx)
+    |                         ^^^ expected 'Struct-Range<Int64>', found 'Int64'
+    | 
+
+error: undeclared identifier 'isSome'
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/validate.cj:42:31:
+   | 
+42 |     return r.matches(version).isSome()
+   |                               ^^^^^^ 
+   | 
+
+warning: unused import 'std.math.*'
+ ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/util.cj:5:1:
+  | 
+5 | import std.math.*
+  | ^^^^^^^^^^^^^^^^^ unused import
+  | 
+  # note: this warning can be suppressed by setting the compiler option `-Woff unused`
+
+warning: function 'matcher' is deprecated. `Matcher` has been marked as deprecated.
+   ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/satisfies.cj:110:19:
+    | 
+110 |     let m = regOp.matcher(range)
+    |                   ^^^^^^^ deprecated
+    | 
+    # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: function 'groupNumber' is deprecated. Use member function `public func groupCount(): Int64` instead.
+   ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/satisfies.cj:112:31:
+    | 
+112 |         case Some(s) => if (s.groupNumber() > 0) {
+    |                               ^^^^^^^^^^^ deprecated
+    | 
+    # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: function 'matcher' is deprecated. `Matcher` has been marked as deprecated.
+   ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/satisfies.cj:123:21:
+    | 
+123 |         var r = reg.matcher(res)
+    |                     ^^^^^^^ deprecated
+    | 
+    # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: function 'groupNumber' is deprecated. Use member function `public func groupCount(): Int64` instead.
+   ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/satisfies.cj:125:35:
+    | 
+125 |             case Some(s) => if (s.groupNumber() > 0) {
+    |                                   ^^^^^^^^^^^ deprecated
+    | 
+    # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: constructor 'init' is deprecated. Use member funtion `public Regex(let pattern: String, flags: Array<RegexFlag>)` instead.
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/util.cj:13:14:
+   | 
+13 | let semver = Regex(
+   |              ^^^^^ deprecated
+   | 
+   # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: class 'RegexOption' is deprecated. Use `public enum RegexFlag` instead.
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/util.cj:15:5:
+   | 
+15 |     RegexOption().ignoreCase()
+   |     ^^^^^^^^^^^ deprecated
+   | 
+   # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: function 'matcher' is deprecated. `Matcher` has been marked as deprecated.
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/util.cj:76:20:
+   | 
+76 |     let m = semver.matcher(version)
+   |                    ^^^^^^^ deprecated
+   | 
+   # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: function 'groupNumber' is deprecated. Use member function `public func groupCount(): Int64` instead.
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/util.cj:81:31:
+   | 
+81 |         case Some(s) => if (s.groupNumber() > 0) {
+   |                               ^^^^^^^^^^^ deprecated
+   | 
+   # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: function 'groupNumber' is deprecated. Use member function `public func groupCount(): Int64` instead.
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/util.cj:82:29:
+   | 
+82 |             for (i in 1..=s.groupNumber()) {
+   |                             ^^^^^^^^^^^ deprecated
+   | 
+   # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: function 'matcher' is deprecated. `Matcher` has been marked as deprecated.
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/validate.cj:21:15:
+   | 
+21 |     return vd.matcher(version).allCount() > 0 && semver.matcher(version).allCount() > 0;
+   |               ^^^^^^^ deprecated
+   | 
+   # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+warning: function 'matcher' is deprecated. `Matcher` has been marked as deprecated.
+  ==> /Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/real-projects/20261006T113241850714Z/compare-versions-cj/.docguard/snapshots/d0d2632f6c5061965fc8391e0b29367b43fadd10e13367d54ac09a7d9a99207a/project/upstream/src/validate.cj:21:57:
+   | 
+21 |     return vd.matcher(version).allCount() > 0 && semver.matcher(version).allCount() > 0;
+   |                                                         ^^^^^^^ deprecated
+   | 
+   # note: this warning can be suppressed by setting the compiler option `-Woff deprecated`
+
+6 errors generated, 6 errors printed.
+12 warnings generated, 12 warnings printed.

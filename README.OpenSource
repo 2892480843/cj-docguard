@@ -1,0 +1,10 @@
+# Open-source provenance
+
+CJ-DocGuard authored sources: Apache-2.0; no third-party Cangjie package dependencies.
+Cangjie SDK/std.ast: external official runtime/toolchain, not bundled; see docs/toolchains.md.
+Python standard library and system C compiler: development/protocol tooling, not vendored.
+Integration source checkouts are fetched at exact commits listed in integrations/upstream-lock.json,
+kept in ignored local build/cache directories, and retain original LICENSE notices.
+leven4cj: Apache-2.0; is-png-cj and compare-versions-cj: MIT.
+The executable integration harness samples are newly authored; upstream files remain unchanged.
+No upstream project adoption, endorsement, or contributor status is implied.

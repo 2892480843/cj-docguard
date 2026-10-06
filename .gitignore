@@ -1,0 +1,9 @@
+build/
+target/
+.docguard/
+.local/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*

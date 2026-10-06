@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-10-06T12:13:59.675952+00:00",
+  "binary_sha256": "2590b9c4a86d57a40617efde1091753ea0f130ba568b9f8ed5633bfa0acf7c3b",
+  "binary_sha256_after": "2590b9c4a86d57a40617efde1091753ea0f130ba568b9f8ed5633bfa0acf7c3b",
+  "binary_unchanged": true,
+  "run_root": "$AUDIT_ROOT",
+  "projects": [
+    {
+      "name": "leven4cj",
+      "commit": "da69d981027b9fcbe12d09cfbb275b4ce8acc91d",
+      "repository": "https://github.com/cangjielanguage-tpc/leven4cj.git",
+      "license": "Apache-2.0",
+      "production_sources": [
+        "src/leven.cj"
+      ],
+      "excluded_sources": [
+        "src/test/leven_test.cj"
+      ],
+      "command": [
+        "$TOOL_ROOT/build/cj-docguard",
+        "verify",
+        "--matrix",
+        "--config",
+        "$AUDIT_ROOT/leven4cj/docguard.toml"
+      ],
+      "started_at": "2026-10-06T12:13:27.369833+00:00",
+      "finished_at": "2026-10-06T12:13:41.371612+00:00",
+      "exit_code": 1,
+      "stdout": "{\"report\":\"$AUDIT_ROOT/leven4cj/.docguard/report.json\",\"summary\":{\"CURRENT\":2,\"RUN_FAILED\":1,\"RUN_VERIFIED\":1,\"TOTAL\":2,\"VERIFIED_CURRENT\":1}}\n",
+      "stderr": "",
+      "report_path": "$AUDIT_ROOT/leven4cj/.docguard/report.json",
+      "summary": {
+        "CURRENT": 2,
+        "RUN_FAILED": 1,
+        "RUN_VERIFIED": 1,
+        "TOTAL": 2,
+        "VERIFIED_CURRENT": 1
+      },
+      "closure_complete": true,
+      "extraction_files": [
+        {
+          "path": null,
+          "source": "upstream/src/leven.cj",
+          "status": "OK",
+          "package": "leven4cj"
+        }
+      ],
+      "diagnostics": [],
+      "results": [
+        {
+          "sdk_version": "1.1.3",
+          "status": "RUN_VERIFIED",
+          "freshness": "CURRENT",
+          "eligible": true,
+          "reason": "Registered assertions passed in this recorded environment"
+        },
+        {
+          "sdk_version": "1.2.0",
+          "status": "RUN_FAILED",
+          "freshness": "CURRENT",
+          "eligible": false,
+          "reason": "program failed, timed out, interrupted or exceeded log limit"
+        }
+      ],
+      "third_party_adoption": false,
+      "report_sha256": "8b60a220f203a5b21913b8cc5767a1dac82b5053ba7bbf6b4fb4afe7509cd80c",
+      "report_relative": "build/real-projects/20261006T121327259937Z/leven4cj/.docguard/report.json",
+      "api_symbol_count": 1,
+      "cells": [
+        {
+          "sdk_version": "1.1.3",
+          "status": "RUN_VERIFIED",
+          "freshness": "CURRENT",
+          "eligible": true,
+          "reason": "Registered assertions passed in this recorded environment",
+          "platform": "Darwin-arm64",
+          "project_fingerprint": "de9ddfbb650e1c7c118674d814bc585f9949e9bc89d7d9d940ac8e1f014df803",
+          "environment_fingerprint": "fc0e7c82c40de651cf444048b9b88f20bdb8d20bbc8ee5c0512117c9716bebdc",
+          "assertions": [
+            {
+              "actual": 0,
+              "expected": 0,
+              "kind": "exit_code",
+              "passed": true,
+              "required": true
+            },
+            {
+              "actual": "3\n2\n3\n",
+              "expected": "3\n2\n3\n",
+              "kind": "stdout",
+              "passed": true,
+              "required": true
+            }
+          ],
+          "compile_exit_code": 0,
+          "compile_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "run_exit_code": 0
+        },
+        {
+          "sdk_version": "1.2.0",
+          "status": "RUN_FAILED",
+          "freshness": "CURRENT",
+          "eligible": false,
+          "reason": "program failed, timed out, interrupted or exceeded log limit",
+          "platform": "Darwin-arm64",
+          "project_fingerprint": "de9ddfbb650e1c7c118674d814bc585f9949e9bc89d7d9d940ac8e1f014df803",
+          "environment_fingerprint": "c66f2e13463652cbeb2ad0a8469d87f1860634909b358f00cf4c8c1112f9169c",
+          "assertions": [
+            {
+              "actual": 137,
+              "expected": 0,
+              "kind": "exit_code",
+              "passed": false,
+              "required": true
+            },
+            {
+              "actual": "",
+              "expected": "3\n2\n3\n",
+              "kind": "stdout",
+              "passed": false,
+              "required": true
+            }
+          ],
+          "compile_exit_code": 0,
+          "compile_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "run_exit_code": 137
+        }
+      ]
+    },
+    {
+      "name": "is-png-cj",
+      "commit": "e1fdf9b6b3c2cdbf7ba85d94828729d4fb857028",
+      "repository": "https://github.com/cangjielanguage-tpc/is-png-cj.git",
+      "license": "MIT",
+      "production_sources": [
+        "src/is_png.cj",
+        "src/util.cj"
+      ],
+      "excluded_sources": [
+        "src/is_png_test.cj"
+      ],
+      "command": [
+        "$TOOL_ROOT/build/cj-docguard",
+        "verify",
+        "--matrix",
+        "--config",
+        "$AUDIT_ROOT/is-png-cj/docguard.toml"
+      ],
+      "started_at": "2026-10-06T12:13:41.375238+00:00",
+      "finished_at": "2026-10-06T12:13:51.236899+00:00",
+      "exit_code": 1,
+      "stdout": "{\"report\":\"$AUDIT_ROOT/is-png-cj/.docguard/report.json\",\"summary\":{\"RUN_VERIFIED\":2,\"TOTAL\":2,\"UNKNOWN_CURRENT\":2,\"VERIFIED_CURRENT\":0}}\n",
+      "stderr": "",
+      "report_path": "$AUDIT_ROOT/is-png-cj/.docguard/report.json",
+      "summary": {
+        "RUN_VERIFIED": 2,
+        "TOTAL": 2,
+        "UNKNOWN_CURRENT": 2,
+        "VERIFIED_CURRENT": 0
+      },
+      "closure_complete": false,
+      "extraction_files": [
+        {
+          "path": null,
+          "source": "upstream/src/is_png.cj",
+          "status": "OK",
+          "package": "is_png_cj"
+        },
+        {
+          "path": null,
+          "source": "upstream/src/util.cj",
+          "status": "OK",
+          "package": "is_png_cj"
+        }
+      ],
+      "diagnostics": [
+        {
+          "column": 0,
+          "line": 0,
+          "message": "Import requires explicit dependency/external-input review: import std.io.*",
+          "rule": "INPUT_CLOSURE_UNKNOWN",
+          "severity": "warning",
+          "source": "upstream/src/is_png.cj"
+        },
+        {
+          "column": 0,
+          "line": 0,
+          "message": "Import requires explicit dependency/external-input review: import std.io.*",
+          "rule": "INPUT_CLOSURE_UNKNOWN",
+          "severity": "warning",
+          "source": "upstream/src/util.cj"
+        }
+      ],
+      "results": [
+        {
+          "sdk_version": "1.1.3",
+          "status": "RUN_VERIFIED",
+          "freshness": "UNKNOWN_CURRENT",
+          "eligible": false,
+          "reason": "Registered assertions passed in this recorded environment"
+        },
+        {
+          "sdk_version": "1.2.0",
+          "status": "RUN_VERIFIED",
+          "freshness": "UNKNOWN_CURRENT",
+          "eligible": false,
+          "reason": "Registered assertions passed in this recorded environment"
+        }
+      ],
+      "third_party_adoption": false,
+      "report_sha256": "a33ae6e789e73a6aaba42352b89bfb1f07d3a8eaad9b492f493bda80764f7800",
+      "report_relative": "build/real-projects/20261006T121327259937Z/is-png-cj/.docguard/report.json",
+      "api_symbol_count": 2,
+      "cells": [
+        {
+          "sdk_version": "1.1.3",
+          "status": "RUN_VERIFIED",
+          "freshness": "UNKNOWN_CURRENT",
+          "eligible": false,
+          "reason": "Registered assertions passed in this recorded environment",
+          "platform": "Darwin-arm64",
+          "project_fingerprint": "37a2383849e5214759787c7825dad2745eaea0316af8ce6def5b1d1bde2e4a46",
+          "environment_fingerprint": "fc0e7c82c40de651cf444048b9b88f20bdb8d20bbc8ee5c0512117c9716bebdc",
+          "assertions": [
+            {
+              "actual": 0,
+              "expected": 0,
+              "kind": "exit_code",
+              "passed": true,
+              "required": true
+            },
+            {
+              "actual": "true\nfalse\nfalse\n",
+              "expected": "true\nfalse\nfalse\n",
+              "kind": "stdout",
+              "passed": true,
+              "required": true
+            }
+          ],
+          "compile_exit_code": 0,
+          "compile_stderr_sha256": "efff8345274732cb4f1f1434122c816d546ec7da8ac7f097069fef1944a2ff1a",
+          "run_exit_code": 0
+        },
+        {
+          "sdk_version": "1.2.0",
+          "status": "RUN_VERIFIED",
+          "freshness": "UNKNOWN_CURRENT",
+          "eligible": false,
+          "reason": "Registered assertions passed in this recorded environment",
+          "platform": "Darwin-arm64",
+          "project_fingerprint": "37a2383849e5214759787c7825dad2745eaea0316af8ce6def5b1d1bde2e4a46",
+          "environment_fingerprint": "c66f2e13463652cbeb2ad0a8469d87f1860634909b358f00cf4c8c1112f9169c",
+          "assertions": [
+            {
+              "actual": 0,
+              "expected": 0,
+              "kind": "exit_code",
+              "passed": true,
+              "required": true
+            },
+            {
+              "actual": "true\nfalse\nfalse\n",
+              "expected": "true\nfalse\nfalse\n",
+              "kind": "stdout",
+              "passed": true,
+              "required": true
+            }
+          ],
+          "compile_exit_code": 0,
+          "compile_stderr_sha256": "efff8345274732cb4f1f1434122c816d546ec7da8ac7f097069fef1944a2ff1a",
+          "run_exit_code": 0
+        }
+      ]
+    },
+    {
+      "name": "compare-versions-cj",
+      "commit": "d0f664c9b25c4cda41238f7a0406004faa6a82a6",
+      "repository": "https://github.com/cangjielanguage-tpc/compare-versions-cj.git",
+      "license": "MIT",
+      "production_sources": [
+        "src/compare.cj",
+        "src/compare_version.cj",
+        "src/satisfies.cj",
+        "src/util.cj",
+        "src/validate.cj"
+      ],
+      "excluded_sources": [
+        "src/compare_test.cj",
+        "src/compare_version_test.cj",
+        "src/satisfies_test.cj",
+        "src/util_test.cj",
+        "src/validate_test.cj"
+      ],
+      "command": [
+        "$TOOL_ROOT/build/cj-docguard",
+        "verify",
+        "--matrix",
+        "--config",
+        "$AUDIT_ROOT/compare-versions-cj/docguard.toml"
+      ],
+      "started_at": "2026-10-06T12:13:51.240819+00:00",
+      "finished_at": "2026-10-06T12:13:59.673083+00:00",
+      "exit_code": 1,
+      "stdout": "{\"report\":\"$AUDIT_ROOT/compare-versions-cj/.docguard/report.json\",\"summary\":{\"COMPILE_FAILED\":2,\"TOTAL\":2,\"UNKNOWN_CURRENT\":2,\"VERIFIED_CURRENT\":0}}\n",
+      "stderr": "",
+      "report_path": "$AUDIT_ROOT/compare-versions-cj/.docguard/report.json",
+      "summary": {
+        "COMPILE_FAILED": 2,
+        "TOTAL": 2,
+        "UNKNOWN_CURRENT": 2,
+        "VERIFIED_CURRENT": 0
+      },
+      "closure_complete": false,
+      "extraction_files": [
+        {
+          "path": null,
+          "source": "upstream/src/compare.cj",
+          "status": "OK",
+          "package": "compareVersions"
+        },
+        {
+          "path": null,
+          "source": "upstream/src/compare_version.cj",
+          "status": "OK",
+          "package": "compareVersions"
+        },
+        {
+          "path": null,
+          "source": "upstream/src/satisfies.cj",
+          "status": "OK",
+          "package": "compareVersions"
+        },
+        {
+          "path": null,
+          "source": "upstream/src/util.cj",
+          "status": "PARTIAL",
+          "package": "compareVersions"
+        },
+        {
+          "path": null,
+          "source": "upstream/src/validate.cj",
+          "status": "OK",
+          "package": "compareVersions"
+        }
+      ],
+      "diagnostics": [
+        {
+          "column": 1,
+          "line": 35,
+          "message": "缺少显式类型；未执行类型推断：compare",
+          "rule": "AST_TYPE_UNKNOWN",
+          "severity": "warning",
+          "source": "upstream/src/compare.cj"
+        },
+        {
+          "column": 0,
+          "line": 0,
+          "message": "Import requires explicit dependency/external-input review: import std.regex.*",
+          "rule": "INPUT_CLOSURE_UNKNOWN",
+          "severity": "warning",
+          "source": "upstream/src/satisfies.cj"
+        },
+        {
+          "column": 1,
+          "line": 95,
+          "message": "未解析扩展成员与目标类型绑定",
+          "rule": "AST_UNSUPPORTED_EXTEND",
+          "severity": "warning",
+          "source": "upstream/src/util.cj"
+        },
+        {
+          "column": 0,
+          "line": 0,
+          "message": "Import requires explicit dependency/external-input review: import std.regex.*",
+          "rule": "INPUT_CLOSURE_UNKNOWN",
+          "severity": "warning",
+          "source": "upstream/src/util.cj"
+        },
+        {
+          "column": 0,
+          "line": 0,
+          "message": "Import requires explicit dependency/external-input review: import std.regex.*",
+          "rule": "INPUT_CLOSURE_UNKNOWN",
+          "severity": "warning",
+          "source": "upstream/src/validate.cj"
+        }
+      ],
+      "results": [
+        {
+          "sdk_version": "1.1.3",
+          "status": "COMPILE_FAILED",
+          "freshness": "UNKNOWN_CURRENT",
+          "eligible": false,
+          "reason": "compiler failed, timed out, interrupted or exceeded log limit"
+        },
+        {
+          "sdk_version": "1.2.0",
+          "status": "COMPILE_FAILED",
+          "freshness": "UNKNOWN_CURRENT",
+          "eligible": false,
+          "reason": "compiler failed, timed out, interrupted or exceeded log limit"
+        }
+      ],
+      "third_party_adoption": false,
+      "report_sha256": "d8b1c343d5f633c7678ea1df26802c9a529a0416cb5d01d1776b3d121d4424f8",
+      "report_relative": "build/real-projects/20261006T121327259937Z/compare-versions-cj/.docguard/report.json",
+      "api_symbol_count": 5,
+      "cells": [
+        {
+          "sdk_version": "1.1.3",
+          "status": "COMPILE_FAILED",
+          "freshness": "UNKNOWN_CURRENT",
+          "eligible": false,
+          "reason": "compiler failed, timed out, interrupted or exceeded log limit",
+          "platform": "Darwin-arm64",
+          "project_fingerprint": "a6ba23154cca6b865c99dd243b644cf91e2a3bbefcc9528725ced92d4a355522",
+          "environment_fingerprint": "fc0e7c82c40de651cf444048b9b88f20bdb8d20bbc8ee5c0512117c9716bebdc",
+          "assertions": [],
+          "compile_exit_code": 1,
+          "compile_stderr_sha256": "822a8bc5211915c1cd55e6fbdc97bff9088c34a3d0031e5ca3ee712edb635551",
+          "run_exit_code": null
+        },
+        {
+          "sdk_version": "1.2.0",
+          "status": "COMPILE_FAILED",
+          "freshness": "UNKNOWN_CURRENT",
+          "eligible": false,
+          "reason": "compiler failed, timed out, interrupted or exceeded log limit",
+          "platform": "Darwin-arm64",
+          "project_fingerprint": "a6ba23154cca6b865c99dd243b644cf91e2a3bbefcc9528725ced92d4a355522",
+          "environment_fingerprint": "c66f2e13463652cbeb2ad0a8469d87f1860634909b358f00cf4c8c1112f9169c",
+          "assertions": [],
+          "compile_exit_code": 1,
+          "compile_stderr_sha256": "822a8bc5211915c1cd55e6fbdc97bff9088c34a3d0031e5ca3ee712edb635551",
+          "run_exit_code": null
+        }
+      ]
+    }
+  ],
+  "claim": "independent pinned-source audit, not third-party adoption",
+  "raw_evidence_relative": "../build/real-projects/20261006T121327259937Z"
+}

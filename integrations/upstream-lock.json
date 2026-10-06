@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-10-06",
+  "projects": [
+    {
+      "name": "leven4cj",
+      "repository": "https://github.com/cangjielanguage-tpc/leven4cj.git",
+      "commit": "da69d981027b9fcbe12d09cfbb275b4ce8acc91d",
+      "license": "Apache-2.0",
+      "files_sha256": {
+        ".gitignore": "28ec3de22ccf0ffcaff2569bb07ba53081bb026e0c6c79429eec2d78b35829ff",
+        "CHANGELOG.md": "276ab55d3a92a350d2ebffc18ae824832c5cd7e4c23c56e5b840ed9b150868b8",
+        "LICENSE": "55d02dcc395166dcbbcd3c5837a48307b656b90310b9a61f6c853a13ab5481b3",
+        "README.md": "16c4110783ffb3f71a7a62a13d4dd083e84993a7c1abb9ba3dab610c7051b369",
+        "cjpm.toml": "5ba610f1de72a1ad126ed0faeb0268b98b175abec2101a4751ea9d165de01f4e",
+        "doc/readme-image/readme-icon-compile.png": "d7b0f82f3d338c31bdc9064b5a31b257b93dc99c3dacad1bce125d0349d14c98",
+        "doc/readme-image/readme-icon-contribute.png": "843a7832a574eda6ca10323411e51beaee6054a555377c983869cc6d65ba4950",
+        "doc/readme-image/readme-icon-framework.png": "5d401849409796d48288634bdf56eafd66cd4f4ce046a2a69f4222740bd775b9",
+        "doc/readme-image/readme-icon-introduction.png": "b84c0a061e7a71f90d25bea8cb310a7c2b9bcb16c2f22c344efa9ede7ec0a666",
+        "src/leven.cj": "8481682b4bc61c821a817aaa8b998542b179c41a5ddb8ddde11eef81b6cd12de",
+        "src/test/leven_test.cj": "b0de63b6d99bb6284f61ec17a4a021788e7ebb17e78852aa2d305560eed05fba"
+      },
+      "production_sources": [
+        "src/leven.cj"
+      ],
+      "excluded_sources": [
+        "src/test/leven_test.cj"
+      ],
+      "stdout": "3\n2\n3\n",
+      "symbol": "leven"
+    },
+    {
+      "name": "is-png-cj",
+      "repository": "https://github.com/cangjielanguage-tpc/is-png-cj.git",
+      "commit": "e1fdf9b6b3c2cdbf7ba85d94828729d4fb857028",
+      "license": "MIT",
+      "files_sha256": {
+        ".gitignore": "6c7d53bb17b91cc28e2cb085092c6e70de60307395c642340d9dbbe68ae551e2",
+        "CHANGELOG.md": "6c94676dfce68b8908f7412a110c43aae18dec066ea6c27b7755b9e480113e84",
+        "LICENSE": "fca2255b7facab3e56e13bf052365f0595be7e04f83baf564498888c382627ec",
+        "README.md": "a94c1ae49b671b89192411be21f625d789fa46e761ab34a6c9e9618bf9777d63",
+        "build.sh": "c021e61a9a233f6cf950034108fd8af6caef2aee4478bcd431be0a20444b5c40",
+        "cjpm.toml": "81a0a7351042410bfa9ee92a1bcfa19d144d1f4db11fa2b4a1e2c40d7794f9ed",
+        "examples/is_png/.gitignore": "6c7d53bb17b91cc28e2cb085092c6e70de60307395c642340d9dbbe68ae551e2",
+        "examples/is_png/cjpm.toml": "acce1317d8b49de859a68054fb7bd4ff1d00bab21035f5bca3383a7f195c7989",
+        "examples/is_png/src/main.cj": "e8979873783d0d70c11c07264b22c1c408f89a2237f6376183dc88a319a92da0",
+        "src/is_png.cj": "316888ec908008b020ad1da771a86c7c8ec81cf161cba54ae57cb5148cd5b956",
+        "src/is_png_test.cj": "ed067b8567b876a3a366ea81cad9fad41b723a2f0c73098deef1a388ca46b21f",
+        "src/util.cj": "c396e4e6663382c215ad525846931295d76c15fb41b235e9cc36e3ee457e597f"
+      },
+      "production_sources": [
+        "src/is_png.cj",
+        "src/util.cj"
+      ],
+      "excluded_sources": [
+        "src/is_png_test.cj"
+      ],
+      "stdout": "true\nfalse\nfalse\n",
+      "symbol": "isPng"
+    },
+    {
+      "name": "compare-versions-cj",
+      "repository": "https://github.com/cangjielanguage-tpc/compare-versions-cj.git",
+      "commit": "d0f664c9b25c4cda41238f7a0406004faa6a82a6",
+      "license": "MIT",
+      "files_sha256": {
+        ".gitignore": "35ce98da940c6885b65ba19b3de935f6fe9cd44238a17488df8c0aa1617f7f09",
+        "CHANGELOG.md": "38cf0f731c7d122c92900228d103ceee62d3d0c824b772bdc1afad6da8cc8a1e",
+        "LICENSE": "5fa3f3d08168a097f24c705757d8e4d90cff79c5b6db75c6e82f189b1392e62d",
+        "README.md": "8866310ba14df68fcf83f112d039a14c7e061bddb72db833643630af06202510",
+        "cjpm.toml": "61f63e46a481adf60637a340020b59d9957974bd32c601ecc939a5384cbbbdc7",
+        "doc/dev.md": "4719d1a5eed557678e5204331493ca28d9bc90a4e1cbb6120226f87802b1fc39",
+        "doc/feature_api.md": "c74c3ae08f8e5c13f24763451e21e1ec06f647518705ecd5555f70276e78f289",
+        "doc/readme-image/readme-icon-compile.png": "d7b0f82f3d338c31bdc9064b5a31b257b93dc99c3dacad1bce125d0349d14c98",
+        "doc/readme-image/readme-icon-contribute.png": "843a7832a574eda6ca10323411e51beaee6054a555377c983869cc6d65ba4950",
+        "doc/readme-image/readme-icon-framework.png": "5d401849409796d48288634bdf56eafd66cd4f4ce046a2a69f4222740bd775b9",
+        "doc/readme-image/readme-icon-introduction.png": "b84c0a061e7a71f90d25bea8cb310a7c2b9bcb16c2f22c344efa9ede7ec0a666",
+        "src/compare.cj": "8ec3cc73d99ddd08d8a7c50dcb4e6a45c3f28c3c54bf714e8e412a95a324dc10",
+        "src/compare_test.cj": "7c9f6d46d45f05e09e41ad939fd85817e8bd195a3b7f5e62436966ddfed808ab",
+        "src/compare_version.cj": "31eebeb8aae0e2e13813a2330bfbfa045ae99a16aa7c2f74f86507e48a5c921c",
+        "src/compare_version_test.cj": "62ce3f757670ce3310bc6afbcf70164ced7ef7c55306d6d82a74a482f86288bc",
+        "src/satisfies.cj": "3dc41567b2d37c39b85fb8ae2cf84dc6bb8367a3ce37917e2022b1541641247a",
+        "src/satisfies_test.cj": "ee17a7704832efc861ecb4a761ebc226ee2c961f0dbd971762893a505b4b677b",
+        "src/util.cj": "37dd9723c6e4c0ac12a6f9b91aaec35dc320acd991b74e5657c3d104b50ce5d9",
+        "src/util_test.cj": "4e6e585c1c97f4aaac43841a16e646fdad2dca9ec07dfcf6b5c649676a917477",
+        "src/validate.cj": "f43e212266f6612b7959c348dfb09be7d43ae2581a9467064d3a8bea3caedc25",
+        "src/validate_test.cj": "b5f35dae529aacbb02edf66612e7c1bff92c9ebac3110285e64fac47865a5a9e"
+      },
+      "production_sources": [
+        "src/compare.cj",
+        "src/compare_version.cj",
+        "src/satisfies.cj",
+        "src/util.cj",
+        "src/validate.cj"
+      ],
+      "excluded_sources": [
+        "src/compare_test.cj",
+        "src/compare_version_test.cj",
+        "src/satisfies_test.cj",
+        "src/util_test.cj",
+        "src/validate_test.cj"
+      ],
+      "stdout": "1\n0\n-1\ntrue\nfalse\n",
+      "symbol": "compareVersions"
+    }
+  ]
+}

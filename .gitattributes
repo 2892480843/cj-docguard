@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.cj text working-tree-encoding=UTF-8
+*.md text working-tree-encoding=UTF-8
+*.py text working-tree-encoding=UTF-8
+# Preserve compiler diagnostic spacing in evidence copies.
+integrations/compare-versions-cj/compiler-*.txt -whitespace
