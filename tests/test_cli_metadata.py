@@ -48,6 +48,46 @@ class MetadataTests(unittest.TestCase):
             self.assertIn('--config and --project are mutually exclusive for init', json.loads(result.stdout)['error'])
             self.assertEqual(list(root.iterdir()), [])
 
+    def assert_early_query_error(self, arguments, message):
+        with tempfile.TemporaryDirectory() as t:
+            root = Path(t)
+            config = root/'docguard.toml'
+            env = dev.sdk_env('1.1.3')
+            initialized = subprocess.run([str(ROOT/'build/cj-docguard'), 'init', '--config', str(config)],
+                                         env=env, capture_output=True, text=True, timeout=30)
+            self.assertEqual(initialized.returncode, 0, initialized.stdout + initialized.stderr)
+            def inventory():
+                return {str(p.relative_to(root)): p.read_bytes() if p.is_file() else None
+                        for p in root.rglob('*')}
+            before = inventory()
+            result = subprocess.run([str(ROOT/'build/cj-docguard'), *arguments, '--config', str(config)],
+                                    env=env, capture_output=True, text=True, timeout=30)
+            self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+            self.assertIn(message, json.loads(result.stdout)['error'])
+            self.assertEqual(inventory(), before, 'invalid query must not create probes, locks or reports')
+
+    def test_symbol_listing_rejects_evidence_filters(self):
+        for tool in [[], ['--tool', 'list_symbols']]:
+            for option, value in [('--sdk', '1.1.3'), ('--platform', 'other-platform'),
+                                  ('--example', 'other-example')]:
+                with self.subTest(tool=tool, option=option):
+                    self.assert_early_query_error(['query', *tool, option, value],
+                                                  f'option {option} is not valid for query tool list_symbols')
+
+    def test_evidence_requires_environment_before_project_work(self):
+        for command in [['evidence'], ['query', '--tool', 'get_evidence'],
+                        ['query', '--tool', 'get_verified_examples']]:
+            for filters in [[], ['--sdk', '1.1.3'], ['--platform', 'Darwin-arm64'],
+                            ['--sdk', '1.1.3', '--platform', ' \t '],
+                            ['--sdk', ' \t ', '--platform', 'Darwin-arm64']]:
+                with self.subTest(command=command, filters=filters):
+                    self.assert_early_query_error([*command, *filters],
+                                                  'exact --sdk and --platform required for evidence queries')
+
+    def test_unknown_query_tool_fails_before_project_work(self):
+        self.assert_early_query_error(['query', '--tool', 'unsupported-tool'],
+                                      'unsupported read-only query tool')
+
     def test_diff_and_frozen_history_are_explicit(self):
         # Synthetic minimal report fixture, never used as execution evidence.
         old={'manifest':{'fingerprint':'old'},'summary':{'TOTAL':1},'api':{'symbols':[{'id':'old-symbol'}]},'results':[{'example_id':'x','sdk_version':'1.1.3','status':'RUN_FAILED','freshness':'CURRENT'}], 'history':[{'example_id':'x','sdk_version':'1.1.3','status':'RUN_VERIFIED'}]}

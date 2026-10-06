@@ -3,7 +3,7 @@ package docguard
 import std.collection.*
 import std.fs.*
 
-let HELP = "CJ-DocGuard 0.1.0 native Cangjie evidence tool\nCommands: init, doctor, build, verify, check, query, evidence, history, diff\n--config docguard.toml; verify --matrix or --sdk VERSION\nquery --tool list_symbols|get_verified_examples|get_evidence --sdk VERSION --platform Darwin-arm64 [--symbol NAME] [--example ID]\ndiff --old report.json --new report.json\nExit: 0 satisfied / 1 quality failure / 2 configuration or environment error\n"
+let HELP = "CJ-DocGuard 0.1.0 native Cangjie evidence tool\nCommands: init, doctor, build, verify, check, query, evidence, history, diff\n--config docguard.toml; verify --matrix or --sdk VERSION\nquery [--tool list_symbols] [--symbol NAME_OR_ID]\nquery --tool get_verified_examples|get_evidence --sdk VERSION --platform OS-ARCH [--symbol NAME] [--example ID]\nevidence --sdk VERSION --platform OS-ARCH [--symbol NAME] [--example ID]\ndiff --old report.json --new report.json\nExit: 0 satisfied / 1 quality failure / 2 configuration or environment error\n"
 
 func options(args: Array<String>): HashMap<String, String> {
     let out = HashMap<String, String>()
@@ -20,6 +20,18 @@ func options(args: Array<String>): HashMap<String, String> {
     return out
 }
 func opt(options: HashMap<String, String>, key: String, fallback: String): String { options.get(key) ?? fallback }
+
+func validateQueryOptions(tool: String, parsed: HashMap<String, String>): Unit {
+    if (tool == "list_symbols") {
+        for (key in ["--sdk", "--platform", "--example"]) {
+            if (parsed.contains(key)) { throw Exception("option " + key + " is not valid for query tool list_symbols") }
+        }
+    } else if (tool == "get_verified_examples" || tool == "get_evidence") {
+        if (opt(parsed, "--sdk", "").trimAscii().isEmpty() || opt(parsed, "--platform", "").trimAscii().isEmpty()) {
+            throw Exception("exact --sdk and --platform required for evidence queries")
+        }
+    } else { throw Exception("unsupported read-only query tool") }
+}
 
 func validateOptions(command: String, parsed: HashMap<String, String>): Unit {
     let allowed: Array<String> = match (command) {
@@ -43,6 +55,9 @@ func validateOptions(command: String, parsed: HashMap<String, String>): Unit {
     if (command == "init" && parsed.contains("--config") && parsed.contains("--project")) {
         throw Exception("--config and --project are mutually exclusive for init")
     }
+    if (command == "query" || command == "evidence") {
+        validateQueryOptions(if (command == "evidence") { "get_evidence" } else { opt(parsed, "--tool", "list_symbols") }, parsed)
+    }
 }
 
 func initialize(path: String): Unit {
@@ -58,6 +73,7 @@ func initialize(path: String): Unit {
 
 func queryReport(report: J, options: HashMap<String, String>): J {
     let tool = opt(options, "--tool", "list_symbols")
+    validateQueryOptions(tool, options)
     let symbol = opt(options, "--symbol", "")
     let example = opt(options, "--example", "")
     let sdk = opt(options, "--sdk", "")
@@ -69,7 +85,6 @@ func queryReport(report: J, options: HashMap<String, String>): J {
             if (symbol.isEmpty() || s.get("name").s() == symbol || s.get("id").s() == symbol) { items.add(s) }
         }
     } else if (tool == "get_verified_examples" || tool == "get_evidence") {
-        if (sdk.isEmpty() || platform.isEmpty()) { throw Exception("exact --sdk and --platform required for evidence queries") }
         for (r in report.get("results").items) {
             if (r.get("sdk_version").s() != sdk || r.get("platform").s() != platform) { continue }
             if (!example.isEmpty() && r.get("example_id").s() != example) { continue }
