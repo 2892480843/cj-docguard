@@ -6,6 +6,20 @@
 
 当前支持并实测 **macOS arm64，仓颉 SDK 1.1.3 / 1.2.0**。Linux 分支未实测，Windows 暂不支持。可执行输入限于审核过的本地、单包项目；广泛第三方依赖、宏展开、完整语义推断不在首版支持范围。
 
+## 测试与验证证据速览
+
+以下数字均来自实际编译器与测试运行的最新记录，口径与限制见 [验收记录](docs/acceptance.md) 与 [持续优化记录](docs/optimization-log.md)；不同测试的断言数不可相加为普遍准确率。
+
+| 证据 | 最新结果 |
+|---|---|
+| 仓颉原生模块断言（每个 SDK 独立执行） | 基础 86 项、AST 提取 37 项、报告 40 项、平台 46 项 |
+| Python 集成/协议/监督器测试（R02 导出迭代） | 52 项通过，零跳过；双 SDK 另有 12 个原生模块测试程序通过 |
+| 导出包真实复现 | 26 个当前有效格全部导出、编译运行，登记断言匹配；2 个仅编译格拒绝导出 |
+| 健康样本执行矩阵 | 14 个登记例 × 2 个真实 SDK＝28 格：26 格运行验证、2 格明确仅编译 |
+| 提取覆盖 | 健康样本 47 个公共符号，含位置/注释/重载/泛型边界 |
+| 第三方固定版本接入 | 3 个授权开源项目 × 2 SDK＝6 格：2 当前通过、2 运行过但输入未知、2 真实编译失败（不宣称采用） |
+| 负向场景 | 过期输入、验证中修改、取消、缺日志、最新失败优先、严格退出码均有实测记录 |
+
 ## 快速运行
 
 需要 Python 3.11.4+、系统 C 编译器和对应官方仓颉 SDK（本机实测 Python 3.14.6）。不要将 SDK 放进待扫描示例目录。
@@ -87,6 +101,7 @@ required = true
 | `check --config FILE --strict` | 重新读取输入/环境，检查必需结果及链接 |
 | `query --tool ... --config FILE` | 当前符号或满足准入条件的运行证据 |
 | `evidence --example ID --sdk VERSION --platform OS-ARCH --config FILE` | 当前证据查询的快捷命令 |
+| `export --config FILE --example ID --sdk VERSION --platform OS-ARCH --out DIR` | 将当前有效的单例证据和冻结源码导出为可运行目录 |
 | `history --report REPORT.json [--example ID] [--sdk VERSION]` | 显式读取归档，统一标为 `FROZEN`、`eligible=false` |
 | `diff --old A.json --new B.json` | 对比两个固定报告的输入、状态和符号变化 |
 
@@ -99,6 +114,20 @@ required = true
 `.docguard/attempts` 保存尝试，`.docguard/evidence` 保存真实有界日志和控制结果，`.docguard/snapshots` 保存原始冻结输入。已完成尝试不会被下一次验证覆盖。输入变化采取全项目保守失效；不按修改时间缓存 SDK 身份，工具内容同大小、同时间被修改也会失效。输出、`.git`、`target`、`.env*` 等明确排除；项目外依赖不自动被视为封闭。
 
 查询会产生私有环境探针日志和互斥保留目录，但不执行项目示例、不修改项目源码。多个命令串行执行。中断留下 `writer.lock` 时先确认没有活动验证进程；维护者再删除该保留目录。工具不会自动清除它或回退到旧成功。
+
+## 导出可运行示例包
+
+先用精确 SDK 与平台查询确认示例 `eligible=true`，再导出：
+
+```bash
+python3 scripts/dev.py run -- export --config examples/healthy/docguard.toml \
+  --example arithmetic --sdk 1.1.3 --platform Darwin-arm64 \
+  --out build/export-smoke/arithmetic
+cd build/export-smoke/arithmetic
+CJ_SDK_HOME=/absolute/sdk-1.1.3/cangjie bash build.sh
+```
+
+`--out` 相对路径从 CLI 当前工作目录解析；拒绝 `..` 相对穿越、符号链接、源码或私有输出重叠及非空目录。导出包含冻结源码、实际编译单元、运行脚本和 `manifest.json` 证据清单。仅 `RUN_VERIFIED`、`CURRENT`、证据完整且断言通过的单包示例可导出；拒绝时不留下导出文件。**证据只证明登记断言在记录环境下通过；输入或环境变化后须重新查询。**
 
 ## AI 只读复用
 

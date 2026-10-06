@@ -15,6 +15,7 @@ CASES = {
     'evidence': ['primitives', 'evidence'],
     'report': ['primitives', 'report'],
     'platform': ['primitives', 'util', 'platform'],
+    'export': ['primitives', 'util', 'extractor', 'evidence', 'platform', 'engine', 'report', 'export'],
 }
 
 def run(argv, env, log, timeout=600):
@@ -34,6 +35,14 @@ def main():
     outcomes=[]
     for sdk in a.sdk or ['1.1.3','1.2.0']:
         env=dev.sdk_env(sdk)
+        env['CJ_DOCGUARD_TEST_SDK']=sdk
+        cli=logs/f'native-cli-{sdk}'
+        cli_sources=[str(p.relative_to(ROOT)) for p in sorted((ROOT/'src').glob('*.cj'))]
+        cli_code=run([str(dev.sdk_home(sdk)/'bin/cjc'),*cli_sources,'-O2','-Woff','unused','-o',str(cli)],
+                     env,logs/f'export-cli-{sdk}-compile.log')
+        outcomes.append({'case':'export-cli-build','sdk':sdk,'exit_code':cli_code})
+        if cli_code: continue
+        env['CJ_DOCGUARD_TEST_CLI']=str(cli)
         for name, sources in CASES.items():
             binary=logs/f'native-{name}-{sdk}'
             cmd=[str(dev.sdk_home(sdk)/'bin/cjc'),*[f'src/{s}.cj' for s in sources], f'tests/native_{name}.cj','-O2','-Woff','unused','-o',str(binary)]

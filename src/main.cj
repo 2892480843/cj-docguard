@@ -3,7 +3,7 @@ package docguard
 import std.collection.*
 import std.fs.*
 
-let HELP = "CJ-DocGuard 0.1.0 native Cangjie evidence tool\nCommands: init, doctor, build, verify, check, query, evidence, history, diff\n--config docguard.toml; verify --matrix or --sdk VERSION\nquery [--tool list_symbols] [--symbol NAME_OR_ID]\nquery --tool get_verified_examples|get_evidence --sdk VERSION --platform OS-ARCH [--symbol NAME] [--example ID]\nevidence --sdk VERSION --platform OS-ARCH [--symbol NAME] [--example ID]\ndiff --old report.json --new report.json\nExit: 0 satisfied / 1 quality failure / 2 configuration or environment error\n"
+let HELP = "CJ-DocGuard 0.1.0 native Cangjie evidence tool\nCommands: init, doctor, build, verify, check, query, evidence, export, history, diff\n--config docguard.toml; verify --matrix or --sdk VERSION\nquery [--tool list_symbols] [--symbol NAME_OR_ID]\nquery --tool get_verified_examples|get_evidence --sdk VERSION --platform OS-ARCH [--symbol NAME] [--example ID]\nevidence --sdk VERSION --platform OS-ARCH [--symbol NAME] [--example ID]\nexport --config FILE --example ID --sdk VERSION --platform OS-ARCH --out DIRECTORY\ndiff --old report.json --new report.json\nExit: 0 satisfied / 1 quality failure / 2 configuration or environment error\n"
 
 func options(args: Array<String>): HashMap<String, String> {
     let out = HashMap<String, String>()
@@ -13,7 +13,7 @@ func options(args: Array<String>): HashMap<String, String> {
         if (out.contains(key)) { throw Exception("duplicate option " + key) }
         if (key == "--matrix" || key == "--strict") { out[key] = "true"; i++; continue }
         var known = false
-        for (k in ["--config", "--sdk", "--tool", "--symbol", "--example", "--platform", "--old", "--new", "--project", "--report"]) { if (key == k) { known = true } }
+        for (k in ["--config", "--sdk", "--tool", "--symbol", "--example", "--platform", "--out", "--old", "--new", "--project", "--report"]) { if (key == k) { known = true } }
         if (!known || i + 1 >= args.size) { throw Exception("unknown option or missing value: " + key) }
         out[key] = args[i + 1]; i += 2
     }
@@ -41,6 +41,7 @@ func validateOptions(command: String, parsed: HashMap<String, String>): Unit {
         case "check" => ["--config", "--strict"]
         case "query" => ["--config", "--tool", "--symbol", "--example", "--sdk", "--platform"]
         case "evidence" => ["--config", "--symbol", "--example", "--sdk", "--platform"]
+        case "export" => ["--config", "--example", "--sdk", "--platform", "--out"]
         case "history" => ["--report", "--example", "--sdk"]
         case "diff" => ["--old", "--new"]
         case "--help" | "help" | "--version" => []
@@ -57,6 +58,11 @@ func validateOptions(command: String, parsed: HashMap<String, String>): Unit {
     }
     if (command == "query" || command == "evidence") {
         validateQueryOptions(if (command == "evidence") { "get_evidence" } else { opt(parsed, "--tool", "list_symbols") }, parsed)
+    }
+    if (command == "export") {
+        for (key in ["--config", "--example", "--sdk", "--platform", "--out"]) {
+            if (opt(parsed, key, "").trimAscii().isEmpty()) { throw Exception("export requires " + key) }
+        }
     }
 }
 
@@ -146,9 +152,10 @@ func operate(command: String, options: HashMap<String, String>): Int64 {
     }
     if (command == "diff") { println(diffReports(parseJson(readText(opt(options, "--old", ""))), parseJson(readText(opt(options, "--new", "")))).dump()); return 0 }
     var known = false
-    for (c in ["doctor", "build", "verify", "check", "query", "evidence"]) { if (command == c) { known = true } }
+    for (c in ["doctor", "build", "verify", "check", "query", "evidence", "export"]) { if (command == c) { known = true } }
     if (!known) { throw Exception("unknown command: " + command) }
     let project = Project(opt(options, "--config", "docguard.toml"))
+    if (command == "export") { return exportExample(project, options) }
     mkdir(project.output)
     let lock = join(project.output, "writer.lock")
     if (exists(lock)) { throw Exception("writer.lock exists: an active or interrupted verification must be resolved before using evidence") }
