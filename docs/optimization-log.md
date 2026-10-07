@@ -263,3 +263,5 @@ Darwin arm64，固定0a4d81e772d5613c7ad491a675b11a47fcba9c5b的干净git archiv
 新增10页16:9可编辑PPT，使用Artifact Tool及实有Heiti SC字体，六张原生表格与一张原生双SDK堆叠图表，来源放逐页备注。首次finalizer遗漏表格验证参数而失败，第二次缺RUNTIME_NODE_MODULES导入失败；保存两轮候选/双流，补所声明表格参数及正确捆绑运行时后完整finalizer0。初稿逐页检查后修正STALE表述和图表文字对比度，另存新版，最终10页渲染逐页检查无观察到裁切/重叠。原生图表工作簿快照与导入、字体、完整性、几何验证通过；最终PPT SHA-256 1b8f7978aaa5913563fa2135a91fa3d9ea147581ff20a5e004b9ae47f2a9d39c。没有Microsoft PowerPoint实际打开声明。
 
 新增架构/可靠性、真实库教程、原需求完成度、六维评审证据和CONTRIBUTING，连接README及提交索引。2026-10-07直接观察AtomGit主项目页Star 0、Fork 0，只有该页面计数快照，不外推社区受欢迎程度；未代为Star/Fork或联系社区。模型历史实验未提升、GUI客户端未实测、浏览器报告预览拒绝、CI/性能剖析待办仍保持。没有报名、组织同步、代签、发邮件或比赛正式提交。
+
+R12发布完成：git push atomgit HEAD:main退出0，首批17份文件提交`c5ee8423ad327d62564a8d294105b3a62882e16c`。关闭凭据助手的匿名ls-remote/fetch均0，main身份一致，17份文件与本地逐字节匹配；174相对链接、328附件摘要/CRC、10页PPT原生6表/1图及工作簿、固定上游/导出源码字节和45保留文件核对0。计划完成状态在发布核验后标记，本地最终回执保存在build/rubric-optimization-20261007/publication-final.json。没有赛事提交回执。
