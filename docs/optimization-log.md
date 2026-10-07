@@ -146,3 +146,22 @@ Task1–4 独立审查已通过；流式序列化排序去重和Linux恢复身�
 交付 [新版视频](../build/release/cj-docguard-demo-cute-smooth-20261007.mp4)、[旁白 MP3](../build/release/cj-docguard-narration-cute-20261007.mp3)、[SRT 字幕](../build/release/cj-docguard-demo-cute-smooth-20261007.srt) 和 [核验 JSON](../build/release/cj-docguard-demo-cute-smooth-20261007.json)。视频 SHA-256 `cf704cc024389bf8b0cbd0aaf702a18ca28d7e86b12f462c8cd309d922af6bed`；MP3 SHA-256 `21ba16715f4e8250f6f2e68148373ae787e7805118321feb3e94e0940a82ef9f`。
 
 支持边界：本轮只调整离线媒体与说明，核心验证仍为 R03 的冻结记录；不是浏览器录屏或新执行证据。完整音视频及独立 MP3 解码均退出 0，但没有人工听审，自动静音/时序检查不保证主观可爱程度、每词发音或绝对无口语瑕疵。网络重置的唯一原因未确认；不修改全局代理、不关闭证书验证，接续最多五次并保存每次失败。没有新增付费资源、上传或提交；旧源码/证据包仍为历史归档，不替换旧摘要。
+
+## R05：整体独立评测（2026-10-07）
+
+用户要求重新评测整个项目。本轮确认 Darwin 25.6.0 arm64，以提交 `4910c15c12587ee001a30ec74363db0d2b64eaf5` 的161个受版本管理文件建立干净副本，显式注册真实 SDK 1.1.3 / 1.2.0 与已有官方归档缓存。没有复制原构建产物或真实上游缓存；没有修改产品代码。[整体评测报告](project-evaluation-2026-10-07.md) 区分当前运行、历史实验和待核验事项。
+
+原始命令、实际退出码、双流日志和身份保留于 `build/project-evaluation-20261007T080339Z/`，总索引 [evaluation-summary.json](../build/project-evaluation-20261007T080339Z/evaluation-summary.json)。`python3 .../evaluate_runtime.py` 实际退出1：驱动为子进程注册 SDK，但遗漏其自身后续 `dev.sdk_env()` 调用，产品已完成的构建/全量测试/矩阵/查询/首次导出均0。保留原驱动、失败堆栈与失败汇总；新驱动补注册并核对源码/二进制/报告身份，仅接续剩余阶段，`python3 .../evaluate_runtime_remaining.py` 退出0。不能把驱动首轮退出1改写成成功或产品失败。
+
+| 当前验证 | 实际结果 |
+|---|---|
+| `python3 scripts/dev.py build` | 退出0，约6.19秒 |
+| `python3 scripts/test.py` | 退出0，80项Python通过、0跳过（309.501秒）；双SDK共14个原生程序及两次匹配CLI构建通过；总流程414.34秒 |
+| `verify --matrix` / `check --strict` | 退出0/0，47个公共符号、28 CURRENT，其中26 RUN_VERIFIED、2 COMPILE_ONLY；副本新历史28条 |
+| 导出与对应SDK重建 | 26格导出及真实`build.sh`均0，逐项断言匹配；两个仅编译格按预期拒绝1，目标不存在 |
+| 查询 / MCP / 页面 | 两版各13个有效示例；两次只读查询单次耗时4.355783/4.295640秒；实际MCP握手/工具/查询0，HTML+Node结构检查0，无浏览器视觉通过声明 |
+| 交付完整性 | R03源码161文件与冻结提交一致；证据清单7971文件摘要/大小、ZIP CRC通过；新视频/MP3/字幕摘要与Word压缩结构通过；不是历史实验重跑 |
+
+66条外层阶段命令均符合各自预期，包含两次业务拒绝；驱动自身失败另行保留。新二进制摘要 `56cbfabbc730564b1bdcb1331641e2ed3b7a471eaabf44cb1979079845f4230f`，新健康报告 `2a0fb4dc496b9b393d7edefb26af0687a96d59c90c7d84aed6f12ffde3a68a59`；原工程364次历史、二进制、用户PRD/Skill草稿及24个旧release文件均未改。结束时副本源文件字节保持。旧R03包相对受测提交仅五份文档差异，旧证据不覆盖。
+
+范围：仅本轮macOS arm64双SDK执行；真实上游120格、Linux49命令、128MB受控内存和60次AI生成均为历史冻结实验，本轮仅核验归档。官方网页读取失败；只读 `git ls-remote https://atomgit.com/cj-codelabs/docs.git HEAD` 退出0，与已保存规则提交相同，不能代替最新完整课题#9核验。发现查询约4.3秒、首页/Word旧视频引用、缺少受版本管理的CI任务，以及862个证据文件含本机用户路径；路径统计不是全面秘密/分发权审查。后续优先真实项目完整复用、竞品行为对照、材料版本统一及查询分阶段测量；未宣称AI提升、外部采用、有效提交或获奖。
