@@ -1,8 +1,16 @@
 # 实际命令演示与复现
 
-本地视频为 [CJ-DocGuard 三分半演示](../build/release/cj-docguard-gap-demo-0d08f76.mp4)。已核对 SHA-256 `14a33b4cc809d07776b5ffcd482cec5d13ab78ddccb8c92f76605e7b27d7adff`；时长 210.021333 秒，1920×1080，H.264 视频和 AAC 音频。8 幅画面已逐幅检查，FFmpeg 完整解码退出 0；未进行人工听音检查。**视频是实际命令日志的静态重绘，配 macOS「婷婷」合成语音，不是浏览器录屏或直播操作。**
+推荐预览 [流畅配音版视频](../build/release/cj-docguard-demo-cute-smooth-20261007.mp4)，也可单独 [试听旁白](../build/release/cj-docguard-narration-cute-20261007.mp3)。2026-10-07 在 macOS arm64 重新制作：采用轻快的「晓伊」合成女声，语速 `+3%`、音高 `+12Hz`；讲稿改成连贯口语，按旁白实际长度切换八幕画面，整片只编码一次连续音轨。时长 182.433333 秒，1920×1080、30 帧/秒，H.264/AAC；33 条动态字幕与 [独立字幕文件](../build/release/cj-docguard-demo-cute-smooth-20261007.srt) 对应。
 
-## 画面与原始证据
+原版固定每幕 26.25 秒，实测八段尾部空白共约 89.21 秒，最长 13.0435 秒。新版在相同 `silencedetect=noise=-38dB:d=0.45` 参数下最长静音段 0.641583 秒，没有检出超过 1 秒的静音；保留自然句间停顿。最终音量测得综合响度约 −16.03 LUFS（用于衡量整段音频的平均响度）。完整解码退出 0，八幕最长字幕画面已检查，无观察到裁切；**自动检查不等于人工听审，也不保证主观音色和每个词的发音**。
+
+新版证据面板与原版上部 776 像素逐幕保持一致，来源仍是此前保存的 20 条真实命令，而非本轮重新运行。视频 SHA-256 `cf704cc024389bf8b0cbd0aaf702a18ca28d7e86b12f462c8cd309d922af6bed`，旁白 SHA-256 `21ba16715f4e8250f6f2e68148373ae787e7805118321feb3e94e0940a82ef9f`。原始合成音频、时间标记、失败连接、两次渲染和核验日志保留于 `build/voice-optimization-20261007/`，详细分镜、摘要与边界见 [新版核验记录](../build/release/cj-docguard-demo-cute-smooth-20261007.json)。没有新增付费资源或上传视频。
+
+## 原版归档
+
+此前的 [CJ-DocGuard 三分半演示](../build/release/cj-docguard-gap-demo-0d08f76.mp4) 保留不覆盖。SHA-256 `14a33b4cc809d07776b5ffcd482cec5d13ab78ddccb8c92f76605e7b27d7adff`；时长 210.021333 秒，1920×1080，H.264 视频和 AAC 音频。8 幅画面曾逐幅检查，FFmpeg 完整解码退出 0；未进行人工听音检查。**两版均为实际命令日志的静态重绘与合成配音，不是浏览器录屏或直播操作；原版配 macOS「婷婷」语音。**
+
+## 原版时间轴与两版共用的命令证据
 
 | 时段 | 画面 | 可追溯的实际结果 |
 |---|---|---|
@@ -28,4 +36,4 @@ python3 scripts/record_demo.py --out build/gap-closure/demo-rerun-001 \
 
 `--out` 必须是 `build/gap-closure/` 下**尚不存在**的目录；工具拒绝覆盖，复制 `examples/healthy` 作为故障注入副本，并冻结所指定 CLI 到输出目录。它运行真实编译器和程序，不把受控替身当成编译结果。每步原始输出、错误输出、命令、退出码即时写盘；任何非预期退出都会停止并留下已采集证据。MCP 子进程（模型上下文协议的标准输入/输出适配程序）使用当前 `sys.executable`，避免 SDK 缩短的 `PATH` 选错 Python。仅复现演示中的登记断言；导出的单例程序不保证所有接口及输入正确。Linux 证据另见 [独立记录](linux-verification.md)，本视频只展示上述 macOS 捕获。
 
-复现渲染需 FFmpeg、Pillow、能显示中文的字体以及 macOS「婷婷」语音；现有一次性渲染脚本依赖 `build/gap-closure/demo/narration.json` 和语音文件。永久工具仅负责可复用的实际命令采集，既有成片已存于 `build/release/`。如果修改画面或配音，应在**新目录**渲染、核对全部画面、音轨、时长和完整解码，并给新视频独立摘要；不能把新采集直接说成现有视频的来源。
+复现原版渲染需 FFmpeg、Pillow、能显示中文的字体以及 macOS「婷婷」语音；现有一次性渲染脚本依赖 `build/gap-closure/demo/narration.json` 和语音文件。永久工具仅负责可复用的实际命令采集，既有成片已存于 `build/release/`。如果修改画面或配音，应在**新目录**渲染、核对全部画面、音轨、时长和完整解码，并给新视频独立摘要；不能把新采集直接说成现有视频的来源。

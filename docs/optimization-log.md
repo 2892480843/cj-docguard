@@ -126,3 +126,23 @@ Task1–4 独立审查已通过；流式序列化排序去重和Linux恢复身�
 前两版独立打包候选分别因旧申报答案草稿收录、忽略审计脚本随后变化而弃用，原档和 SUPERSEDED 标记保留。第三版验证候选161源码/7952证据逐字节及CRC/摘要通过，正式交付另用最终提交身份命名，并补入 `final/completion-proof/` 的9份红/绿控制日志、已完成修复/复审报告与固定生产器副本；最终ZIP检查这些原始字节，避免仅对已选择内容自洽校验。
 
 原打包器是忽略的一次性工具，修改前没有独立源码备份；保留的红选择审计记录304个AI原始文件漏项，但不能称其为旧生产器源码快照。旧R02包、当前视频/Word/PDF及原用户文件均保持字节；正式包结果和摘要在 `build/release/cj-docguard-R03-gap-manifest-<最终提交>.json`，仅本地交付。本人信息、签字、公开链接、任务9最新条款及比赛提交尚未办理。
+
+## R04：配音连贯性与音色优化（2026-10-07）
+
+用户要求视频话语流畅、消除卡顿、使用可爱音色。实际平台 Darwin 25.6.0 arm64。先对旧片执行 `ffmpeg ... -af silencedetect=noise=-38dB:d=0.45 -vn -f null -`，退出 0：八个固定分镜尾部静音共 89.21227 秒，最长 13.0435 秒。原因是原旁白约 13～17 秒、每幕固定 26.25 秒，`apad` 补齐空白。
+
+采用已安装 edge-tts 7.2.8 的 `zh-CN-XiaoyiNeural` 轻快合成女声，语速 `+3%`、音高 `+12Hz`。八幕讲稿改为口语，段落连续合成；只裁去句段外静音，保留低能量语音边缘和句间停顿，加入短淡入淡出；按语音实际长度切换画面。整段旁白统一音量，再一次性编码 AAC，避免逐幕编码后拼接。原始音频及 33 条字幕时间标记全部留存。八幕证据面板的上部 776 像素与旧图逐字节相同，沿用 R03 的实际命令来源；不冒称新采集。
+
+| 执行/核验 | 实际结果 | 原始记录 |
+|---|---|---|
+| 旧片静音检测及声音列表 | 退出 0 | `build/voice-optimization-20261007/setup-commands.json`、`baseline-silence.stderr` |
+| 语音试音与完整生成 | 初次连接、TLS/代理试验失败均保留；等价 HTTPS 升级试音成功，仍有间歇连接重置；首完整生成退出 1，有限重试接续退出 0，八段最终全部生成 | `sample-*.json`、`sample-*.stderr`、`synthesis-commands.json`、`synthesis-retry-commands.json`；成功段按摘要复用，无覆盖失败文件 |
+| 第一次渲染 | 退出 1；FFmpeg 响度 JSON 后附诊断输出，严格整段 JSON 解析报 Extra data | `render.py`、`render.stdout/stderr`、`render/`、`render-v1-failure.json` |
+| 最小解析修正与第二次渲染 | `render-v2.py` 退出 0，17 条 FFmpeg/FFprobe 命令均 0，原始失败目录保留 | `render-v2.stdout/stderr`、`render-v2/commands.json` |
+| 最终结构、静音、音量 | 182.433333 秒、1920×1080、30帧/秒 H264/AAC；相同参数最长静音 0.641583 秒，未检出超过 1 秒静音；综合响度 −16.03 LUFS | `render-v2/ffprobe.json`、`silence-detect.stderr`、`final-loudness.stderr` |
+| 画面、字幕与连续音轨 | 八幕最长字幕图像检查无观察到裁切；33 条字幕无重叠、末条覆盖到音轨末尾；8552 个 AAC 包，最大时间间隙约 0.000001 秒 | `caption-qa-scenes-1-4.png`、`caption-qa-scenes-5-8.png`、`delivery-verification.json`、原始包时间戳 |
+| 交付保护 | 20 个旧 release 文件、原 PRD、用户 Skill README、原生 CLI 摘要均保持 | `old-release-sha256.json`、`delivery-verification.json` |
+
+交付 [新版视频](../build/release/cj-docguard-demo-cute-smooth-20261007.mp4)、[旁白 MP3](../build/release/cj-docguard-narration-cute-20261007.mp3)、[SRT 字幕](../build/release/cj-docguard-demo-cute-smooth-20261007.srt) 和 [核验 JSON](../build/release/cj-docguard-demo-cute-smooth-20261007.json)。视频 SHA-256 `cf704cc024389bf8b0cbd0aaf702a18ca28d7e86b12f462c8cd309d922af6bed`；MP3 SHA-256 `21ba16715f4e8250f6f2e68148373ae787e7805118321feb3e94e0940a82ef9f`。
+
+支持边界：本轮只调整离线媒体与说明，核心验证仍为 R03 的冻结记录；不是浏览器录屏或新执行证据。完整音视频及独立 MP3 解码均退出 0，但没有人工听审，自动静音/时序检查不保证主观可爱程度、每词发音或绝对无口语瑕疵。网络重置的唯一原因未确认；不修改全局代理、不关闭证书验证，接续最多五次并保存每次失败。没有新增付费资源、上传或提交；旧源码/证据包仍为历史归档，不替换旧摘要。
