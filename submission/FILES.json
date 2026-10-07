@@ -8,8 +8,8 @@
     "sha256": "b1d9e85b918742d21ed4e7842f11b6a9a8dd9c99810b4d46b3c03a31905d5d2a"
   },
   "README.md": {
-    "bytes": 2505,
-    "sha256": "a5bc1b469f82b36677fac90b63278dab8ef9fd6ce7e621fbd08af2e3b5c96068"
+    "bytes": 3871,
+    "sha256": "22a3ac5a7e1ea3f42271263f3d5fa08b3b1b5e4f02dac15e3bc9af665df11899"
   },
   "CJ-DocGuard-作品提交书-公开未签字版.docx": {
     "bytes": 19236,
@@ -18,5 +18,21 @@
   "CJ-DocGuard-作品提交书-公开未签字版.pdf": {
     "bytes": 462443,
     "sha256": "e6788710c4e24c103567c84301c9bffc3d851585a3a389ba0caf518f79c85976"
+  },
+  "AI生态贡献加分申请.md": {
+    "bytes": 3132,
+    "sha256": "2fc5e98963e0121cd7181390df0717c4e6fc10833b1747ca27d561ee8dd1d82d"
+  },
+  "CJ-DocGuard-AI生态贡献包-20261007.zip": {
+    "bytes": 49950,
+    "sha256": "b2aa2a099a5506182246e41c55969a66c5359b10cd9aea8f8e08e8e20855cd62"
+  },
+  "CJ-DocGuard-作品提交书-AI贡献公开未签字版.docx": {
+    "bytes": 19242,
+    "sha256": "ef02b9e234389f476906f1f7ad68660f55ebba0ab0d73e3ab499ed5281988c61"
+  },
+  "CJ-DocGuard-作品提交书-AI贡献公开未签字版.pdf": {
+    "bytes": 462448,
+    "sha256": "ce534a708abcdb4f6305504aff2bacf15f204a5cb998c8d325a58a7ae13c3b50"
   }
 }

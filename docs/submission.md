@@ -57,8 +57,8 @@ CJ-DocGuard 是以仓颉原生实现的文档与示例验证工具。它从真�
 |---|---|
 | 真实姓名、团队、联系方式与资格 | 本地Word已按用户信息填写，队伍名采用CJ-DocGuard；资格仍须本人核验 |
 | 正式任务书逐项对照、最新模板 | 组委会公开规则和统一 Word 模板已有本地快照；课题 #9 最新完整任务书须本人向组委会确认 |
-| 公开仓库 URL / 组织同步 | [GitHub源码仓库](https://github.com/2892480843/cj-docguard)；未办理其他组织同步 |
-| 演示视频 URL | 本地成片已生成并校验；尚未上传、无公开 URL |
+| 公开仓库 URL / 组织同步 | [AtomGit作品仓库](https://atomgit.com/c2892480843s/cj-docguard)与[独立贡献仓库](https://atomgit.com/c2892480843s/cj-docguard-ai)；未办理赛事组织同步 |
+| 演示视频 URL | [负责人提供的B站链接](https://www.bilibili.com/video/BV1R5HC6MEDo/)已填写；线上播放与本地一致性仍待本人确认 |
 | 签字版申报 PDF | 未签字 |
 | 官方邮箱与收件口径 | 以主办方确认结果为准，未发送 |
 | 平台提交及成功回执 | 未提交 |
@@ -87,3 +87,7 @@ git archive --format=zip --prefix=cj-docguard/ \
 ## AtomGit公开材料（2026-10-07）
 
 作品仓库：https://atomgit.com/c2892480843s/cj-docguard 。[仓库材料入口](../submission/README.md)整理统一模板公开未签字副本、PDF预览、225份必要验证日志与汇总附件及B站视频入口。公开Word保留原字体字号，隐藏电话和邮箱；私人完整模板及旧包保持在本地。未完成本人签字、赛事组织同步、邮件发送或正式提交。当前赛事介绍要求本人签字的PDF按页面说明发送，并在赛题发布处提交AtomGit作品仓库、勾选同步到`cj-codelabs`；未替用户执行。
+
+## R11 AI生态贡献独立分发
+
+[独立贡献仓库](https://atomgit.com/c2892480843s/cj-docguard-ai)已公开发布，匿名Git读取退出0，远端main与本地提交`4b07cb87f641fe1d8052a780626d29247b922534`一致。仓库包含代码、Apache-2.0许可、安装运行与复用说明、Skill、配置示例、提示模板、工作流、可审核小样例及真实验证日志，依赖主仓库固定`8a886f73f28d29c7fe92f2ea9dbebaa205b7f68a`的原生引擎。[申请说明](ai-ecosystem-contribution.md)可用于填写加分项，[提交入口](../submission/README.md)提供新模板和离线包。旧完整包继续归档；新私人模板保留联系方式，只存本地。初赛与决赛分别评审，不以AI使用过程或未实测效果申请加分。

@@ -1,6 +1,6 @@
 # CJ-DocGuard
 
-[AtomGit源码仓库](https://atomgit.com/c2892480843s/cj-docguard) · [演示视频](https://www.bilibili.com/video/BV1R5HC6MEDo/) · [参赛材料与模板](submission/README.md)
+[AtomGit源码仓库](https://atomgit.com/c2892480843s/cj-docguard) · [演示视频](https://www.bilibili.com/video/BV1R5HC6MEDo/) · [参赛材料与模板](submission/README.md) · [独立AI贡献仓库](https://atomgit.com/c2892480843s/cj-docguard-ai)
 
 **为仓颉 API 文档和示例提供实际运行证据；输入变化后拒绝把旧成功当作当前成功。**
 
@@ -144,6 +144,8 @@ python3 scripts/mcp_stdio.py \
 ```
 
 启动适配器时设置 `CJ_DOCGUARD_RUNNER=/absolute/cj-docguard/build/cjdg-runner`、SDK 注册变量及对应运行库环境，或使用 `scripts/dev.py` 的 `sdk_env()` 启动。协议入口固定项目和程序，不接受任意路径、命令、验证或构建工具。使用指南见 [Skill](skills/cj-docguard/SKILL.md)，可复制到自己的助手技能目录；未自动安装到全局配置。
+
+申请AI生态贡献的独立分发见 [cj-docguard-ai](https://atomgit.com/c2892480843s/cj-docguard-ai)，含Skill、只读适配器、配置示例、提示模板、复现工作流及公开实测日志。[贡献申请说明](docs/ai-ecosystem-contribution.md)列明源码依赖、运行方法和评审边界。本轮在固定主仓库提交`8a886f7`完成14项MCP测试（13协议单元、1真实原生集成，零跳过）、双SDK自建样例验证与导出重建；独立分发的13项协议单元另行通过。未新增模型效果实验或外部采用证据。
 
 ## 测试与证据
 
