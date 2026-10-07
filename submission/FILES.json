@@ -1,0 +1,22 @@
+{
+  "CJ-DocGuard-演示字幕.srt": {
+    "bytes": 3809,
+    "sha256": "b6ee9c925e955c5c1931a12ea6dfcf857bd2f67bd5cd78733945da51e1b9db2d"
+  },
+  "CJ-DocGuard-验证材料-20261007.zip": {
+    "bytes": 254541,
+    "sha256": "b1d9e85b918742d21ed4e7842f11b6a9a8dd9c99810b4d46b3c03a31905d5d2a"
+  },
+  "README.md": {
+    "bytes": 2505,
+    "sha256": "a5bc1b469f82b36677fac90b63278dab8ef9fd6ce7e621fbd08af2e3b5c96068"
+  },
+  "CJ-DocGuard-作品提交书-公开未签字版.docx": {
+    "bytes": 19236,
+    "sha256": "9cfc93dfbefa15ebaa0c33acfa634367baa2f9b8296b1e28a55ca940798f8e36"
+  },
+  "CJ-DocGuard-作品提交书-公开未签字版.pdf": {
+    "bytes": 462443,
+    "sha256": "e6788710c4e24c103567c84301c9bffc3d851585a3a389ba0caf518f79c85976"
+  }
+}

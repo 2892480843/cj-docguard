@@ -189,3 +189,41 @@ Task1–4 独立审查已通过；流式序列化排序去重和Linux恢复身�
 最终本地 [Word终稿](../build/release/CJ-DocGuard-作品提交书-完整填写终稿-20261007.docx) 摘要 `29d4a5ce355623b4bfc16808ceb960272629b7a95a52f755d20d56ed0a252d3b`，原25个release文件、模板及用户PRD/Skill草稿均保持。原始双流与命令、字体核对、命名空间修正及终稿交付核验在 `build/application-completion-20261007/`；不同失败、候选和证据未覆盖。原模板缺省页边距未人为补设；本机渲染的字体回退不等于修改Word字体，也没有Microsoft Word应用运行验证。
 
 本轮只修改本地申报书和公开说明，核心程序/验证规则未改，当前全量执行证据仍为R05。未代签、上传视频、发送邮件、正式报名或提交，最新完整课题#9、资格与签署仍需负责人处理。新源码链接已闭环；旧冻结源码/证据包继续归档，不被本次GitHub入口替代。
+
+## R08：产品发布演示动画重剪（2026-10-07）
+
+用户要求重剪并加入动画，随后明确选择“产品发布演示：明亮、精致、流程动画”。实际平台由 `uname -sm` 确认为Darwin arm64。旧片问题为长时间静态终端面板、密集小字；在冻结真实日志与既有旁白上重制8章32镜头，大字结论配矩阵、流程、代码片段和历史时间线动画。保留晓伊音色与语速，只去除175.841～180.247秒已过时的公开链接句、剪接处加6毫秒淡化；不新增音乐、付费资源或网络语音生成。
+
+| 命令/核验 | 实际结果 | 原始记录（均在 `build/video-motion-20261007/`） |
+|---|---|---|
+| `python3 edit.py prepare` | 1：输入实际为双声道，旧断言错误要求单声道；没有修改输入 | `prepare.stdout/stderr`、原脚本 |
+| `python3 edit-v2.py prepare`、`python3 edit-v3.py prepare` | 均0；按双声道帧剪接，v3另修正状态卡含义并增加代码逐字动画 | `prepare-v2.*`、`prepare-v3.*` |
+| v2/v3六秒试片及 `python3 edit-v3.py render` | FFmpeg均0，最终渲染0 | `commands.json`、`render.*`、`motion-encode.*` |
+| `python3 verify.py` | 1：检查器错误要求输出等于5341个原始输入帧，实际 `-t 178.004` 输出5340帧；成片没有重渲染 | `verify.*`、`qa-v1-commands.json` |
+| `python3 verify-v2.py` | 0：按一帧量化范围核对，实际音视频差4毫秒 | `verify-v2.*`、`qa-commands.json` |
+| 全片解码、静音、峰值、抽帧 | 各命令0；最长静音0.641583秒（−38dB / 最小0.45秒），峰值−4.5dB | `v2-decode-entire-video.*`、`v2-final-silence.*`、`v2-final-volume.*` |
+| 图形运动与视觉抽查 | 64帧两两比较：31/32镜头图形区域变化，排除字幕/进度；32制作静帧与32成片样帧均按八章拼图检查，无观察到裁切重叠 | `verification.json`、`stills-v3/`、`encoded-frames/`、`motion-samples/` |
+| `python3 deliver.py` | 0：新名字独占创建视频/字幕/JSON，复制后摘要相同；30旧文件及4输入保持 | `deliver.stdout/stderr`、`delivery-verification.json` |
+
+交付 [动画视频](../build/release/cj-docguard-demo-motion-20261007.mp4)：178.004秒、1920×1080、30帧/秒、5340帧、H.264/AAC、32条连续字幕。视频SHA-256 `207247c73c59d8c18c5e6fda05c91d50be62bea3cf431ac97109bdfd8692ab3d`；[字幕](../build/release/cj-docguard-demo-motion-20261007.srt) SHA-256 `b6ee9c925e955c5c1931a12ea6dfcf857bd2f67bd5cd78733945da51e1b9db2d`。制作及自动QA的旧记录不覆盖，最终抽查结论另存 [交付JSON](../build/release/cj-docguard-demo-motion-20261007.json)。
+
+来源仍为此前20条真实命令：26格运行/2格仅编译，70条历史来自故障演示副本；动画状态没有把历史成功写成当前准入。每镜头只抽样检查，不等于全帧或人工音频听审，不保证主观效果；最后链接卡刻意保持静止。无产品代码变更及新核心测试，当前全量执行仍为R05；未执行浏览器预览、远端推送、视频上传或正式提交。私人Word和旧包未改，材料版本统一及公开视频链接仍待正式提交时处理。
+
+## R09：补公开视频链接并整理提交材料（2026-10-07）
+
+用户提供B站BV1R5HC6MEDo链接并要求整理文件。实际 `uname -sm` 为Darwin arm64。去掉跟踪参数，使用 `https://www.bilibili.com/video/BV1R5HC6MEDo/`；B站及AtomGit页面直接抓取未成功，链接按用户提供填写，未声称在线播放、审核状态或线上媒体与本地一致。现有规则快照要求AtomGit报名、作品仓库及组织同步，两个快照的同步组织描述不同，以当前提交页面为准；不以GitHub发布冒称已提交。
+
+保留当前用户修改后的私人Word为底稿（SHA-256 `c712df85867201a0758ab9e493c475f2a0701113d8de14312313d5909c428071`，18个包成员），没有恢复旧候选。只改3个文本节点，补视频链接并同步约2分58秒/动画文件名；全部119个运行格式属性、字体字号、表格及页设置保持。为消除独立留白页，仅取消第九节标题强制换页，不改正文。最终5页逐页检查无观察到裁切、重叠、缺字或孤立页，签字栏原样保留。
+
+制作中实际失败：`prepare.py`退出1，因检查器错误要求旧版本含姓名的签字文字；`render_docx.py`随后因输入尚未生成退出1，双流保留。改为核对当前签字段落后，`prepare-v2.py`退出1：写ZIP时复用ZipInfo会修改读取句柄偏移；候选未交付，原件字节未改。`prepare-v3.py`复制ZipInfo后退出0。初渲染退出0但中文为方框，不合格；补本地字体目录后渲染0但7页有留白；仅为未安装等线指定Heiti SC渲染替代后0、6页，仍有第九节强制换页留白；`finish-layout.py`及最终 `render-v6.py`均0、5页通过。DOCX仍为Arial/等线，PDF是本机字体替代后的未签字预览，不保证Microsoft Word效果或嵌入等线。探测字体的fontTools导入不可用，改用已有Pillow读取本地字体，不安装资源。PDF文本检查首次误用不存在的override/pdftotext失败；改用发现的捆绑Poppler路径退出0，视频ID、身份和签字文字均存在。
+
+`python3 build/submission-organize-20261007/package.py`退出0，交付目录 `build/release/CJ-DocGuard-提交材料-20261007/` 共9文件：说明、Word、未签字预览PDF、源码ZIP、MP4、SRT、验证ZIP、摘要清单与可复制简介/链接。源码164文件及独立身份记录，58个src/scripts/tests/examples文件与R05干净受测副本逐字节一致；源码包是当前工作树快照，不能称为全新受测Git提交。验证附件225份真实日志/摘要选摘，记录原件与脱敏副本摘要，将本机用户目录替换为LOCAL_HOME；不把脱敏副本当作原始准入指纹，不冒称完整历史7971文件证据包。换环境仍须复验。
+
+总ZIP SHA-256 `83df812fef0fe199069d2bcd0fd1f1716bede7380d7713bda3e2258d10b501f3`，8252121字节；Word摘要 `cb20f9e5d9e0e21c9884e024ec5557dbcdc7ec2b8e844b4b314d7a514ee4b9e3`。外包、源码ZIP、验证ZIP和DOCX的CRC与路径检查均通过，外包成员逐字节匹配目录，31旧release文件及2用户文件保持。原始制作、失败、字体配置、渲染、清单和回执在 `build/submission-organize-20261007/`；源码冻结之后的本节交付记录不反写旧包。新增公开索引但未远端推送，不公开私人Word/整包，不创建AtomGit仓库、同步、代签或正式提交。签字、资格、任务#9及平台回执仍待本人完成；当前核心执行仍为R05，没有新核心或AI实测。
+
+
+## R10 AtomGit仓库整理（2026-10-07）
+
+用户明确要求放入AtomGit仓库。macOS arm64环境；通过已登录账号导入完整GitHub代码及22次历史提交，实际仓库为`https://atomgit.com/c2892480843s/cj-docguard`，`git ls-remote`确认main为`0fda18b0db805f4bbf13c979701b66b846dbb808`。公开材料副本位于`submission/`，包含五页模板Word/PDF、225份必要日志与汇总ZIP、字幕、索引和校验清单。Word分片邮箱按完整段落匹配隐藏，字体字号与其余部件保持；首轮发现分片邮箱仍可见，未上传，修正后重新渲染并逐页检查。`prepare.py`和PDF提取退出0，ZIP校验、五项附件摘要和用户文件保留检查通过。发布增量和远端复核接续记录在本轮日志中。
+
+核心源码未变，本轮没有新构建、核心测试、Linux运行、远端CI或AI效果验证；最新完整执行仍为R05。私人完整模板与旧包不覆盖。当前赛事页面确认提交作品须同步`cj-codelabs`并另送本人签字PDF；本轮未代签、发邮件、同步组织或正式提交。B站线上播放和课题#9完整要求待核验。
