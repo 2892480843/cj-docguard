@@ -12,6 +12,20 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def host_identity() -> tuple[str, str]:
+    host = os.uname()
+    return host.sysname, host.machine
+
+
+def native_runtime_directory(system: str, machine: str) -> str:
+    architecture = {'arm64': 'aarch64', 'aarch64': 'aarch64', 'x86_64': 'x86_64'}.get(machine)
+    if system == 'Darwin' and architecture == 'aarch64':
+        return 'darwin_aarch64_cjnative'
+    if system == 'Linux' and architecture in ('aarch64', 'x86_64'):
+        return f'linux_{architecture}_cjnative'
+    raise RuntimeError(f'unsupported native host: {system}/{machine}')
+
+
 def sdk_home(version: str) -> Path:
     explicit = os.environ.get('CJ_DOCGUARD_SDK_' + version.replace('.', '_'))
     candidates = [Path(explicit)] if explicit else []
@@ -26,12 +40,15 @@ def sdk_home(version: str) -> Path:
 
 def sdk_env(version: str) -> dict[str, str]:
     home = sdk_home(version)
+    system, machine = host_identity()
+    runtime = home / 'runtime' / 'lib' / native_runtime_directory(system, machine)
+    if not runtime.is_dir():
+        raise RuntimeError(f'SDK {version} lacks runtime for {system}/{machine}: {runtime}')
     env = os.environ.copy()
     env['CANGJIE_HOME'] = str(home)
     env['PATH'] = os.pathsep.join([str(home / 'bin'), str(home / 'tools' / 'bin'), '/usr/bin', '/bin', '/usr/sbin', '/sbin'])
-    runtime = home / 'runtime' / 'lib' / ('darwin_aarch64_cjnative' if sys.platform == 'darwin' else 'linux_x86_64_cjnative')
-    env['DYLD_LIBRARY_PATH' if sys.platform == 'darwin' else 'LD_LIBRARY_PATH'] = str(runtime)
-    if sys.platform == 'darwin':
+    env['DYLD_LIBRARY_PATH' if system == 'Darwin' else 'LD_LIBRARY_PATH'] = str(runtime)
+    if system == 'Darwin':
         env['SDKROOT'] = subprocess.check_output(['/usr/bin/xcrun', '--sdk', 'macosx', '--show-sdk-path'], text=True).strip()
     for v in ('1.1.3', '1.2.0'):
         try:
