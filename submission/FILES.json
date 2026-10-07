@@ -8,8 +8,8 @@
     "sha256": "b1d9e85b918742d21ed4e7842f11b6a9a8dd9c99810b4d46b3c03a31905d5d2a"
   },
   "README.md": {
-    "bytes": 7070,
-    "sha256": "fff1c6d4a00e4db570c4fc915da2e74aa5b967c7f09c9c2d3f4114217ec5d712"
+    "bytes": 7951,
+    "sha256": "ba228b299371d9d60dc1acdf5a1e4730bbf89250bbdcb4b1f75b9d9aa567e155"
   },
   "CJ-DocGuard-作品提交书-公开未签字版.docx": {
     "bytes": 19236,
@@ -20,8 +20,8 @@
     "sha256": "e6788710c4e24c103567c84301c9bffc3d851585a3a389ba0caf518f79c85976"
   },
   "AI生态贡献加分申请.md": {
-    "bytes": 3132,
-    "sha256": "2fc5e98963e0121cd7181390df0717c4e6fc10833b1747ca27d561ee8dd1d82d"
+    "bytes": 5853,
+    "sha256": "8a5b1c4cf4cf590cb804fa0062412c09b1974cec38f993bf0362d2f51a44059b"
   },
   "CJ-DocGuard-AI生态贡献包-20261007.zip": {
     "bytes": 49950,
@@ -44,8 +44,8 @@
     "sha256": "bb2710cec475e3b9369c2d2705977f3416787f9a0bf5c36edb3bf81090a93d78"
   },
   "必交材料核对清单.md": {
-    "bytes": 7220,
-    "sha256": "a43859623ee3d5c19ecc52528455e927aeaf44bb2135f75e278e038b734a90f4"
+    "bytes": 8093,
+    "sha256": "7a112a290dde9c5235916240dd0858731cbb0b7bae84e172e11939f1746663dd"
   },
   "CJ-DocGuard-作品提交书-材料齐备公开未签字版-20261007.docx": {
     "bytes": 19253,
@@ -58,5 +58,13 @@
   "CJ-DocGuard-初赛答辩-亲切手绘版-20261007.pptx": {
     "bytes": 8150894,
     "sha256": "5951dcc1e6f1ee75bb549a79feab7afc9eebb90c45801d69c8584049dba89ceb"
+  },
+  "CJ-DocGuard-作品提交书-AI加分证据增强公开未签字版-20261007.docx": {
+    "bytes": 20794,
+    "sha256": "b5fb4fd3e6cbe7ca8b0fc29e5c98c71d709f7485281dc259216f27f50876a7b1"
+  },
+  "CJ-DocGuard-作品提交书-AI加分证据增强公开未签字版-20261007.pdf": {
+    "bytes": 500209,
+    "sha256": "c14116a74ad414cbd0a4f520fe97b4b9de691152701d1dab83a03b90646924a3"
   }
 }
