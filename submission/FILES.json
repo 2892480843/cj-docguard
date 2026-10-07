@@ -8,8 +8,8 @@
     "sha256": "b1d9e85b918742d21ed4e7842f11b6a9a8dd9c99810b4d46b3c03a31905d5d2a"
   },
   "README.md": {
-    "bytes": 3871,
-    "sha256": "22a3ac5a7e1ea3f42271263f3d5fa08b3b1b5e4f02dac15e3bc9af665df11899"
+    "bytes": 4979,
+    "sha256": "877b4f9e9d4acebb84c623e627814b6aa57762747fadc8d52b7ea0f34b62e796"
   },
   "CJ-DocGuard-作品提交书-公开未签字版.docx": {
     "bytes": 19236,
@@ -34,5 +34,13 @@
   "CJ-DocGuard-作品提交书-AI贡献公开未签字版.pdf": {
     "bytes": 462448,
     "sha256": "ce534a708abcdb4f6305504aff2bacf15f204a5cb998c8d325a58a7ae13c3b50"
+  },
+  "CJ-DocGuard-初赛答辩-20261007.pptx": {
+    "bytes": 43314,
+    "sha256": "1b8f7978aaa5913563fa2135a91fa3d9ea147581ff20a5e004b9ae47f2a9d39c"
+  },
+  "CJ-DocGuard-真实库复用证据-20261007.zip": {
+    "bytes": 192181,
+    "sha256": "bb2710cec475e3b9369c2d2705977f3416787f9a0bf5c36edb3bf81090a93d78"
   }
 }

@@ -27,3 +27,14 @@
 - [验证细节](https://atomgit.com/c2892480843s/cj-docguard-ai/blob/main/docs/verification.md)：macOS arm64，固定主引擎`8a886f73f28d29c7fe92f2ea9dbebaa205b7f68a`；主仓库14项MCP测试、独立包13项协议测试、真实SDK 1.1.3/1.2.0自建样例及导出后输出3。两套单元测试覆盖重叠，不相加为独立测试数。
 
 旧公开Word/PDF和旧提交ZIP保留为归档。最新模板只更新独立贡献链接，原字体字号与119个运行格式属性保持，五页渲染已检查；完整联系方式版另存于负责人本地。最高10分由组委会评审决定，初赛与决赛分别评分，正式申请仍需本人签字并随赛事提交。
+
+## R12 评分证据与答辩材料
+
+| 新材料 | 入口 |
+|---|---|
+| 六维评分对应证据 | [评审索引](../docs/rubric-evidence.md) |
+| 可编辑10页辅助PPT | [初赛答辩PPT](CJ-DocGuard-初赛答辩-20261007.pptx) |
+| 真实开源库复用 | [教程](../docs/real-library-walkthrough.md)、[328文件公开证据ZIP](CJ-DocGuard-真实库复用证据-20261007.zip) |
+| 工程与完成度 | [架构/可靠性](../docs/architecture.md)、[需求状态](../docs/requirements-status.md)、[贡献入口](../CONTRIBUTING.md) |
+
+本轮固定0a4d81e源码，在macOS arm64真实重验leven4cj的20调用双SDK40格，36当前有效、4断言失败；strict退出1，失败全部保留。有效upstream-api两版导出及独立重建退出0，输出3、2、3；输入变化后query为空、export退出1且不创建目录。公开证据为脱敏冻结附件，不可替代自己工程的当前证据目录。没有修改产品核心、重跑完整核心测试或模型。PPT逐页检查、表格/图表可编辑，未声明PowerPoint应用实测。旧提交包与模板保持，不反写旧证据。

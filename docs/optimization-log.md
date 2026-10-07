@@ -247,3 +247,19 @@ R10可见性补充：导入表单默认生成私有项目，第一次清空凭�
 本轮范围为固定核心的聚焦协议/复用验证、独立分发与文档更新；没有新全量核心回归、健康矩阵覆盖、Linux运行、GUI客户端集成、模型效果实验或第三方采用证据。R05完整回归保留为历史独立记录。没有自动全局安装Skill、邮件发送、组织同步、报名或比赛正式提交；加分由组委会决定，决赛需以真实最终版本另行迭代验证。
 
 R11发布前检查：独立匿名fetch退出0，54份远端文件与本地逐字节一致；ZIP清单/CRC、两份PDF文本与五页数、116个相对文档链接、公开附件摘要、用户文件保留和git diff --check通过。第一次检查器把公开账号c2892480843s中的数字误当作邮箱而退出1；保留脚本和失败记录，改为匹配完整私人邮箱后退出0，未改动文档或联系方式。记录在build/ai-contribution-20261007/final-check.json。
+
+## R12 按初赛评分标准补强证据与复用材料 2026年10月7日
+
+依据用户提供的30/20/20/15/10/5六维100分标准，优先补评审证据定位、真实库发布检查和缺失PPT。用户已授权迭代和AtomGit公开材料发布；本轮不修改原生核心、监督器、构建/测试或MCP适配器。保留45份用户文件与旧release材料摘要，原PRD和未跟踪Skill README不改。
+
+Darwin arm64，固定0a4d81e772d5613c7ad491a675b11a47fcba9c5b的干净git archive副本。真实构建0；scripts/real_projects.py --project leven4cj --cache 已审核缓存 --output 独立目录退出0，固定上游da69d981027b9fcbe12d09cfbb275b4ce8acc91d、全部生产源码保持、20不同调用×两SDK=40格。36 RUN_VERIFIED/CURRENT有效、4 ASSERTION_FAILED/CURRENT，原生verify退出1，strict也退出1。unicode-empty与emoji-empty两版失败保留。不是整个库发布通过，也未证明上游采用。
+
+13条实际命令记录在build/rubric-optimization-20261007/logs/commands.json：两版本upstream-api query、export、导出目录bash build.sh均0，输出3\n2\n3\n。隔离生产源码末尾加入注释后，query 0但items为空、freshness=STALE，export 1且目标不存在。未登记新执行尝试，恢复原始字节后query恢复有效；不把该恢复场景与R11较新失败后的必须重验混淆。只读旧报告仍显示历史成功，形成同一输入的最小对照，不宣称优于任何第三方产品。原生二进制前后摘要一致，源身份与支持范围在summary.json。
+
+实际失败及接续：外层检查器误用MCP包装records字段读取CLI的items，第一次进程退出1；原query本身0。保存v1-run.*及脚本，按实际JSON修正后在已完成构建/矩阵身份上接续，最终0，不重写旧日志。本轮不新增模型调用或全套核心回归。初次字体/构建工作目录读取用错目录的辅助命令失败留在工具记录；没有修改技能或用户应用。
+
+公开真实库ZIP328文本文件，SHA-256 bb2710cec475e3b9369c2d2705977f3416787f9a0bf5c36edb3bf81090a93d78，包含40格阶段日志/尝试、报告、13命令、来源与LICENSE、两版导出源码及脚本。排除可执行文件、.cjo和SDK。原始双流本地保留，路径脱敏副本另存，FILES同时记录原始与公开SHA；脱敏后不是原生准入目录。CRC、UTF-8/JSON和选择的路径/联系方式检查0。
+
+新增10页16:9可编辑PPT，使用Artifact Tool及实有Heiti SC字体，六张原生表格与一张原生双SDK堆叠图表，来源放逐页备注。首次finalizer遗漏表格验证参数而失败，第二次缺RUNTIME_NODE_MODULES导入失败；保存两轮候选/双流，补所声明表格参数及正确捆绑运行时后完整finalizer0。初稿逐页检查后修正STALE表述和图表文字对比度，另存新版，最终10页渲染逐页检查无观察到裁切/重叠。原生图表工作簿快照与导入、字体、完整性、几何验证通过；最终PPT SHA-256 1b8f7978aaa5913563fa2135a91fa3d9ea147581ff20a5e004b9ae47f2a9d39c。没有Microsoft PowerPoint实际打开声明。
+
+新增架构/可靠性、真实库教程、原需求完成度、六维评审证据和CONTRIBUTING，连接README及提交索引。2026-10-07直接观察AtomGit主项目页Star 0、Fork 0，只有该页面计数快照，不外推社区受欢迎程度；未代为Star/Fork或联系社区。模型历史实验未提升、GUI客户端未实测、浏览器报告预览拒绝、CI/性能剖析待办仍保持。没有报名、组织同步、代签、发邮件或比赛正式提交。
