@@ -7,14 +7,14 @@
 | 代码质量与可靠性 | 30 | [模块与安全边界](architecture.md)、[测试与原始日志](acceptance.md)、[资源诊断](memory-diagnostics.md) | 当前真实库40格、strict失败、双SDK导出重建和输入变更拒绝 | 未测行/分支覆盖率、无远端CI、查询延迟仍待剖析 |
 | 创新性 | 20 | 仓颉声明、内容失效、最新尝试、完整断言及导出使用同一证据规则 | [静态状态读取与当前查询的实测对照](real-library-walkthrough.md) | 未完成同环境竞品实验，不能声称独占生态空白 |
 | 实用性 | 20 | 库发布、SDK例子维护、AI辅助编码、可运行复现包 | [真实库接入教程](real-library-walkthrough.md)，两SDK实际输出匹配 | 没有外部采用人数、节省工时或用户调研统计 |
-| 文档完善度 | 15 | [安装使用](../README.md)、[演示视频](https://www.bilibili.com/video/BV1R5HC6MEDo/)、[统一模板](../submission/README.md) | [10页可编辑PPT](../submission/CJ-DocGuard-初赛答辩-20261007.pptx)、教程与本页索引 | 线上视频播放/本地一致性仍待本人确认，模板待签字 |
+| 文档完善度 | 15 | [安装使用](../README.md)、[演示视频](https://www.bilibili.com/video/BV1R5HC6MEDo/)、[统一模板](../submission/README.md) | [10页可编辑PPT](../submission/CJ-DocGuard-初赛答辩-亲切手绘版-20261007.pptx)、教程与本页索引 | 线上视频播放/本地一致性仍待本人确认，模板待签字 |
 | 实现完成度 | 10 | [原需求逐项状态](requirements-status.md)、[验收映射](acceptance.md) | 分开列明已实现、支持子集、未达成目标和外部提交待办 | 完整Markdown、多包、Windows、模型提升目标未完成 |
 | 社区影响 | 5 | [公开AtomGit项目](https://atomgit.com/c2892480843s/cj-docguard)、[贡献指南](../CONTRIBUTING.md) | 新增真实复现与问题反馈入口，降低参与门槛 | 2026-10-07页面观察Star 0、Fork 0；无外部采用证明，后续数据会变化 |
 | 合计 | 100 | 以上为证据索引，分值由评委决定 | 不把材料数量等同于得分 | 初赛与决赛成果须分别核验 |
 
 ## 建议审阅顺序
 
-先看[10页PPT](../submission/CJ-DocGuard-初赛答辩-20261007.pptx)理解问题、机制和支持范围，再看[真实库教程](real-library-walkthrough.md)与[公开证据ZIP](../submission/CJ-DocGuard-真实库复用证据-20261007.zip)，最后按[原需求状态](requirements-status.md)和[验收](acceptance.md)逐项复核。主程序入口和核心模块在[架构说明](architecture.md)直接链接。
+先看[10页PPT](../submission/CJ-DocGuard-初赛答辩-亲切手绘版-20261007.pptx)理解问题、机制和支持范围，再看[真实库教程](real-library-walkthrough.md)与[公开证据ZIP](../submission/CJ-DocGuard-真实库复用证据-20261007.zip)，最后按[原需求状态](requirements-status.md)和[验收](acceptance.md)逐项复核。主程序入口和核心模块在[架构说明](architecture.md)直接链接。
 
 R12固定主源码`0a4d81e772d5613c7ad491a675b11a47fcba9c5b`，平台Darwin-arm64。20不同调用、双SDK40格，36有效、4失败；严格检查退出1，失败没有删。upstream-api两版导出重建退出0，均输出三行3、2、3。输入改变后当前查询拒绝，过期导出不创建目录。该实测提供可复验技术组合依据，不能外推为产品优于所有竞品。
 

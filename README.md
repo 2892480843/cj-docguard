@@ -10,7 +10,7 @@
 
 ## 评审与真实库复用
 
-[六项评分证据索引](docs/rubric-evidence.md)提供源码、测试、资源控制、实用案例和完成度的直接入口。[10页答辩PPT](submission/CJ-DocGuard-初赛答辩-20261007.pptx)为可编辑辅助材料，[真实库接入教程](docs/real-library-walkthrough.md)与[验证附件](submission/CJ-DocGuard-真实库复用证据-20261007.zip)展示固定leven4cj的40格双SDK检查和有效单例导出重建。当前36格有效、4格断言失败，严格检查返回1；有效单例的两版重建输出一致。输入变化后当前查询和导出拒绝旧成功。[架构审阅](docs/architecture.md)、[需求完成度](docs/requirements-status.md)和[贡献指南](CONTRIBUTING.md)说明支持范围及参与方法。
+[六项评分证据索引](docs/rubric-evidence.md)提供源码、测试、资源控制、实用案例和完成度的直接入口。[10页答辩PPT](submission/CJ-DocGuard-初赛答辩-亲切手绘版-20261007.pptx)为可编辑辅助材料，[真实库接入教程](docs/real-library-walkthrough.md)与[验证附件](submission/CJ-DocGuard-真实库复用证据-20261007.zip)展示固定leven4cj的40格双SDK检查和有效单例导出重建。当前36格有效、4格断言失败，严格检查返回1；有效单例的两版重建输出一致。输入变化后当前查询和导出拒绝旧成功。[架构审阅](docs/architecture.md)、[需求完成度](docs/requirements-status.md)和[贡献指南](CONTRIBUTING.md)说明支持范围及参与方法。
 
 ## 测试与验证证据速览
 

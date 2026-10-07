@@ -21,3 +21,5 @@
 最新完整填写版和附件已另存本地 `build/release/CJ-DocGuard-必交材料完整包-20261007-v2/`；公开版本以[核对清单](../submission/必交材料核对清单.md)为准。旧本地综合ZIP保持冻结，新包整合最新模板、PPT、真实库及独立AI贡献附件；负责人应补本人签名。
 
 R12新增[评分证据索引](rubric-evidence.md)、[10页PPT](../submission/CJ-DocGuard-初赛答辩-20261007.pptx)、[真实库教程](real-library-walkthrough.md)和[328文件验证ZIP](../submission/CJ-DocGuard-真实库复用证据-20261007.zip)。最新辅助材料与旧完整包分开保存，正式提交时一并选用新PPT和真实库附件。
+
+R14按负责人视觉要求提供[亲切手绘新版10页PPT](../submission/CJ-DocGuard-初赛答辩-亲切手绘版-20261007.pptx)，原数据与证据备注保留，文字、2表及1数据图可编辑。R13-v2本地完整包内R12原稿保持冻结，本次新版单独下载选用，Word/视频本轮未改。
