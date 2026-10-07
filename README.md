@@ -1,5 +1,7 @@
 # CJ-DocGuard
 
+**按官方四类编号的最新入口：[正式提交材料总览](submission/正式提交材料/README.md)。01源码、02测试验证、03视频、04统一模板；旧文件保留，正式签字仍待本人完成。**
+
 [AtomGit源码仓库](https://atomgit.com/c2892480843s/cj-docguard) · [演示视频](https://www.bilibili.com/video/BV1R5HC6MEDo/) · [参赛材料与模板](submission/README.md) · [独立AI贡献仓库](https://atomgit.com/c2892480843s/cj-docguard-ai)
 
 **为仓颉 API 文档和示例提供实际运行证据；输入变化后拒绝把旧成功当作当前成功。**

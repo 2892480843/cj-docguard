@@ -1,5 +1,7 @@
 # CJ-DocGuard 提交材料索引
 
+**按官方四类编号的最新入口：[正式提交材料总览](../submission/正式提交材料/README.md)。01源码、02测试验证、03视频、04统一模板；旧文件保留，正式签字仍待本人完成。**
+
 作品名称：CJ-DocGuard 项目级 API 文档生成及示例证据验证。队伍名称：CJ-DocGuard。
 
 - [AtomGit源码仓库](https://atomgit.com/c2892480843s/cj-docguard)

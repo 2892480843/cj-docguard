@@ -1,0 +1,42 @@
+{
+  "01-源代码与测试入口.md": {
+    "bytes": 895,
+    "sha256": "721438cb3eed5ffd0183cf1eb2d21f6dea23bf338af4e541e9bf2bc176f5dac3"
+  },
+  "02-测试与验证说明.md": {
+    "bytes": 1550,
+    "sha256": "45c40d232c0b8944730a11f2610d3f1520b9caa1c55994d4faa87f1cf7752c38"
+  },
+  "02A-测试验证日志.zip": {
+    "bytes": 254541,
+    "sha256": "b1d9e85b918742d21ed4e7842f11b6a9a8dd9c99810b4d46b3c03a31905d5d2a"
+  },
+  "02B-真实库复用验证日志.zip": {
+    "bytes": 192181,
+    "sha256": "bb2710cec475e3b9369c2d2705977f3416787f9a0bf5c36edb3bf81090a93d78"
+  },
+  "03-演示视频链接.md": {
+    "bytes": 1013,
+    "sha256": "54d0431db364b12b14321fc1135e6ae5863fdad0f7b503026306eebad9329411"
+  },
+  "03A-辅助答辩PPT-亲切手绘版.pptx": {
+    "bytes": 8150894,
+    "sha256": "5951dcc1e6f1ee75bb549a79feab7afc9eebb90c45801d69c8584049dba89ceb"
+  },
+  "04-统一作品提交模板-公开未签字版.docx": {
+    "bytes": 20794,
+    "sha256": "b5fb4fd3e6cbe7ca8b0fc29e5c98c71d709f7485281dc259216f27f50876a7b1"
+  },
+  "04A-统一作品提交模板-未签字预览.pdf": {
+    "bytes": 500209,
+    "sha256": "c14116a74ad414cbd0a4f520fe97b4b9de691152701d1dab83a03b90646924a3"
+  },
+  "05-AI生态贡献加分说明.md": {
+    "bytes": 538,
+    "sha256": "d36f66f2b715fc986275b3f5b12ac3f1d67b409b91a6f9ee6ba302420f98ce66"
+  },
+  "README.md": {
+    "bytes": 2592,
+    "sha256": "cf248b7f56f56006f392ba9f5493873b7c269e41d66bc3c327739fb661a0d794"
+  }
+}
