@@ -1,0 +1,863 @@
+{
+  "schema_version": 1,
+  "scope": "Self-built healthy library; paired pilot, not external project efficacy",
+  "tasks": [
+    {
+      "id": "add",
+      "request": "Return the sum of a and b using add.",
+      "required_symbols": [
+        "add"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "1\n5\n-2\n7\n",
+      "reference_body": "add(a, b).toString()"
+    },
+    {
+      "id": "subtract",
+      "request": "Return a minus b using subtract.",
+      "required_symbols": [
+        "subtract"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "-1\n-1\n-6\n11\n",
+      "reference_body": "subtract(a, b).toString()"
+    },
+    {
+      "id": "multiply",
+      "request": "Return the product using multiply.",
+      "required_symbols": [
+        "multiply"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "0\n6\n-8\n-18\n",
+      "reference_body": "multiply(a, b).toString()"
+    },
+    {
+      "id": "absolute",
+      "request": "Return the absolute value of a using absValue; ignore b.",
+      "required_symbols": [
+        "absValue"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "0\n2\n4\n9\n",
+      "reference_body": "absValue(a).toString()"
+    },
+    {
+      "id": "maximum",
+      "request": "Return the larger integer using maxValue.",
+      "required_symbols": [
+        "maxValue"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "1\n3\n2\n9\n",
+      "reference_body": "maxValue(a, b).toString()"
+    },
+    {
+      "id": "minimum",
+      "request": "Return the smaller integer using minValue.",
+      "required_symbols": [
+        "minValue"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "0\n2\n-4\n-2\n",
+      "reference_body": "minValue(a, b).toString()"
+    },
+    {
+      "id": "clamp",
+      "request": "Clamp a to the closed interval -5..5 using clamp; ignore b.",
+      "required_symbols": [
+        "clamp"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "0\n2\n-4\n5\n",
+      "reference_body": "clamp(a, -5, 5).toString()"
+    },
+    {
+      "id": "divide",
+      "request": "Use divideSafe(a,b); return the quotient or -99 if absent.",
+      "required_symbols": [
+        "divideSafe"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          9,
+          2
+        ],
+        [
+          -9,
+          2
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "expected_stdout": "0\n4\n-4\n-99\n",
+      "reference_body": "(divideSafe(a, b) ?? -99).toString()"
+    },
+    {
+      "id": "counter-step",
+      "request": "Construct Counter(a), increment by named step b, return resulting count.",
+      "required_symbols": [
+        "Counter",
+        "increment"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "1\n5\n-2\n7\n",
+      "reference_body": "Counter(a).increment(step: b).toString()"
+    },
+    {
+      "id": "pair-sum",
+      "request": "Construct Pair(a,b) and return sum() as text.",
+      "required_symbols": [
+        "Pair",
+        "sum"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "1\n5\n-2\n7\n",
+      "reference_body": "Pair(a, b).sum().toString()"
+    },
+    {
+      "id": "pair-difference",
+      "request": "Construct Pair(a,b) and return difference() as text.",
+      "required_symbols": [
+        "Pair",
+        "difference"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "-1\n-1\n-6\n11\n",
+      "reference_body": "Pair(a, b).difference().toString()"
+    },
+    {
+      "id": "callback",
+      "request": "Use applyTwice with a transform adding b, starting with a.",
+      "required_symbols": [
+        "applyTwice"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "2\n8\n0\n5\n",
+      "reference_body": "applyTwice({ n => n + b }, a).toString()"
+    },
+    {
+      "id": "identity-int",
+      "request": "Use generic identity on a, preserving Int64; ignore b.",
+      "required_symbols": [
+        "identity"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "0\n2\n-4\n9\n",
+      "reference_body": "identity<Int64>(a).toString()"
+    },
+    {
+      "id": "array-sum",
+      "request": "Use sumArray to sum [a,b,1].",
+      "required_symbols": [
+        "sumArray"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "2\n6\n-1\n8\n",
+      "reference_body": "sumArray([a, b, 1]).toString()"
+    },
+    {
+      "id": "factorial",
+      "request": "Use factorial(a); inputs satisfy a in 0..5, ignore b.",
+      "required_symbols": [
+        "factorial"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          3,
+          -2
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "expected_stdout": "1\n1\n6\n120\n",
+      "reference_body": "factorial(a).toString()"
+    },
+    {
+      "id": "counter-reset",
+      "request": "Construct Counter(a), increment by b, then reset and return read().",
+      "required_symbols": [
+        "Counter",
+        "increment",
+        "reset",
+        "read"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "0\n0\n0\n0\n",
+      "reference_body": "let c = Counter(a)\n    c.increment(step: b)\n    c.reset()\n    c.read().toString()"
+    },
+    {
+      "id": "box-int",
+      "request": "Store a in a Box<Int64>, read get() and convert to text.",
+      "required_symbols": [
+        "Box",
+        "get"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "0\n2\n-4\n9\n",
+      "reference_body": "Box<Int64>(a).get().toString()"
+    },
+    {
+      "id": "counter-current",
+      "request": "Construct Counter(a), increment by b, return current property as text.",
+      "required_symbols": [
+        "Counter",
+        "increment",
+        "current"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "1\n5\n-2\n7\n",
+      "reference_body": "let c = Counter(a)\n    c.increment(step: b)\n    c.current.toString()"
+    },
+    {
+      "id": "even",
+      "request": "Use isEven(a) and return its boolean text.",
+      "required_symbols": [
+        "isEven"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "true\ntrue\ntrue\nfalse\n",
+      "reference_body": "isEven(a).toString()"
+    },
+    {
+      "id": "positive",
+      "request": "Use isPositive(a) and return its boolean text.",
+      "required_symbols": [
+        "isPositive"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "false\ntrue\nfalse\ntrue\n",
+      "reference_body": "isPositive(a).toString()"
+    },
+    {
+      "id": "greeting",
+      "request": "Use greet to greet the decimal representation of a.",
+      "required_symbols": [
+        "greet"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "你好，0\n你好，2\n你好，-4\n你好，9\n",
+      "reference_body": "greet(a.toString())"
+    },
+    {
+      "id": "repeat-text",
+      "request": "Use repeatText to repeat 好 a times; a is 0..3; ignore b.",
+      "required_symbols": [
+        "repeatText"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          -1
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "expected_stdout": "\n好\n好好\n好好好\n",
+      "reference_body": "repeatText(\"好\", a)"
+    },
+    {
+      "id": "identity-string",
+      "request": "Use identity<String> on the decimal representation of b.",
+      "required_symbols": [
+        "identity"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "1\n3\n2\n-2\n",
+      "reference_body": "identity<String>(b.toString())"
+    },
+    {
+      "id": "box-string",
+      "request": "Store decimal text of a in Box<String> and access value field.",
+      "required_symbols": [
+        "Box",
+        "value"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "0\n2\n-4\n9\n",
+      "reference_body": "Box<String>(a.toString()).value"
+    },
+    {
+      "id": "named-interface",
+      "request": "Assign Label(decimal text of a) to Named, return name().",
+      "required_symbols": [
+        "Label",
+        "Named",
+        "name"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "0\n2\n-4\n9\n",
+      "reference_body": "let label: Named = Label(a.toString())\n    label.name()"
+    },
+    {
+      "id": "enum-red",
+      "request": "Use Shade.Red.code() then add a; return decimal text.",
+      "required_symbols": [
+        "Shade",
+        "code"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "1\n3\n-3\n10\n",
+      "reference_body": "(Shade.Red.code() + a).toString()"
+    },
+    {
+      "id": "compose-arithmetic",
+      "request": "Use multiply then add: a*b + b.",
+      "required_symbols": [
+        "multiply",
+        "add"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "1\n9\n-6\n-20\n",
+      "reference_body": "add(multiply(a, b), b).toString()"
+    },
+    {
+      "id": "compose-clamp",
+      "request": "Use sumArray([a,b]) then clamp to -3..3.",
+      "required_symbols": [
+        "sumArray",
+        "clamp"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "1\n3\n-2\n3\n",
+      "reference_body": "clamp(sumArray([a, b]), -3, 3).toString()"
+    },
+    {
+      "id": "divide-overflow",
+      "request": "Use divideSafe(a,b), return quotient or -99; include absent/overflow.",
+      "required_symbols": [
+        "divideSafe"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          8,
+          2
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          -9223372036854775808,
+          -1
+        ],
+        [
+          -8,
+          -2
+        ]
+      ],
+      "expected_stdout": "4\n-99\n-99\n4\n",
+      "reference_body": "(divideSafe(a, b) ?? -99).toString()"
+    },
+    {
+      "id": "counter-default",
+      "request": "Construct Counter(a), increment twice with default step, return read().",
+      "required_symbols": [
+        "Counter",
+        "increment",
+        "read"
+      ],
+      "signature": "public func answer(a: Int64, b: Int64): String",
+      "hidden_inputs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          9,
+          -2
+        ]
+      ],
+      "expected_stdout": "2\n4\n-2\n11\n",
+      "reference_body": "let c = Counter(a)\n    c.increment()\n    c.increment()\n    c.read().toString()"
+    }
+  ]
+}
