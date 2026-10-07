@@ -78,6 +78,18 @@ func appendQuotedJson(out: ArrayList<Byte>, s: String): Unit {
     }
     out.add(34)
 }
+func sortedObjectKeys(j: J): ArrayList<String> {
+    // Stable ordering is needed for reproducible fingerprints and reports.
+    let keys = ArrayList<String>()
+    for ((key, _) in j.fields) { keys.add(key) }
+    for (i in 0..keys.size) {
+        var p = i
+        while (p > 0 && keys[p] < keys[p - 1]) {
+            let tmp = keys[p]; keys[p] = keys[p - 1]; keys[p - 1] = tmp; p--
+        }
+    }
+    return keys
+}
 func appendJson(out: ArrayList<Byte>, j: J, depth: Int64): Unit {
     if (depth > 256) { throw Exception("JSON nesting exceeds 256 (or cyclic tree)") }
     if (j.kind == "string") { appendQuotedJson(out, j.text); return }
@@ -100,15 +112,7 @@ func appendJson(out: ArrayList<Byte>, j: J, depth: Int64): Unit {
         return
     }
     if (j.kind != "object") { throw Exception("unknown JSON kind") }
-    // Stable ordering is needed for reproducible fingerprints and reports.
-    let keys = ArrayList<String>()
-    for ((k, _) in j.fields) { keys.add(k) }
-    for (i in 0..keys.size) {
-        var p = i
-        while (p > 0 && keys[p] < keys[p - 1]) {
-            let tmp = keys[p]; keys[p] = keys[p - 1]; keys[p - 1] = tmp; p--
-        }
-    }
+    let keys = sortedObjectKeys(j)
     out.add(123)
     var first = true
     for (k in keys) {
@@ -158,14 +162,7 @@ func writeJsonNode(writer: JsonChunkWriter, j: J, depth: Int64): Unit {
         return
     }
     writer.add(123)
-    let keys = ArrayList<String>()
-    for ((key, _) in j.fields) { keys.add(key) }
-    for (i in 0..keys.size) {
-        var p = i
-        while (p > 0 && keys[p] < keys[p - 1]) {
-            let tmp = keys[p]; keys[p] = keys[p - 1]; keys[p - 1] = tmp; p--
-        }
-    }
+    let keys = sortedObjectKeys(j)
     var first = true
     for (key in keys) {
         if (!first) { writer.add(44) }; first = false

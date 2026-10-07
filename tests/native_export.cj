@@ -33,7 +33,7 @@ main(): Int64 {
         sanitized.put("extra", J.num(1))
         checkExport(privateRecord.get("extra").kind == "null" &&
             privateRecord.get("nested").dump() == sanitized.get("nested").dump(),
-            "changed parent is independent and unchanged subtree is read only")
+            "changed parent is independent and unchanged subtree retains equal content")
         let options = HashMap<String, String>()
         options["--example"] = "missing"; options["--sdk"] = sdk; options["--platform"] = "Darwin-arm64"
         options["--out"] = join(temp, "unknown")

@@ -6,11 +6,11 @@ R02 原始事件是在默认运行条件下，`verify --matrix` 已保存 28 条
 
 隔离的 308 条完整历史使内存压力可重复：旧二进制在 `cjHeapSize=128MB` 下 `check` 和 `verify` 都在报告阶段报内存不足；`verify` 的 28 条新记录已完整落盘。临时编译副本的阶段标记显示旧代码最先在 `report.dump()` 失败，跳过该分配后还会在后续报告写入阶段失败。这说明**多个同时驻留的大型报告对象和字符串共同造成受限堆失败**，单改一处字符串拼接不够。
 
-修复保留所有历史与报告字段：JSON 序列化改为线性追加，报告 JSON 分块写入临时目录，其他报告文件逐个生成后再发布；只读脱敏过程共享未改变的子树。这里的共享仅适用于 `reportFor` 及后续只读报告路径，`J` 本身并未变成不可变类型。最终新二进制在 `128MB` 下完整执行 `verify`，生成 336 条历史与 28 格报告，随后 `check --strict` 退出 0。对旧二进制留下的 308 条过期证据直接执行新 `check` 时，也完整生成报告，但因 `STALE`（证据对应旧二进制）而按严格检查规则退出 1；**这不是内存不足**。
+修复保留所有历史与报告字段：JSON 序列化改为线性追加，报告 JSON 分块写入临时目录，其他报告文件逐个生成后再发布；只读脱敏过程共享未改变的子树。这里的共享仅适用于 `reportFor` 及后续只读报告路径，`J` 本身并未变成不可变类型。复审修正版二进制在 `128MB` 下完整执行 `verify`，生成 336 条历史与 28 格报告，随后 `check --strict` 退出 0。对旧二进制留下的 308 条过期证据直接执行首次修复版 `check` 时，也完整生成报告，但因 `STALE`（证据对应旧二进制）而按严格检查规则退出 1；**这不是内存不足**。
 
 ## 可复现命令
 
-使用真实 SDK 1.1.3 和本机 Darwin arm64。脚本拒绝超过 400 条历史的源样本，先复制完整工程（macOS 使用 APFS 写时复制），所有产品命令只运行在新目录。`--commands` 可选 `check query verify`，`verify` 会追加新记录，应放最后。
+使用真实 SDK 1.1.3 和本机 Darwin arm64。脚本拒绝超过 400 条历史的源样本，先复制完整工程（macOS 使用 APFS 写时复制），所有产品命令只运行在新目录。`--commands` 可选 `check query verify`；`verify` 会追加新记录，若需核对新证据，应在其后执行 `check`。
 
 ```bash
 python3 scripts/diagnose_memory.py \
@@ -26,17 +26,18 @@ python3 scripts/diagnose_memory.py \
 |---|---:|---:|---:|---:|
 | 308 条；旧 `e67f62ac…`；默认堆 | 0 | 未测 | 未测 | `check` 235840 KiB |
 | 308 条；旧 `e67f62ac…`；128MB | 1，OOM | 0 | 1，28 条写完后 OOM | `check` 154304 KiB；`verify` 152224 KiB |
-| 308 条；最终新 `98ab81a8…`；128MB | 1，完整报告、证据 `STALE` | 未测 | **0，历史增至 336 条** | `check` 140736 KiB；`verify` 131008 KiB |
-| 最终新二进制验证后的 336 条；128MB | **0，严格检查通过** | 未测 | 未重复 | `check` 135328 KiB |
-| 308 条；旧/新；192MB | 旧 1，OOM；新 1，过期证据 | 未测 | 未测 | 旧 184688 KiB；新 183456 KiB |
+| 308 条；首次修复版 `98ab81a8…`；128MB | 1，完整报告、证据 `STALE` | 未测 | **0，历史增至 336 条** | `check` 140736 KiB；`verify` 131008 KiB |
+| 首次修复版验证后的 336 条；128MB | **0，严格检查通过** | 未测 | 未重复 | `check` 135328 KiB |
+| 308 条；复审修正版 `b3a01f3d…`；128MB | 验证后 **0，严格检查通过** | **0，旧证据无当前有效结果** | **0，历史增至 336 条** | `query` 121808 KiB；`verify` 149888 KiB；`check` 154912 KiB |
+| 308 条；旧 `e67f62ac…` / 中间新 `e1ab91fb…`；192MB | 旧 1，OOM；中间新 1，过期证据 | 未测 | 未测 | 旧 184688 KiB；中间新 183456 KiB |
 
-OOM 为运行时 `Out of memory`，与新二进制完整写出报告、随后因证据 `STALE` 返回的业务退出码 1 不同。旧、新二进制在 `128MB` 下的 `query` 均退出 0；旧证据在新二进制中返回空的当前有效结果，符合证据准入规则。原始日志在 `build/optimization-r02/verify.stderr` 和 `refresh-commands.json`；上述受控原始输出在 `build/gap-closure/memory/`。旧二进制 SHA-256 为 `e67f62ac9c4d0aefc474b9b56873d78f41c8f65d747e12264fd12dad29058eed`，最终诊断新二进制 SHA-256 为 `98ab81a8bba1eb08b0377da44cb1cac2ea9606d5270948cfc36e070390159a37`。合并重建后哈希会改变，应以每次 `summary.json` 为准。
+OOM 为运行时 `Out of memory`，与新二进制完整写出报告、随后因证据 `STALE` 返回的业务退出码 1 不同。旧二进制 `e67f62ac…` 和中间新二进制 `19b6461b…` 的独立 `128MB` 实验中，`query` 均退出 0；首次修复版 `98ab81a8…` 没有执行 `query`。复审修正版 `b3a01f3d…` 的新隔离实验依次执行 `query`、`verify`、`check --strict`，三者均退出 0；先查询旧证据得到空的当前有效结果，符合证据准入规则。原始日志在 `build/optimization-r02/verify.stderr` 和 `refresh-commands.json`；首次修复版原始输出在 `build/gap-closure/memory/final-128mb/`，复审修正版原始输出及精确命令、退出码在 `build/gap-closure/memory/review-fix/`。旧二进制 SHA-256 为 `e67f62ac9c4d0aefc474b9b56873d78f41c8f65d747e12264fd12dad29058eed`，首次修复版为 `98ab81a8bba1eb08b0377da44cb1cac2ea9606d5270948cfc36e070390159a37`，复审修正版为 `b3a01f3dc46fb5d0d2c8273c51d30af9b1fb1295aa5db30780d275b20ef4d2e5`。后续重建哈希会改变，应以每次 `summary.json` 为准。
 
 ## 完整性与验证
 
 - 336 条报告历史的前 308 条与隔离源报告按 JSON 值逐条相等；源目录中 308 个尝试文件与新副本对应文件逐字节相同。新历史仍保留序号、状态、编译/运行日志及断言。
 - 原生报告测试比较 `writeReports` 写出的 `report.json`、`api.json`、`manifest.json` 与 `J.dump()` 的**精确字节**；测试还验证循环树拒绝后无正式报告与残留临时目录。
-- 原生导出测试验证脱敏前源记录未改变、脱敏后的父对象独立，以及现有证据准入拒绝行为；没有修改 `eligible`、`freshness` 或证据 Schema。
-- Python 诊断测试覆盖隔离复制、完整 stdout/stderr、退出码、采样、超时及快速报告更新。双 SDK 1.1.3/1.2.0 的 `memory`、`report`、`export` 原生测试均退出 0。
+- 原生导出测试验证脱敏前源记录未改变、脱敏后的父对象独立、未改变子树内容相等，以及现有证据准入拒绝行为；这不保证共享子树不可变。没有修改 `eligible`、`freshness` 或证据 Schema。
+- Python 诊断测试覆盖隔离复制、完整 stdout/stderr、退出码、采样、超时及快速报告更新。双 SDK 1.1.3/1.2.0 的 `primitives`、`memory`、`report`、`export` 原生测试在复审修正后均退出 0。
 
 当前结论仅覆盖所测 macOS arm64、两版真实 SDK 的原生回归，以及 SDK 1.1.3 的受限堆 CLI 实验。历史默认堆异常是否与宿主内存压力、运行时回收或其他因素有关，仍需在再次出现时保留 `MRT_REPORT` 与完整阶段日志进一步核验。
