@@ -72,22 +72,37 @@ class Capture:
         self.environment = environment
         self.rows: list[dict] = []
 
+    def _save(self, name: str, argv: list[str], expected: int, started: float,
+              stdout: str | bytes | None, stderr: str | bytes | None,
+              result: dict) -> None:
+        for stream, value in (("stdout", stdout), ("stderr", stderr)):
+            raw = value if isinstance(value, bytes) else (value or "").encode("utf-8")
+            (self.output / f"{name}.{stream}").write_bytes(raw)
+        self.rows.append({"name": name, "command": argv, "cwd": str(self.root),
+                          "expected_exit": expected,
+                          "seconds": round(time.monotonic() - started, 3), **result})
+        (self.output / "commands.json").write_text(
+            json.dumps(self.rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     def run(self, name: str, argv: list[str], expected: int = 0, *,
-            stdin: str | None = None, environment: dict[str, str] | None = None) -> str:
+            stdin: str | None = None, environment: dict[str, str] | None = None,
+            timeout: float = 600) -> str:
         if not name or not all(c.isascii() and (c.isalnum() or c in "-._") for c in name):
             raise ValueError("unsafe capture command name")
         if any(row["name"] == name for row in self.rows):
             raise ValueError(f"duplicate capture command: {name}")
         started = time.monotonic()
-        proc = subprocess.run(argv, cwd=self.root, env=environment if environment is not None else self.environment,
-                              input=stdin, capture_output=True, text=True, timeout=600)
-        (self.output / f"{name}.stdout").write_text(proc.stdout, encoding="utf-8")
-        (self.output / f"{name}.stderr").write_text(proc.stderr, encoding="utf-8")
-        self.rows.append({"name": name, "command": argv, "cwd": str(self.root),
-                          "exit_code": proc.returncode, "expected_exit": expected,
-                          "seconds": round(time.monotonic() - started, 3)})
-        (self.output / "commands.json").write_text(
-            json.dumps(self.rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        try:
+            proc = subprocess.run(argv, cwd=self.root, env=environment if environment is not None else self.environment,
+                                  input=stdin, capture_output=True, text=True, timeout=timeout)
+        except subprocess.TimeoutExpired as error:
+            self._save(name, argv, expected, started, error.stdout, error.stderr,
+                       {"exit_code": None, "timeout_seconds": timeout,
+                        "timed_out": True, "passed": False})
+            print(f"{name}: timed out after {timeout} seconds", flush=True)
+            raise
+        self._save(name, argv, expected, started, proc.stdout, proc.stderr,
+                   {"exit_code": proc.returncode})
         print(f"{name}: exit {proc.returncode} (expected {expected})", flush=True)
         if proc.returncode != expected:
             raise AssertionError(f"unexpected {name} exit: {proc.returncode} != {expected}")

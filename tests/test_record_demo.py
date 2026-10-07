@@ -1,6 +1,7 @@
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -30,6 +31,28 @@ class DemoCaptureControls(unittest.TestCase):
             with self.assertRaisesRegex(AssertionError, "unexpected.*exit"):
                 capture.run("bad", [sys.executable, "-c", "raise SystemExit(2)"], expected=1)
             self.assertEqual(json.loads((Path(directory) / "commands.json").read_text())[0]["exit_code"], 2)
+
+    def test_timeout_records_partial_raw_output_and_nonpassing_command(self):
+        with tempfile.TemporaryDirectory() as directory:
+            capture = record_demo.Capture(Path(directory), ROOT, {})
+            child = ("import sys, time; "
+                     "sys.stdout.buffer.write(b'partial-out\\xff\\n'); sys.stdout.flush(); "
+                     "sys.stderr.buffer.write(b'partial-err\\xfe\\n'); sys.stderr.flush(); "
+                     "time.sleep(5)")
+            command = [sys.executable, "-c", child]
+            with self.assertRaises(subprocess.TimeoutExpired):
+                capture.run("timed-out", command, timeout=0.2)
+            self.assertEqual((Path(directory) / "timed-out.stdout").read_bytes(), b"partial-out\xff\n")
+            self.assertEqual((Path(directory) / "timed-out.stderr").read_bytes(), b"partial-err\xfe\n")
+            row = json.loads((Path(directory) / "commands.json").read_text())[0]
+            self.assertEqual(row["command"], command)
+            self.assertEqual(row["cwd"], str(ROOT))
+            self.assertIsNone(row["exit_code"])
+            self.assertEqual(row["expected_exit"], 0)
+            self.assertEqual(row["timeout_seconds"], 0.2)
+            self.assertTrue(row["timed_out"])
+            self.assertFalse(row["passed"])
+            self.assertGreaterEqual(row["seconds"], 0)
 
     def test_latest_failed_attempt_must_be_preserved(self):
         report = {"results": [
