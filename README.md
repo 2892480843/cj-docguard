@@ -165,6 +165,6 @@ python3 scripts/real_projects.py --fetch
 
 SDK 指纹覆盖实际编译器、工具、模块、库、运行时和受控环境，未遍历整个操作系统或 Apple 系统 SDK；结果依赖审核时固定的宿主环境。报告会映射已知项目/SDK 私人路径；原始归档保持实际证据，公开前仍需按项目权利与内容审核。
 
-已执行一轮 AI 对照实验，未观察到提升，详见 [实验说明](docs/ai-evaluation.md)。推荐约3分2秒的 [流畅配音视频](build/release/cj-docguard-demo-cute-smooth-20261007.mp4) 和按用户提供模板更新的 [Word 填写稿](build/release/CJ-DocGuard-作品提交书-20261007更新版.docx)；视频为实际命令日志重绘与合成配音，旧三分半版保留。本人信息、公开仓库/视频链接、签字及比赛提交仍待办理，详见 [提交材料](docs/submission.md)。
+已执行一轮 AI 对照实验，未观察到提升，详见 [实验说明](docs/ai-evaluation.md)。[公开源码仓库](https://github.com/2892480843/cj-docguard) 提供核心代码、配置、示例与测试。约3分2秒的新版视频及模板填写稿见 [演示说明](docs/demo.md) 和 [申报内容](docs/application.md)；这些本地交付文件位于忽略的 `build/release/`，未包含在源码仓库中。视频为实际命令日志重绘与合成配音，旧版保留；含联系方式的申报书保存在本地。公开视频链接、本人签字及正式提交仍待完成，详见 [提交材料](docs/submission.md)。
 
 许可证：[Apache-2.0](LICENSE)。上游接入项目保留各自许可证，未重新许可其源码。

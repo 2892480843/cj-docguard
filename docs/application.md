@@ -66,7 +66,7 @@ CJ-DocGuard 项目级 API 文档生成及示例证据验证
 贡献类型：☑ 工具  ☑ MCP 工具  ☑ 工作流  ☑ 示例；不以一般 AI 辅助开发过程申请加分。
 解决的问题、用户与场景：为仓颉维护者和 AI 编码助手提供当前源码及精确 SDK 下的有效运行示例，拒绝过期、未知、仅编译或破损证据。
 与仓颉生态及作品的关系：仓颉原生引擎负责接口、指纹、状态与准入，Python 只读适配负责协议；同一判断可在命令行和 AI 客户端复用。
-贡献代码仓库或 PR 链接：待参赛人公开发布后填写；代码路径为 src/evidence.cj、src/engine.cj、src/export.cj、scripts/mcp_stdio.py。
+贡献代码仓库或 PR 链接：https://github.com/2892480843/cj-docguard；代码路径为 src/evidence.cj、src/engine.cj、src/export.cj、scripts/mcp_stdio.py。
 2. 安装、运行与复用说明
 安装或配置方式：安装指定 SDK 后构建原生 CLI（命令行工具）；按 skills/cj-docguard/SKILL.md 配置 MCP stdio 适配。依赖 Python 标准库，不需要额外模型付费服务。
 运行、调用或复用步骤：verify 登记例后调用 list_symbols、get_verified_examples 或 get_evidence；运行证据工具要求精确 SDK 与平台。修改源码后旧结果被拒绝，恢复并重验后可再次使用。
