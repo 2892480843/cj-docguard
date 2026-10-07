@@ -214,7 +214,25 @@ func evidenceComplete(project: Project, record: J): Bool {
     } catch (_: Exception) { return false }
 }
 
+func needsPublicValue(project: Project, value: J): Bool {
+    if (value.kind == "string") {
+        if (value.text.contains(project.root)) { return true }
+        for (sdk in array(project.config, "sdks").items) {
+            let version = sdk.get("version").s()
+            let home = text(sdk, "home", envValue("CJ_DOCGUARD_SDK_" + version.replace(".", "_")))
+            if (!home.isEmpty() && value.text.contains(home)) { return true }
+        }
+        return false
+    }
+    if (value.kind == "array") { for (item in value.items) { if (needsPublicValue(project, item)) { return true } } }
+    if (value.kind == "object") { for ((_, item) in value.fields) { if (needsPublicValue(project, item)) { return true } } }
+    return false
+}
+
 func publicValue(project: Project, value: J): J {
+    // This report path only reads the returned tree. Share unchanged subtrees to
+    // avoid a second copy of large immutable attempt logs during serialization.
+    if (!needsPublicValue(project, value)) { return value }
     if (value.kind == "string") {
         var out = value.s().replace(project.root, "$PROJECT")
         for (sdk in array(project.config, "sdks").items) {

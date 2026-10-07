@@ -36,6 +36,9 @@ main(): Int64 {
     report.get("results").add(J.obj().put("example_id", J.str("sample-run")).put("sdk_version", J.str("1.1.3")).put("status", J.str("CANCELLED")).put("sequence", J.num(2)).put("freshness", J.str("STALE")))
     report.get("results").add(J.obj().put("example_id", J.str("future-status")).put("sdk_version", J.str("1.2.0")).put("status", J.str("FUTURE_STATUS")))
     writeReports(output, report)
+    reportExpect(readReportFile(output + "/report.json") == report.dump(), "streamed report bytes match canonical dump")
+    reportExpect(readReportFile(output + "/api.json") == report.get("api").dump() &&
+        readReportFile(output + "/manifest.json") == report.get("manifest").dump(), "streamed component bytes match canonical dump")
     reportExpect(parseJson(readReportFile(output + "/report.json")).get("schema_version").text == "1.0", "full JSON artifact")
     reportExpect(parseJson(readReportFile(output + "/api.json")).get("symbols").items.size == 1, "API JSON artifact")
     reportExpect(parseJson(readReportFile(output + "/manifest.json")).get("fingerprint").s() == "abc123", "manifest JSON artifact")
@@ -98,6 +101,13 @@ main(): Int64 {
     reportExpect(sourceHtml.contains("id=\"" + sourceAnchor + "\"") && sourceHtml.contains("href=\"#" + sourceAnchor + "\""), "path/code source entry has reachable symbol anchor")
     reportExpect(sourceHtml.contains("id=\"file-" + sha256("src/second.cj".toArray())[..20] + "\""), "source/code entry remains supported")
     reportExpect(sourceHtml.contains("&lt;escaped&gt;") && !sourceHtml.contains("<escaped>"), "source code remains escaped text")
+    let cyclic = J.arr(); cyclic.add(cyclic)
+    let invalidOutput = output + "/invalid-tree"
+    var rejected = false
+    try { writeReports(invalidOutput, J.obj().put("history", cyclic)) }
+    catch (_: Exception) { rejected = true }
+    reportExpect(rejected && !exists(invalidOutput + "/report.json") &&
+        !exists(invalidOutput + ".report-staging"), "malformed tree leaves no published output")
     println("PASS native report: " + reportAssertions.toString() + " assertions; files, snapshot, escaping, evidence, offline search")
     return 0
 }

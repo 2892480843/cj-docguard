@@ -66,8 +66,7 @@ func strictInt(s: String): Int64 {
     return if (negative) { value } else { -value }
 }
 
-func quotedJson(s: String): String {
-    let out = ArrayList<Byte>()
+func appendQuotedJson(out: ArrayList<Byte>, s: String): Unit {
     out.add(34)
     let hex = "0123456789abcdef".toArray()
     for (b in s.toArray()) {
@@ -78,27 +77,27 @@ func quotedJson(s: String): String {
         } else { out.add(b) }
     }
     out.add(34)
-    return String.fromUtf8(out.toArray())
 }
-func renderJ(j: J, depth: Int64): String {
+func appendJson(out: ArrayList<Byte>, j: J, depth: Int64): Unit {
     if (depth > 256) { throw Exception("JSON nesting exceeds 256 (or cyclic tree)") }
-    if (j.kind == "string") { return quotedJson(j.text) }
-    if (j.kind == "null") { return "null" }
-    if (j.kind == "boolean") { j.b(); return j.text }
+    if (j.kind == "string") { appendQuotedJson(out, j.text); return }
+    if (j.kind == "null") { for (b in "null".toArray()) { out.add(b) }; return }
+    if (j.kind == "boolean") { j.b(); for (b in j.text.toArray()) { out.add(b) }; return }
     if (j.kind == "number") {
         let checked = parseJson(j.text)
         if (checked.kind != "number") { throw Exception("invalid JSON number") }
-        return j.text
+        for (b in j.text.toArray()) { out.add(b) }
+        return
     }
-    var out = ""
     if (j.kind == "array") {
-        out = "["
+        out.add(91)
         var first = true
         for (v in j.items) {
-            if (!first) { out += "," }; first = false
-            out += renderJ(v, depth + 1)
+            if (!first) { out.add(44) }; first = false
+            appendJson(out, v, depth + 1)
         }
-        return out + "]"
+        out.add(93)
+        return
     }
     if (j.kind != "object") { throw Exception("unknown JSON kind") }
     // Stable ordering is needed for reproducible fingerprints and reports.
@@ -110,13 +109,82 @@ func renderJ(j: J, depth: Int64): String {
             let tmp = keys[p]; keys[p] = keys[p - 1]; keys[p - 1] = tmp; p--
         }
     }
-    out = "{"
+    out.add(123)
     var first = true
     for (k in keys) {
-        if (!first) { out += "," }; first = false
-        out += quotedJson(k) + ":" + renderJ(j.get(k), depth + 1)
+        if (!first) { out.add(44) }; first = false
+        appendQuotedJson(out, k)
+        out.add(58)
+        appendJson(out, j.get(k), depth + 1)
     }
-    return out + "}"
+    out.add(125)
+}
+func renderJ(j: J, depth: Int64): String {
+    let out = ArrayList<Byte>()
+    appendJson(out, j, depth)
+    return String.fromUtf8(out.toArray())
+}
+
+class JsonChunkWriter {
+    let file: File
+    var bytes = ArrayList<Byte>()
+    init(file: File) { this.file = file }
+    func add(b: Byte): Unit {
+        bytes.add(b)
+        if (bytes.size >= 65536) { flush() }
+    }
+    func append(data: Array<Byte>): Unit { for (b in data) { add(b) } }
+    func flush(): Unit {
+        if (bytes.size > 0) { file.write(bytes.toArray()); bytes = ArrayList<Byte>() }
+    }
+}
+
+func writeJsonNode(writer: JsonChunkWriter, j: J, depth: Int64): Unit {
+    if (depth > 256) { throw Exception("JSON nesting exceeds 256 (or cyclic tree)") }
+    if (j.kind != "array" && j.kind != "object") {
+        let scalar = ArrayList<Byte>()
+        appendJson(scalar, j, depth)
+        writer.append(scalar.toArray())
+        return
+    }
+    if (j.kind == "array") {
+        writer.add(91)
+        var first = true
+        for (item in j.items) {
+            if (!first) { writer.add(44) }; first = false
+            writeJsonNode(writer, item, depth + 1)
+        }
+        writer.add(93)
+        return
+    }
+    writer.add(123)
+    let keys = ArrayList<String>()
+    for ((key, _) in j.fields) { keys.add(key) }
+    for (i in 0..keys.size) {
+        var p = i
+        while (p > 0 && keys[p] < keys[p - 1]) {
+            let tmp = keys[p]; keys[p] = keys[p - 1]; keys[p - 1] = tmp; p--
+        }
+    }
+    var first = true
+    for (key in keys) {
+        if (!first) { writer.add(44) }; first = false
+        let quoted = ArrayList<Byte>()
+        appendQuotedJson(quoted, key)
+        writer.append(quoted.toArray())
+        writer.add(58)
+        writeJsonNode(writer, j.get(key), depth + 1)
+    }
+    writer.add(125)
+}
+
+public func writeJsonFile(path: String, j: J): Unit {
+    let file = File.create(path)
+    try {
+        let writer = JsonChunkWriter(file)
+        writeJsonNode(writer, j, 0)
+        writer.flush()
+    } finally { file.close() }
 }
 
 class JsonReader {

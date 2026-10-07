@@ -24,6 +24,16 @@ main(): Int64 {
         let settings = "[project]\nname=\"Native export\"\nsources=[\"src\"]\ndocuments=[]\noutput=\".docguard\"\ntrusted=true\nclosed_inputs=true\n[[sdks]]\nversion=\"" + sdk + "\"\n[[examples]]\nid=\"add\"\nfile=\"example.cj\"\nsymbol=\"add\"\nstdout=\"3\\n\"\nexpected_exit=0\n"
         writeText(config, settings)
         let project = Project(config)
+        let untouched = J.obj().put("status", J.str("RUN_VERIFIED"))
+        let privateRecord = J.obj().put("cwd", J.str(project.root + "/src"))
+            .put("nested", untouched)
+        let sanitized = publicValue(project, privateRecord)
+        checkExport(privateRecord.get("cwd").s() == project.root + "/src" &&
+            sanitized.get("cwd").s() == "$PROJECT/src", "redaction leaves source record untouched")
+        sanitized.put("extra", J.num(1))
+        checkExport(privateRecord.get("extra").kind == "null" &&
+            privateRecord.get("nested").dump() == sanitized.get("nested").dump(),
+            "changed parent is independent and unchanged subtree is read only")
         let options = HashMap<String, String>()
         options["--example"] = "missing"; options["--sdk"] = sdk; options["--platform"] = "Darwin-arm64"
         options["--out"] = join(temp, "unknown")

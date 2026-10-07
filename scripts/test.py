@@ -11,6 +11,7 @@ import dev
 ROOT = dev.ROOT
 CASES = {
     'primitives': ['primitives'],
+    'memory': ['primitives'],
     'extractor': ['primitives', 'extractor'],
     'evidence': ['primitives', 'evidence'],
     'report': ['primitives', 'report'],

@@ -238,18 +238,28 @@ func rMarkdown(report: J): String {
     return out
 }
 public func writeReports(output: String, report: J): Unit {
-    // Prepare all content before writing so malformed trees fail without partial output.
-    let fullJson = report.dump()
-    let api = rField(report, "api").dump()
-    let manifest = rField(report, "manifest").dump()
-    let markdown = rMarkdown(report)
-    let html = rHtml(report)
-    if (!exists(output)) { Directory.create(output, recursive: true) }
-    let site = output + "/site"
-    if (!exists(site)) { Directory.create(site, recursive: true) }
-    File.writeTo(output + "/api.json", api.toArray())
-    File.writeTo(output + "/report.json", fullJson.toArray())
-    File.writeTo(output + "/manifest.json", manifest.toArray())
-    File.writeTo(output + "/report.md", markdown.toArray())
-    File.writeTo(site + "/index.html", html.toArray())
+    // Build all five artifacts in a private staging directory. A malformed tree
+    // cannot replace a previously published report, and large JSON stays bounded.
+    let stage = output + ".report-staging"
+    if (exists(stage)) { throw Exception("Report staging directory already exists") }
+    let parent = Path(stage).parent.toString()
+    if (!exists(parent)) { Directory.create(parent, recursive: true) }
+    // This create is exclusive; cleanup below only touches a stage we own.
+    Directory.create(stage)
+    try {
+        Directory.create(stage + "/site")
+        writeJsonFile(stage + "/report.json", report)
+        writeJsonFile(stage + "/api.json", rField(report, "api"))
+        writeJsonFile(stage + "/manifest.json", rField(report, "manifest"))
+        File.writeTo(stage + "/report.md", rMarkdown(report).toArray())
+        File.writeTo(stage + "/site/index.html", rHtml(report).toArray())
+        if (!exists(output)) { Directory.create(output, recursive: true) }
+        let site = output + "/site"
+        if (!exists(site)) { Directory.create(site, recursive: true) }
+        copy(stage + "/api.json", to: output + "/api.json", overwrite: true)
+        copy(stage + "/report.json", to: output + "/report.json", overwrite: true)
+        copy(stage + "/manifest.json", to: output + "/manifest.json", overwrite: true)
+        copy(stage + "/report.md", to: output + "/report.md", overwrite: true)
+        copy(stage + "/site/index.html", to: site + "/index.html", overwrite: true)
+    } finally { removeIfExists(stage, recursive: true) }
 }
