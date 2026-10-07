@@ -8,8 +8,8 @@
     "sha256": "b1d9e85b918742d21ed4e7842f11b6a9a8dd9c99810b4d46b3c03a31905d5d2a"
   },
   "README.md": {
-    "bytes": 4979,
-    "sha256": "877b4f9e9d4acebb84c623e627814b6aa57762747fadc8d52b7ea0f34b62e796"
+    "bytes": 5447,
+    "sha256": "8254d67958b6af92ff9d7f04a2f5d96069c866a7ac2060a9904f3eed0a899b8f"
   },
   "CJ-DocGuard-作品提交书-公开未签字版.docx": {
     "bytes": 19236,
@@ -42,5 +42,17 @@
   "CJ-DocGuard-真实库复用证据-20261007.zip": {
     "bytes": 192181,
     "sha256": "bb2710cec475e3b9369c2d2705977f3416787f9a0bf5c36edb3bf81090a93d78"
+  },
+  "必交材料核对清单.md": {
+    "bytes": 6419,
+    "sha256": "35e1a1d5136a1339f213cea10787f5cc150ce2c41545152cb6e7f48e33692fa2"
+  },
+  "CJ-DocGuard-作品提交书-材料齐备公开未签字版-20261007.docx": {
+    "bytes": 19253,
+    "sha256": "37ec7c0fc7e52b37f1b10dd6a9496a7a1ed784e040d434d1adf4b3a61c11a28a"
+  },
+  "CJ-DocGuard-作品提交书-材料齐备公开未签字版-20261007.pdf": {
+    "bytes": 462001,
+    "sha256": "daa3c28a25ea58c1d91af152e7a6bb8051a74b5599da1986e1859c5c85b9cae0"
   }
 }
