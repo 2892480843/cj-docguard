@@ -1,0 +1,194 @@
+{
+  "platform": "macOS arm64",
+  "main_head": "0e90bc6f227923617b32e1a460a437f1c0e4a10b",
+  "ai_head": "4b07cb87f641fe1d8052a780626d29247b922534",
+  "anonymous_fetch_exit_codes": {
+    "main": 0,
+    "ai": 0
+  },
+  "main_source_script_example_test_files": 58,
+  "test_sources": 18,
+  "public_manifest_files_checked": 28,
+  "public_files": [
+    {
+      "path": "submission/CJ-DocGuard-演示字幕.srt",
+      "bytes": 3809,
+      "sha256": "b6ee9c925e955c5c1931a12ea6dfcf857bd2f67bd5cd78733945da51e1b9db2d",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/CJ-DocGuard-验证材料-20261007.zip",
+      "bytes": 254541,
+      "sha256": "b1d9e85b918742d21ed4e7842f11b6a9a8dd9c99810b4d46b3c03a31905d5d2a",
+      "archive_file_count": 228
+    },
+    {
+      "path": "submission/README.md",
+      "bytes": 8162,
+      "sha256": "a4151e6cb5667f03efe594282b8441775e191eac17a4b9482836c7e89d56587a",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/CJ-DocGuard-作品提交书-公开未签字版.docx",
+      "bytes": 19236,
+      "sha256": "9cfc93dfbefa15ebaa0c33acfa634367baa2f9b8296b1e28a55ca940798f8e36",
+      "archive_file_count": 13
+    },
+    {
+      "path": "submission/CJ-DocGuard-作品提交书-公开未签字版.pdf",
+      "bytes": 462443,
+      "sha256": "e6788710c4e24c103567c84301c9bffc3d851585a3a389ba0caf518f79c85976",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/AI生态贡献加分申请.md",
+      "bytes": 5853,
+      "sha256": "8a5b1c4cf4cf590cb804fa0062412c09b1974cec38f993bf0362d2f51a44059b",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/CJ-DocGuard-AI生态贡献包-20261007.zip",
+      "bytes": 49950,
+      "sha256": "b2aa2a099a5506182246e41c55969a66c5359b10cd9aea8f8e08e8e20855cd62",
+      "archive_file_count": 54
+    },
+    {
+      "path": "submission/CJ-DocGuard-作品提交书-AI贡献公开未签字版.docx",
+      "bytes": 19242,
+      "sha256": "ef02b9e234389f476906f1f7ad68660f55ebba0ab0d73e3ab499ed5281988c61",
+      "archive_file_count": 13
+    },
+    {
+      "path": "submission/CJ-DocGuard-作品提交书-AI贡献公开未签字版.pdf",
+      "bytes": 462448,
+      "sha256": "ce534a708abcdb4f6305504aff2bacf15f204a5cb998c8d325a58a7ae13c3b50",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/CJ-DocGuard-初赛答辩-20261007.pptx",
+      "bytes": 43314,
+      "sha256": "1b8f7978aaa5913563fa2135a91fa3d9ea147581ff20a5e004b9ae47f2a9d39c",
+      "archive_file_count": 60
+    },
+    {
+      "path": "submission/CJ-DocGuard-真实库复用证据-20261007.zip",
+      "bytes": 192181,
+      "sha256": "bb2710cec475e3b9369c2d2705977f3416787f9a0bf5c36edb3bf81090a93d78",
+      "archive_file_count": 328
+    },
+    {
+      "path": "submission/必交材料核对清单.md",
+      "bytes": 8304,
+      "sha256": "6e22b02cb2dc465fcad33789ceea48a7993ffb4efde7afb2725e55cfc9ec5350",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/CJ-DocGuard-作品提交书-材料齐备公开未签字版-20261007.docx",
+      "bytes": 19253,
+      "sha256": "37ec7c0fc7e52b37f1b10dd6a9496a7a1ed784e040d434d1adf4b3a61c11a28a",
+      "archive_file_count": 13
+    },
+    {
+      "path": "submission/CJ-DocGuard-作品提交书-材料齐备公开未签字版-20261007.pdf",
+      "bytes": 462001,
+      "sha256": "daa3c28a25ea58c1d91af152e7a6bb8051a74b5599da1986e1859c5c85b9cae0",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/CJ-DocGuard-初赛答辩-亲切手绘版-20261007.pptx",
+      "bytes": 8150894,
+      "sha256": "5951dcc1e6f1ee75bb549a79feab7afc9eebb90c45801d69c8584049dba89ceb",
+      "archive_file_count": 70
+    },
+    {
+      "path": "submission/CJ-DocGuard-作品提交书-AI加分证据增强公开未签字版-20261007.docx",
+      "bytes": 20794,
+      "sha256": "b5fb4fd3e6cbe7ca8b0fc29e5c98c71d709f7485281dc259216f27f50876a7b1",
+      "archive_file_count": 13
+    },
+    {
+      "path": "submission/CJ-DocGuard-作品提交书-AI加分证据增强公开未签字版-20261007.pdf",
+      "bytes": 500209,
+      "sha256": "c14116a74ad414cbd0a4f520fe97b4b9de691152701d1dab83a03b90646924a3",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/正式提交材料/02-测试与验证说明.md",
+      "bytes": 1550,
+      "sha256": "45c40d232c0b8944730a11f2610d3f1520b9caa1c55994d4faa87f1cf7752c38",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/正式提交材料/03A-辅助答辩PPT-亲切手绘版.pptx",
+      "bytes": 8150894,
+      "sha256": "5951dcc1e6f1ee75bb549a79feab7afc9eebb90c45801d69c8584049dba89ceb",
+      "archive_file_count": 70
+    },
+    {
+      "path": "submission/正式提交材料/01-源代码与测试入口.md",
+      "bytes": 895,
+      "sha256": "721438cb3eed5ffd0183cf1eb2d21f6dea23bf338af4e541e9bf2bc176f5dac3",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/正式提交材料/03-演示视频链接.md",
+      "bytes": 1013,
+      "sha256": "54d0431db364b12b14321fc1135e6ae5863fdad0f7b503026306eebad9329411",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/正式提交材料/02A-测试验证日志.zip",
+      "bytes": 254541,
+      "sha256": "b1d9e85b918742d21ed4e7842f11b6a9a8dd9c99810b4d46b3c03a31905d5d2a",
+      "archive_file_count": 228
+    },
+    {
+      "path": "submission/正式提交材料/04A-统一作品提交模板-未签字预览.pdf",
+      "bytes": 500209,
+      "sha256": "c14116a74ad414cbd0a4f520fe97b4b9de691152701d1dab83a03b90646924a3",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/正式提交材料/05-AI生态贡献加分说明.md",
+      "bytes": 538,
+      "sha256": "d36f66f2b715fc986275b3f5b12ac3f1d67b409b91a6f9ee6ba302420f98ce66",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/正式提交材料/README.md",
+      "bytes": 2592,
+      "sha256": "cf248b7f56f56006f392ba9f5493873b7c269e41d66bc3c327739fb661a0d794",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/正式提交材料/FILES.json",
+      "bytes": 1463,
+      "sha256": "b808f0926f04c416475d47a43f00b071c47509a3ade55f079fbef0be6b241748",
+      "archive_file_count": null
+    },
+    {
+      "path": "submission/正式提交材料/02B-真实库复用验证日志.zip",
+      "bytes": 192181,
+      "sha256": "bb2710cec475e3b9369c2d2705977f3416787f9a0bf5c36edb3bf81090a93d78",
+      "archive_file_count": 328
+    },
+    {
+      "path": "submission/正式提交材料/04-统一作品提交模板-公开未签字版.docx",
+      "bytes": 20794,
+      "sha256": "b5fb4fd3e6cbe7ca8b0fc29e5c98c71d709f7485281dc259216f27f50876a7b1",
+      "archive_file_count": 13
+    }
+  ],
+  "entry_relative_links_checked": 130,
+  "missing_entry_links": [],
+  "ai_repository_files": 54,
+  "ai_nonself_hashes_checked": 53,
+  "ai_offline_matches_remote": true,
+  "video_link_present": true,
+  "video_playback_tested_this_round": false,
+  "core_tests_run_this_round": false,
+  "public_template": "redacted, unsigned",
+  "signed_pdf_present": false,
+  "email_sent": false,
+  "formal_submission_receipt": false
+}

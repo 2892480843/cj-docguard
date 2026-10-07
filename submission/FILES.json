@@ -8,8 +8,8 @@
     "sha256": "b1d9e85b918742d21ed4e7842f11b6a9a8dd9c99810b4d46b3c03a31905d5d2a"
   },
   "README.md": {
-    "bytes": 8162,
-    "sha256": "a4151e6cb5667f03efe594282b8441775e191eac17a4b9482836c7e89d56587a"
+    "bytes": 8403,
+    "sha256": "4977da1e0746d2a2feab91363ba596fe16cd998ea9b912a5f5737df27d7b6d56"
   },
   "CJ-DocGuard-作品提交书-公开未签字版.docx": {
     "bytes": 19236,
@@ -110,5 +110,13 @@
   "正式提交材料/04-统一作品提交模板-公开未签字版.docx": {
     "bytes": 20794,
     "sha256": "b5fb4fd3e6cbe7ca8b0fc29e5c98c71d709f7485281dc259216f27f50876a7b1"
+  },
+  "初赛提交说明.md": {
+    "bytes": 3988,
+    "sha256": "5ace43721be407f83dbce52c3a1014bdb246bb7bc509613c90465d42414906fe"
+  },
+  "材料完整性核验-20261007.json": {
+    "bytes": 7181,
+    "sha256": "06bb49fd15ff87a56bddc35513afd8c7027994f80d72f2aa6cbae8fc54204673"
   }
 }
