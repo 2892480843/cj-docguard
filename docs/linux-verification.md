@@ -1,6 +1,6 @@
 # Linux aarch64 双 SDK 实测
 
-本页只描述 `cjdg-gap-linux-20261007` 容器中的 Ubuntu 22.04 aarch64 实测。宿主为 macOS arm64；容器内 `uname`、镜像身份、源码与监督器摘要、每条命令的参数、原始 stdout/stderr、退出码及最终状态均保存在 `build/gap-closure/linux-final/verification-20261007-v2/summary.json` 和相邻的 `commands/`。首次验证器故障记录在 `verification-20261007/`，保留原样。
+本页只描述 `cjdg-gap-linux-20261007` 容器中的 Ubuntu 22.04 aarch64 实测。宿主为 macOS arm64；本次修复后的完整链保存在 `build/gap-closure/linux-final/verification-20261007-v3/summary.json` 和相邻的 `commands/`。它记录真实 `uname`、镜像身份、完整选定输入清单、验证器和解压 SDK 摘要，以及每条命令的参数、环境摘要、原始 stdout/stderr 的摘要、退出码和最终状态。旧版 `verification-20261007/` 与 `verification-20261007-v2/` 保留原样，不能作为新版恢复清单使用。
 
 ## 来源与范围
 
@@ -29,7 +29,7 @@ docker exec cjdg-gap-linux-20261007 /usr/bin/python3 /input/scripts/linux_verify
   --output /out/verification-NEW-NAME --resume
 ```
 
-`--resume` 会比较先前命令的参数、工作目录与退出码；不同或失败的命令不会被当作成功。最终 `summary.json` 的 `complete` 字段表示整条验证链是否完成。脚本逐步执行两版 `cjc`/`cjpm` 探针、真实 C 监督器构建、双版原生测试编译与运行、两版 CLI 构建、健康样本 `doctor`、28 格 `verify --matrix`、`check --strict`、双版 `query`、各一格 `export` 与 `build.sh` 重建运行，以及双版仅编译案例的导出拒绝。
+`--resume` 只接受新版完整清单：逐一比较当前 `/input` 与冻结 `/work` 的 `src/`、`scripts/`、`tests/`、`examples/healthy/` 文件摘要（排除生成的 `build/`、`.docguard/`、`__pycache__/`），还比较验证器字节、两版 SDK 解压树、归档、每条命令的参数、工作目录、环境摘要、预期与实际退出码，以及原始日志字节摘要。旧版缺少这些身份字段，必须在新目录重跑；摘要采用临时文件加原子替换，避免中断时截断可恢复状态。最终 `summary.json` 的 `complete` 字段表示整条验证链是否完成。脚本逐步执行两版 `cjc`/`cjpm` 探针、真实 C 监督器构建、双版原生测试编译与运行、两版 CLI 构建、健康样本 `doctor`、28 格 `verify --matrix`、`check --strict`、双版 `query`、各一格 `export` 与 `build.sh` 重建运行，以及双版仅编译案例的导出拒绝。
 
 ## 先前失败与修复
 
@@ -46,7 +46,9 @@ docker exec cjdg-gap-linux-20261007 /usr/bin/python3 /input/scripts/linux_verify
 | 健康矩阵 | `verify --matrix` 退出 0；28 格均为 `CURRENT`，其中 26 格 `RUN_VERIFIED`、2 格 `COMPILE_ONLY` |
 | 严格检查 | `check --strict` 退出 0 |
 | 查询 | 每版各有 13 条运行验证结果；仅编译项在 `rejected` 中 |
-| 导出与重放 | 每版导出 `arithmetic` 一格，执行真实 `build.sh` 均退出 0，标准输出均为 `42\n` |
+| 导出与重放 | 每版导出 `arithmetic` 一格，执行真实 `build.sh` 均退出 0；验证器逐字节断言 stdout 为 `42\n`。两版 stderr 各有 21 条编译警告，均保留原始字节及摘要，并归类为编译诊断。 |
 | 拒绝边界 | 每版导出 `compile-only` 均返回预期退出码 1，且目标目录不存在 |
 
-完整链包含 49 条逐命令记录，最终 `summary.json` 为 `complete: true`。其中 `recovered_error` 是验证器旧判定在首次读取成功矩阵后报出的错误，已保留说明；成功的重型命令由 `--resume` 复用其原始日志，没有重复执行。日志不可用时不能将脚本或文档当作实测通过证明。
+v3 完整链包含 49 条逐命令记录，最终 `summary.json` 为 `complete: true`。首次调用执行到第 36 条后 Docker 服务连接消失，宿主 `docker exec` 返回 255；专用容器当时显示退出码 137、`OOMKilled=false`，原因未证实。Docker 恢复后，仅重启该专用容器；第二次调用通过严格身份与日志检查，从第 37 条继续并退出 0。两次调用的原始 stdout、stderr 和退出码单独保存在 `build/gap-closure/linux-fix/`。日志不可用时不能将脚本或文档当作实测通过证明。
+
+警告来源有明确边界：两版 `native-platform` 编译的 stderr 各有 2 条 `CurrentProcess.current` 弃用警告，位置为 `tests/native_platform.cj:57` 与 `:59`；两版重放的 stderr 各有 21 条警告，其中 1 条是导出样本 `src/src/demo.cj:118` 的冗余 `public` 修饰符，另 20 条是同一示例文件中的未使用函数。它们不是程序 stdout，也没有从原始日志中删除；本任务不修改这些原生测试和样本源码。
