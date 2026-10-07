@@ -8,6 +8,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -17,6 +18,55 @@ LOCK = json.loads((ROOT / 'integrations/upstream-lock.json').read_text(encoding=
 SPEC = importlib.util.spec_from_file_location('docguard_dev', ROOT / 'scripts/dev.py')
 DEV = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(DEV)
+
+CASE_ID = re.compile(r'[a-z][a-z0-9-]{0,63}\Z')
+CASE_FILE = re.compile(r'(?:sample\.cj|cases/[a-z][a-z0-9-]{0,63}\.cj)\Z')
+SHA256 = re.compile(r'[0-9a-f]{64}\Z')
+
+
+def examples_for(item: dict) -> list[dict]:
+    """Keep the original one-sample lock usable by older integrations."""
+    if 'examples' in item:
+        return item['examples']
+    sample = ROOT / 'integrations' / item['name'] / 'sample.cj'
+    return [dict(id='upstream-api', file='sample.cj', symbol=item['symbol'],
+                 stdout=item['stdout'], expected_exit=0,
+                 sha256=hashlib.sha256(sample.read_bytes()).hexdigest())]
+
+
+def validate_examples(items: list[dict]) -> None:
+    """Validate the entire registry before any project inputs are copied."""
+    for item in items:
+        cases = examples_for(item)
+        if not isinstance(cases, list) or not cases:
+            raise ValueError(f'{item["name"]}: examples must be a nonempty list')
+        seen = set()
+        seen_files = set()
+        for case in cases:
+            if not isinstance(case, dict) or not {'id', 'file', 'symbol', 'stdout', 'expected_exit', 'sha256'} <= case.keys():
+                raise ValueError(f'{item["name"]}: incomplete case')
+            case_id, relative = case['id'], case['file']
+            if not isinstance(case_id, str) or not CASE_ID.fullmatch(case_id) or case_id in seen:
+                raise ValueError(f'{item["name"]}: invalid or duplicate case id: {case_id}')
+            seen.add(case_id)
+            if not isinstance(relative, str) or not CASE_FILE.fullmatch(relative) or relative in seen_files:
+                raise ValueError(f'{item["name"]}: invalid case path: {relative}')
+            seen_files.add(relative)
+            source = ROOT / 'integrations' / item['name'] / relative
+            digest = case['sha256']
+            case_root = (ROOT / 'integrations' / item['name']).resolve()
+            if (not source.resolve().is_relative_to(case_root) or not isinstance(digest, str)
+                    or not SHA256.fullmatch(digest) or source.is_symlink() or not source.is_file()
+                    or source.stat().st_size > 65536 or hashlib.sha256(source.read_bytes()).hexdigest() != digest):
+                raise ValueError(f'{item["name"]}: case content mismatch: {relative}')
+            if not isinstance(case['symbol'], str) or not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*', case['symbol']):
+                raise ValueError(f'{item["name"]}: invalid symbol')
+            if not isinstance(case['stdout'], str) or len(case['stdout'].encode('utf-8')) > 65536:
+                raise ValueError(f'{item["name"]}: invalid stdout assertion')
+            if type(case['expected_exit']) is not int or not 0 <= case['expected_exit'] <= 255:
+                raise ValueError(f'{item["name"]}: invalid exit assertion')
+            if not re.search(r'\b' + re.escape(case['symbol']) + r'\s*\(', source.read_text(encoding='utf-8')):
+                raise ValueError(f'{item["name"]}: case does not call declared symbol')
 
 
 def git(repo: Path, *arguments: str) -> str:
@@ -71,7 +121,11 @@ def harness(item: dict, repo: Path, destination: Path, sdks: list[str]) -> Path:
     for extra in ('NOTICE', 'NOTICE.txt'):
         if extra in item['files_sha256']:
             shutil.copyfile(repo / extra, destination / 'upstream' / extra)
-    shutil.copyfile(ROOT / 'integrations' / item['name'] / 'sample.cj', destination / 'sample.cj')
+    cases = examples_for(item)
+    for case in cases:
+        target = destination / case['file']
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / 'integrations' / item['name'] / case['file'], target)
     provenance = {key: value for key, value in item.items() if key != 'stdout'}
     provenance.update(scope='full unchanged production src; upstream test files excluded',
                       source_modified=False, third_party_adoption=False)
@@ -83,10 +137,13 @@ def harness(item: dict, repo: Path, destination: Path, sdks: list[str]) -> Path:
              'exclude = ' + json.dumps(exclusions), '']
     for version in sdks:
         lines += ['[[sdks]]', f'version = {json.dumps(version)}', '']
-    lines += ['[[examples]]', 'id = "upstream-api"', 'file = "sample.cj"',
-              f'symbol = {json.dumps(item["symbol"])}', 'kind = "program"', 'mode = "run"',
-              'sdks = ' + json.dumps(sdks), 'stdout = ' + json.dumps(item['stdout'], ensure_ascii=False),
-              'expected_exit = 0', 'timeout_ms = 1000', 'required = true', '']
+    for case in cases:
+        lines += ['[[examples]]', 'id = ' + json.dumps(case['id']),
+                  'file = ' + json.dumps(case['file']),
+                  'symbol = ' + json.dumps(case['symbol']), 'kind = "program"', 'mode = "run"',
+                  'sdks = ' + json.dumps(sdks), 'stdout = ' + json.dumps(case['stdout'], ensure_ascii=False),
+                  'expected_exit = ' + str(case['expected_exit']), 'timeout_ms = 10000',
+                  'required = true', '']
     config = destination / 'docguard.toml'
     config.write_text('\n'.join(lines), encoding='utf-8')
     readme = (f'# {item["name"]} 固定提交集成\n\n'
@@ -124,13 +181,15 @@ def main() -> int:
     results = []
     # Audit/check all selected cache inputs before executing even the first project.
     selected = [p for p in LOCK['projects'] if not args.project or p['name'] in args.project]
+    validate_examples(selected)
     checkouts = {p['name']: checked_checkout(p, args.cache.resolve(), args.fetch) for p in selected}
     for item in selected:
         config = harness(item, checkouts[item['name']], run_root / item['name'], sdk_versions)
         started = datetime.now(timezone.utc).isoformat()
         command = [str(binary), 'verify', '--matrix', '--config', str(config)]
+        matrix_cells = len(examples_for(item)) * len(sdk_versions)
         completed = subprocess.run(command, cwd=ROOT, env=environment, capture_output=True,
-                                   text=True, timeout=300)
+                                   text=True, timeout=120 + matrix_cells * 20)
         finished = datetime.now(timezone.utc).isoformat()
         # Do not write audit logs inside the input tree after verification: that would
         # invalidate the just-recorded fingerprint. Keep orchestration logs outside it.
@@ -148,7 +207,9 @@ def main() -> int:
                       closure_complete=report.get('manifest', {}).get('closure_complete'),
                       extraction_files=report.get('api', {}).get('files', []),
                       diagnostics=report.get('diagnostics', []),
-                      results=[{k: r.get(k) for k in ('sdk_version','status','freshness','eligible','reason')}
+                      example_count=len(examples_for(item)), expected_matrix_cells=matrix_cells,
+                      observed_matrix_cells=len(report.get('results', [])),
+                      results=[{k: r.get(k) for k in ('example_id','sdk_version','status','freshness','eligible','reason')}
                                for r in report.get('results', [])], third_party_adoption=False)
         results.append(result)
         print(json.dumps({k: result[k] for k in ('name','exit_code','summary','results')}, ensure_ascii=False), flush=True)
@@ -156,7 +217,10 @@ def main() -> int:
     record = dict(schema_version=1, audited_at=datetime.now(timezone.utc).isoformat(),
                   binary_sha256=binary_digest, binary_sha256_after=binary_digest_after,
                   binary_unchanged=binary_digest == binary_digest_after,
-                  run_root=str(run_root), projects=results, claim='independent pinned-source audit, not third-party adoption')
+                  run_root=str(run_root), example_count=sum(r['example_count'] for r in results),
+                  expected_matrix_cells=sum(r['expected_matrix_cells'] for r in results),
+                  observed_matrix_cells=sum(r['observed_matrix_cells'] for r in results),
+                  projects=results, claim='independent pinned-source audit, not third-party adoption')
     (run_root / 'audit.json').write_text(json.dumps(record, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     print('Audit record: ' + str(run_root / 'audit.json'))
     if binary_digest != binary_digest_after:
