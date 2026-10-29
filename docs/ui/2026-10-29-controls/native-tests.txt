@@ -1,0 +1,28 @@
+test_actual_index_hrefs_and_multiline_heading_results (test_native_workbench.NativeWorkbenchTests.test_actual_index_hrefs_and_multiline_heading_results) ... ok
+test_auth_host_origin_token (test_native_workbench.NativeWorkbenchTests.test_auth_host_origin_token) ... ok
+test_body_and_header_limits (test_native_workbench.NativeWorkbenchTests.test_body_and_header_limits) ... ok
+test_bootstrap_native_identity (test_native_workbench.NativeWorkbenchTests.test_bootstrap_native_identity) ... ok
+test_connection_close_and_response_headers (test_native_workbench.NativeWorkbenchTests.test_connection_close_and_response_headers) ... ok
+test_doctor_missing_sdk_and_real_version_mismatch (test_native_workbench.NativeWorkbenchTests.test_doctor_missing_sdk_and_real_version_mismatch) ... ok
+test_duplicate_and_ambiguous_framing (test_native_workbench.NativeWorkbenchTests.test_duplicate_and_ambiguous_framing) ... ok
+test_global_busy_cancel_and_other_project_recovery (test_native_workbench.NativeWorkbenchTests.test_global_busy_cancel_and_other_project_recovery) ... ok
+test_initialized_project_real_verify_and_broken_link (test_native_workbench.NativeWorkbenchTests.test_initialized_project_real_verify_and_broken_link) ... ok
+test_invalid_json_and_utf8 (test_native_workbench.NativeWorkbenchTests.test_invalid_json_and_utf8) ... ok
+test_invalid_request_targets (test_native_workbench.NativeWorkbenchTests.test_invalid_request_targets) ... ok
+test_invalid_worker_heap_rejected_before_launch (test_native_workbench.NativeWorkbenchTests.test_invalid_worker_heap_rejected_before_launch) ... ok
+test_large_history_concurrent_reads_preserve_all_records (test_native_workbench.NativeWorkbenchTests.test_large_history_concurrent_reads_preserve_all_records) ... ok
+test_lock_recovery_rejects_symlink_output (test_native_workbench.NativeWorkbenchTests.test_lock_recovery_rejects_symlink_output) ... ok
+test_lock_recovery_validation (test_native_workbench.NativeWorkbenchTests.test_lock_recovery_validation) ... ok
+test_real_native_build_and_query (test_native_workbench.NativeWorkbenchTests.test_real_native_build_and_query) ... ok
+test_registry_and_config_atomic_validation (test_native_workbench.NativeWorkbenchTests.test_registry_and_config_atomic_validation) ... ok
+test_registry_survives_server_restart (test_native_workbench.NativeWorkbenchTests.test_registry_survives_server_restart) ... ok
+test_rich_markdown_link_results_exposed_by_native_report (test_native_workbench.NativeWorkbenchTests.test_rich_markdown_link_results_exposed_by_native_report) ... ok
+test_shutdown_reaps_native_processes (test_native_workbench.NativeWorkbenchTests.test_shutdown_reaps_native_processes) ... ok
+test_source_optimistic_concurrency (test_native_workbench.NativeWorkbenchTests.test_source_optimistic_concurrency) ... ok
+test_source_path_escape_and_symlink (test_native_workbench.NativeWorkbenchTests.test_source_path_escape_and_symlink) ... ok
+test_stalled_header_timeout_and_concurrency_bound (test_native_workbench.NativeWorkbenchTests.test_stalled_header_timeout_and_concurrency_bound) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 57.522s
+
+OK

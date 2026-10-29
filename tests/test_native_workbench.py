@@ -32,7 +32,7 @@ class NativeWorkbenchTests(unittest.TestCase):
         cls.token = cls.request('/api/bootstrap')[1]['token']
 
     @classmethod
-    def launch(cls, state):
+    def launch(cls, state, environment=None):
         binary = Path(os.environ.get('CJ_DOCGUARD_TEST_WORKBENCH', ROOT / 'build/cj-docguard-workbench'))
         if not binary.is_file():
             raise RuntimeError('build/cj-docguard-workbench missing; run scripts/build_workbench.sh')
@@ -41,7 +41,7 @@ class NativeWorkbenchTests(unittest.TestCase):
             port = sock.getsockname()[1]
         log = tempfile.TemporaryFile()
         process = subprocess.Popen([str(binary), '--root', str(ROOT), '--state-dir', str(state), '--port', str(port)],
-                                   cwd=ROOT, env=cls.environment, stdout=log, stderr=subprocess.STDOUT)
+                                   cwd=ROOT, env=environment or cls.environment, stdout=log, stderr=subprocess.STDOUT)
         for _ in range(100):
             if process.poll() is not None:
                 log.seek(0)
@@ -189,6 +189,33 @@ class NativeWorkbenchTests(unittest.TestCase):
             if alive:
                 time.sleep(.05)
         self.assertFalse(alive, f'unreaped native processes: {alive}')
+
+    def test_invalid_worker_heap_rejected_before_launch(self):
+        process, port, log = self.launch(self.directory / 'bad-heap',
+            {**self.environment, 'CJ_DOCGUARD_HEAP_SIZE': 'unbounded'})
+        try:
+            bootstrap = self.request('/api/bootstrap', port=port)[1]
+            project = next(p for p in bootstrap['projects'] if p.get('demo'))
+            status, job = self.request('/api/projects/' + project['id'] + '/jobs',
+                {'action': 'doctor'}, port=port, token=bootstrap['token'])
+            self.assertEqual(status, 200)
+            deadline = time.monotonic() + 30
+            while time.monotonic() < deadline:
+                job = self.request('/api/jobs/' + job['id'], port=port)[1]
+                if job['status'] not in ('queued', 'running'):
+                    break
+                time.sleep(.05)
+            self.assertEqual(job['status'], 'failed')
+            self.assertIn('CJ_DOCGUARD_HEAP_SIZE', job.get('error') or '')
+            self.assertEqual(job['stdout'], '')
+        finally:
+            if process.poll() is None:
+                process.send_signal(signal.SIGTERM)
+                try:
+                    process.wait(timeout=15)
+                except subprocess.TimeoutExpired:
+                    process.kill(); process.wait()
+            log.close()
 
     def test_bootstrap_native_identity(self):
         status, data = self.request('/api/bootstrap')

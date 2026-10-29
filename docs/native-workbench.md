@@ -68,3 +68,18 @@ Python 在这些命令中是测试客户端，不提供被测 HTTP 服务。测�
 [决赛要求证据核验](finals-requirement-evidence-2026-10-29.md)区分公开课题摘要、通用决赛规则及尚缺的完整任务书/最终通知。不能将网页显示 Cangjie 或本地测试通过解释为组委会最终认定。
 
 本轮具体结果、失败记录修复说明、浏览器操作和三项交付对应证据见[迁移验收记录](native-workbench-verification-2026-10-29.md)。
+
+
+## 大量历史记录的任务内存
+
+网页任务的仓颉命令进程默认设置 `cjHeapSize=1GB`，作为最大堆内存上限，不会预先占用全部额度。服务进程与单个示例进程的配置不因此扩大。长期工作区保存数百条记录时，完整报告生成可能超过运行时默认上限。
+
+可在启动服务时通过 `CJ_DOCGUARD_HEAP_SIZE` 选择 `256MB`、`512MB`、`1GB` 或 `2GB`，无效值会明确拒绝执行任务，例如：
+
+```sh
+CJ_DOCGUARD_HEAP_SIZE=2GB bash scripts/workbench.sh --port 8765
+```
+
+保留所有历史记录，不通过裁剪记录规避内存问题。本轮 739 条历史记录的实际工作区完成双 SDK 测试，报告为 26 条运行通过、2 条仅编译；相关检查见 [控件与任务检查记录](ui/2026-10-29-controls/README.md)。更大的工作区仍需按实际资源选择上限。
+
+运行时参数与默认上限依据：[仓颉官方运行时环境变量手册](https://docs.cangjie-lang.cn/en/docs/1.0.0/user_manual/source_en/Appendix/runtime_env.html)、[1.2.0 运行时手册](https://cj-docs.gitcode.com/zh/1.2.0/dev-guide/source_zh_cn/Appendix/runtime_env.html)；本地对照测试验证了参数生效。

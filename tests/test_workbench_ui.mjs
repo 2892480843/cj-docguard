@@ -234,3 +234,51 @@ assert.doesNotMatch(V.overview(state),/border-gray-100-head/);
 const drafts=I.captureForms({querySelectorAll(){return [{id:'global-search-form',elements:[{name:'global_search',type:'search',value:'old'}]},{id:'config-form',elements:[{name:'content',type:'textarea',value:'kept'}]}]}});
 assert.equal(drafts['global-search-form'],undefined);assert.equal(drafts['config-form'][0].value,'kept');
 console.log('Panel headers retain their layout and global search cannot be overwritten by per-page drafts.');
+// Product copy and project options omit presentation-only wording without changing IDs.
+const namedProjects=[{id:'demo',demo:true,name:'CJ-DocGuard 自建健康样本'},{id:'links',name:'链接检查演示（含预期坏链）'}];
+const plainShell=V.layout({...native,projects:namedProjects,project:namedProjects[0],view:'overview'},V.overview({...native,project:namedProjects[0]}));
+assert.doesNotMatch(plainShell,/演示/);
+assert.match(plainShell,/<option value="demo"/);
+assert.equal(V.projectLabel(namedProjects[1]),'链接检查（含预期坏链）');
+const actualRate=V.passRate({report:{results:[{status:'RUN_VERIFIED'},{status:'RUN_VERIFIED'},{status:'COMPILE_ONLY'}]}});
+assert.match(actualRate,/aria-valuenow="2"/);assert.match(actualRate,/aria-valuemax="3"/);
+assert.match(actualRate,/66\.7%/);assert.match(actualRate,/width:66\.666/);
+assert.doesNotMatch(V.passRate({report:null}),/role="progressbar"|NaN|Infinity|100%/);
+assert.match(V.passRate({report:{results:[{status:'ASSERTION_FAILED'}]}}),/width:0%/);
+const controlsSource=await readFile(new URL('../web/controls.js',import.meta.url),'utf8');
+const C=await import('data:text/javascript;base64,'+Buffer.from(controlsSource).toString('base64'));
+const menuOptions=[{label:'全部状态',disabled:false},{label:'不可选',disabled:true},{label:'仅编译',disabled:false},{label:'运行通过',disabled:false}];
+assert.equal(C.moveEnabled(menuOptions,0,'ArrowDown'),2);assert.equal(C.moveEnabled(menuOptions,0,'ArrowUp'),3);
+assert.equal(C.moveEnabled(menuOptions,2,'Home'),0);assert.equal(C.moveEnabled(menuOptions,0,'End'),3);
+assert.equal(C.moveEnabled([{disabled:true}],0,'ArrowDown'),-1);
+assert.equal(C.matchOption(menuOptions,'运行',0),3);
+assert.equal(C.matchOption(menuOptions,'missing',2),2);
+console.log('Plain project labels, exact pass-rate fill, empty states and disabled-aware option navigation passed.');
+for(const status of ['succeeded','failed','cancelled'])assert.doesNotMatch(V.jobProgress({status}),/role="progressbar"|100%/);
+assert.match(V.jobProgress({status:'running',action:'verify'}),/role="progressbar"/);
+assert.doesNotMatch(V.jobProgress({status:'running',action:'verify'}),/aria-valuenow|\d+%/);
+const queryOptions=V.ai({...state,project:{...state.project,sdk_versions:['1.1.3','1.2.0']}});
+assert.match(queryOptions,/<select[^>]+id="query-sdk"/);assert.match(queryOptions,/<option value="1.2.0"/);
+const queryFields={tool:{value:'list_symbols'},sdk:{disabled:false,required:true,options:[{value:'1.1.3'}],dispatchEvent(){}},platform:{disabled:false,required:true,options:[{value:'Darwin-arm64'}],dispatchEvent(){}},example:{disabled:false,dispatchEvent(){}}};
+C.syncQueryFields({querySelector(){return {elements:{namedItem(name){return queryFields[name]}}}}});
+assert.equal(queryFields.sdk.disabled,true);assert.equal(queryFields.sdk.required,false);assert.equal(queryFields.example.disabled,true);
+queryFields.tool.value='get_verified_examples';
+C.syncQueryFields({querySelector(){return {elements:{namedItem(name){return queryFields[name]}}}}});
+assert.equal(queryFields.sdk.disabled,false);assert.equal(queryFields.sdk.required,true);assert.equal(queryFields.example.disabled,false);
+assert.match(V.exportForm({...state,examples:[] ,report:null}),/data-unavailable="true"/);
+assert.match(V.exportForm(state),/<select[^>]+name="sdk"/);
+console.log('Indeterminate task states, actual query/export choices and query field requirements passed.');
+// A disabled SELECT disables its trigger, not each option permanently.
+assert.equal(C.optionIsDisabled({disabled:false,parentElement:{tagName:'SELECT',disabled:true}}),false);
+assert.equal(C.optionIsDisabled({disabled:false,parentElement:{tagName:'OPTGROUP',disabled:true}}),true);
+assert.equal(C.optionIsDisabled({disabled:true,parentElement:{tagName:'SELECT',disabled:false}}),true);
+console.log('Select-level disabled state can be changed without permanently disabling its options.');
+
+assert.match(V.jobProgress({status:'failed',stderr:'Out of memory'}),/进程内存不足/);
+
+assert.match(V.jobProgress({status:'succeeded',action:'verify',result:{summary:{RUN_VERIFIED:26,COMPILE_ONLY:2,TOTAL:28}}}),/26 条运行通过 · 2 条仅编译 · 共 28 条记录/);
+
+assert.doesNotMatch(V.overview({...state,report:null,examples:[]}),/\d+(?:\.\d+)?%/);
+listeners.change({target:{id:'task-sdk',value:'1.2.0'}});
+assert.equal(runInNewContext('state.taskSdk',appContext),'1.2.0');
+assert.match(V.tasks({...state,taskSdk:'1.2.0',project:{...state.project,sdk_versions:['1.1.3','1.2.0']}}),/<option value="1.2.0" selected>/);

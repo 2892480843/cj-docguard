@@ -11,6 +11,13 @@ func wbEnvironment(app: NativeWorkbench): HashMap<String,String> {
     for (key in ["PATH","CANGJIE_HOME","DYLD_LIBRARY_PATH","LD_LIBRARY_PATH","SDKROOT","CJ_DOCGUARD_SYSTEM_SDKROOT","CJ_DOCGUARD_SDK_1_1_3","CJ_DOCGUARD_SDK_1_2_0"]) {
         let value=envValue(key); if (!value.isEmpty()) { result[key]=value }
     }
+    // Full report generation retains archived records; the default runtime heap
+    // is too small for long-lived workspaces. Keep the worker ceiling explicit.
+    let heap=envValue("CJ_DOCGUARD_HEAP_SIZE")
+    if (!heap.isEmpty() && !["256MB","512MB","1GB","2GB"].contains(heap)) {
+        throw WbError("CJ_DOCGUARD_HEAP_SIZE must be 256MB, 512MB, 1GB or 2GB")
+    }
+    result["cjHeapSize"]=if (heap.isEmpty()) { "1GB" } else { heap }
     result["LANG"]="C"; result["LC_ALL"]="C"
     result["CJ_DOCGUARD_RUNNER"]=join(app.root,"build/cjdg-runner")
     return result

@@ -1,0 +1,48 @@
+{
+  "platform": "Darwin-arm64",
+  "history_records_preserved": 739,
+  "report_summary": {
+    "COMPILE_ONLY": 2,
+    "CURRENT": 28,
+    "RUN_VERIFIED": 26,
+    "TOTAL": 28,
+    "VERIFIED_CURRENT": 26
+  },
+  "worker_heap_default": "1GB",
+  "jobs": [
+    {
+      "id": "03c6837f3d738b74e8eb44d4cc6f4414",
+      "action": "verify",
+      "status": "succeeded",
+      "exit_code": 0,
+      "started_at": "2026-10-29T17:21:32.008155+08:00",
+      "finished_at": "2026-10-29T17:22:24.644267+08:00",
+      "result": {
+        "report": "/Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/workbench/projects/demo/.docguard/report.json",
+        "summary": {
+          "COMPILE_ONLY": 2,
+          "CURRENT": 28,
+          "RUN_VERIFIED": 26,
+          "TOTAL": 28,
+          "VERIFIED_CURRENT": 26
+        }
+      },
+      "artifact_url": null
+    },
+    {
+      "id": "278ff8b7c9c5e6dd1d3d98397b829650",
+      "action": "export",
+      "status": "succeeded",
+      "exit_code": 0,
+      "started_at": "2026-10-29T17:25:29.54105+08:00",
+      "finished_at": "2026-10-29T17:25:32.208394+08:00",
+      "result": {
+        "attempt_sequence": 713,
+        "example_id": "arithmetic",
+        "exit_code": 0,
+        "output": "/Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/build/workbench/artifacts/278ff8b7c9c5e6dd1d3d98397b829650/native"
+      },
+      "artifact_url": "/api/artifacts/278ff8b7c9c5e6dd1d3d98397b829650"
+    }
+  ]
+}
