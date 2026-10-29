@@ -35,7 +35,7 @@ const compact=JSON.parse(JSON.stringify(largeReport,(key,value)=>['history','std
 assert.ok(Buffer.byteLength(JSON.stringify({old:compact,new:compact}))<2*1024*1024);
 // UI repair regressions: readable dates, snapshot breakdown, resilient partial reports.
 assert.equal(V.time('not-a-date'), '时间未记录');
-assert.match(V.overview(state), /运行验证记录占比/);
+assert.match(V.overview(state), /运行测试通过记录占比/);
 assert.match(V.overview(state), /仅编译/);
 assert.doesNotThrow(()=>V.apiView({...state,report:{...report,api:{symbols:report.api.symbols}}}));
 
@@ -58,9 +58,9 @@ assert.match(editor,/type="submit"[^>]*data-action="save-source"/);
 assert.match(editor,/source-reload/);
 assert.match(V.apiView(native),/source-open/);
 const q={tool:'get_evidence',sdk_version:'1.1.3',platform:'Darwin-arm64',items:[],rejected:[{example_id:'a',status:'STALE',reason:'source changed'}]};
-assert.match(V.querySummary(q),/0 条可用证据/);assert.match(V.querySummary(q),/source changed/);
+assert.match(V.querySummary(q),/0 条有效记录/);assert.match(V.querySummary(q),/源码已变化/);
 assert.match(V.querySummary(q),/Darwin-arm64/);
-assert.doesNotMatch(V.querySummary({tool:'list_symbols',items:[{}]}),/1 条可用证据/);
+assert.doesNotMatch(V.querySummary({tool:'list_symbols',items:[{}]}),/1 条有效记录/);
 const workflow=V.workflow({...native,jobs:[{id:'real-job',project_id:'demo',action:'verify',status:'failed'}]});
 assert.match(workflow,/real-job/);assert.match(workflow,/badge bad/);assert.match(workflow,/服务端：Cangjie/);
 console.log('Native frontend identity, source capability gate/editor, workflow provenance, and query summary regressions passed.');
@@ -99,14 +99,14 @@ const links=[
 ];
 const linkState={...state,report:{links},linkStatus:'',linkSearch:''};
 const allLinks=V.linkResults(linkState);
-for(const [status,count] of [['PASS',1],['FAIL',1],['UNVERIFIED',1]])assert.ok(allLinks.includes(`${status} · ${count}`));
+for(const [status,count] of [['PASS',1],['FAIL',1],['UNVERIFIED',1]])assert.ok(allLinks.includes(`${V.statusLabel(status)} · ${count}`));
 assert.match(allLinks,/README.md:3/);assert.match(allLinks,/data-action="job" data-key="check"/);
 assert.equal((allLinks.match(/data-action="link-detail"/g)||[]).length,3);
 assert.match(allLinks,/https:\/\/example.test\/&lt;img&gt;/);assert.doesNotMatch(allLinks,/<a |<img/);
 const failedLinks=V.linkResults({...linkState,linkStatus:'FAIL',search:'unrelated',status:'RUN_VERIFIED'});
 assert.equal((failedLinks.match(/data-action="link-detail"/g)||[]).length,1);
 assert.match(failedLinks,/data-action="link-detail" data-key="1"/);
-assert.match(failedLinks,/PASS · 1/); // totals stay report-wide
+assert.match(failedLinks,/通过 · 1/); // totals stay report-wide
 assert.doesNotMatch(V.linkResults({...linkState,linkSearch:'OFFLINE'}),/data-key="0"/);
 assert.match(V.linkResults({...linkState,linkSearch:'OFFLINE'}),/data-key="2"/);
 assert.match(V.linkResults({...linkState,linkStatus:'PASS',linkSearch:'missing'}),/没有匹配链接/);
@@ -139,7 +139,7 @@ assert.equal(appContext.opened.data.target,'docs/ok.md');
 // The actual dialog body uses readable assertion results for an issue and escapes code.
 runInNewContext('state.drawer={type:"issue",data:testFailure};state.tab="logs";',Object.assign(appContext,{testFailure:failedRecord}));
 const issueBody=runInNewContext('evidenceBody()',appContext);
-assert.match(issueBody,/失败断言/);assert.match(issueBody,/1.2.0/);assert.match(issueBody,/ASSERTION_FAILED/);
+assert.match(issueBody,/输出检查失败/);assert.match(issueBody,/1.2.0/);assert.match(issueBody,/ASSERTION_FAILED/);
 runInNewContext('state.tab="code"',appContext);
 assert.equal(runInNewContext('evidenceBody()',appContext),'<pre>&lt;bad&gt;</pre>');
 console.log('Real link filter events preserve global filters/source drafts; PASS detail and native failure dialogs passed.');
@@ -155,3 +155,57 @@ runInNewContext('state.project={id:"demo"};state.view="issues";request=testReque
 await runInNewContext('refreshJobs()',appContext);await runInNewContext('refreshJobs()',appContext);
 assert.equal(reportReloads,1);
 console.log('Native check dispatch and once-only report refresh on link job completion passed.');
+// Product wording applies to system copy in all ten populated and empty pages.
+const renderers=['overview','apiView','examplesView','matrix','tasks','issues','history','ai','sourceView','settings'];
+for(const populated of [false,true])for(const name of renderers){
+ const html=V[name]({...native,report:populated?native.report:null,examples:populated?examples:[],history:populated?state.history:[]});
+ assert.doesNotMatch(html,/证据|准入|快照|承诺|闭环|冻结/,`${name}: plain system copy`);
+}
+assert.deepEqual(V.navs.map(x=>x[2]),['项目概览','接口文档','示例测试','SDK 测试矩阵','任务中心','链接与问题','历史记录','测试结果查询','源码编辑','项目配置']);
+assert.match(V.ai({...state,queryResult:q}),/<details><summary>完整 JSON/);
+assert.doesNotMatch(V.ai(state),/>AI|人工智能/);
+for(const [value,label] of [['COMPILE_ONLY','仅编译'],['CURRENT','未变更'],['STALE','需重测'],['RUN_VERIFIED','运行通过'],['FROZEN','历史记录'],['UNVERIFIED','未确认']]){
+ assert.match(V.badge(value),new RegExp(`data-status="${value}"`));
+ assert.ok(V.badge(value).includes(`>${label}</span>`));
+}
+assert.doesNotMatch(V.badge('COMPILE_ONLY'),/badge good|运行通过/);
+assert.doesNotMatch(V.badge('CURRENT'),/运行通过/);
+assert.match(V.badge(injection),/&lt;img/);
+assert.match(V.matrix({...state,report:{results:[{example_id:'only',sdk_version:'test',status:'COMPILE_ONLY',freshness:'STALE'}]}}),/<option value="COMPILE_ONLY"[^>]*>仅编译<\/option>/);
+assert.match(V.apiView(state),/<option value="function"[^>]*>函数<\/option>/);
+for(const action of ['doctor','build','verify','check','export'])assert.match(V.tasks(state),new RegExp(`data-action="job" data-key="${action}"`));
+for(const tool of ['list_symbols','get_verified_examples','get_evidence'])assert.match(V.ai(state),new RegExp(`option value="${tool}"`));
+const queryRows=V.querySummary({...q,items:[{example_id:'ok',status:'RUN_VERIFIED'}],rejected:[{example_id:injection,status:'COMPILE_ONLY',reason:injection}]});
+assert.match(queryRows,/1 条有效记录/);assert.match(queryRows,/1 条被拒绝/);assert.match(queryRows,/仅编译/);assert.doesNotMatch(queryRows,/<img/);
+assert.match(V.overview(state),/源码或工具链变化后/);
+assert.match(appSource,/aria-label="关闭详情"/);assert.match(appSource,/aria-label="详情内容"/);
+assert.match(appSource,/源码或工具链变化后/);
+assert.doesNotMatch(appSource,/证据|准入|快照|承诺|闭环|冻结/);
+// The existing real-event harness must retain raw matrix filter values as well.
+listeners.change({target:{id:'status',value:'COMPILE_ONLY'}});
+assert.equal(runInNewContext('state.status',appContext),'COMPILE_ONLY');
+listeners.change({target:{id:'kind',value:'function'}});
+assert.equal(runInNewContext('state.kind',appContext),'function');
+console.log('Twenty-page plain wording, translated labels with raw values, read-only query, changed/compile-only semantics and filter events passed.');
+for(const unknown of ['__proto__','constructor','CUSTOM_STATUS']){
+ assert.equal(V.statusLabel(unknown),unknown);
+ assert.equal(V.actionLabel(unknown),unknown);
+ assert.equal(V.reasonLabel(unknown),unknown);
+}
+// User-authored content remains verbatim (HTML-escaped), even when it uses product-avoided words.
+const authored='用户注释：证据与快照 <script>';
+assert.match(V.apiView({...state,report:{api:{symbols:[{id:'user',name:'user',comment:authored,parameters:[],examples:[]}],files:[]}}}),/用户注释：证据与快照 &lt;script&gt;/);
+console.log('Unknown protocol strings and user-authored content remain intact and escaped.');
+
+for(const [kind,label] of [['type_alias','类型别名'],['field','字段'],['enum_constructor','枚举值']]){
+ const html=V.apiView({...state,report:{api:{symbols:[{kind,name:'item',parameters:[],examples:[]}],files:[]}}});
+ assert.ok(html.includes(`<option value="${kind}" >${label}</option>`));
+}
+console.log('All native declaration type names have readable labels and unchanged filter values.');
+// Completed query jobs display the same readable result table as the query page.
+appContext.queryJob={id:'plain-query',action:'query',status:'succeeded',exit_code:0,result:q,stdout:'RAW_QUERY_OUTPUT',stderr:''};
+runInNewContext('state.drawer={type:"job",data:queryJob};state.tab="logs";',appContext);
+const queryJobBody=runInNewContext('evidenceBody()',appContext);
+assert.match(queryJobBody,/0 条有效记录/);
+assert.match(queryJobBody,/<details><summary>查看原始输出<\/summary><pre class="terminal">RAW_QUERY_OUTPUT<\/pre><\/details>/);
+console.log('Completed query job shows readable results and collapses the original output.');

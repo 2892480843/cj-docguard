@@ -1,0 +1,13 @@
+{
+  "source": "Google Fonts / Noto Sans SC",
+  "commit": "9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0",
+  "source_url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf",
+  "license_url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/notosanssc/OFL.txt",
+  "license": "SIL OFL 1.1",
+  "source_sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+  "output_sha256": "f604836e6a4457b0f3ea6f75aa0e10a135bbcf8bd32720a65b0c7ce8e3a457d9",
+  "bytes": 2079696,
+  "modifications": "GB2312, Latin and punctuation subset; renamed primary family DocGuard Sans SC; variable weights retained",
+  "glyphs": 8825,
+  "fonttools": "4.68.0"
+}
