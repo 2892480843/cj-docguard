@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4966,
-      "sha256": "a6dd0e61e424ac738173f414afe40cb2bbcd0e0615b43588183b850a2be88f95"
+      "bytes": 4977,
+      "sha256": "34c9957ece00e163c9be15f4154ef68334916a4d6e73a189ba82ec7929466bae"
     },
     {
       "path": "assets/api.png",
@@ -89,8 +89,8 @@
     },
     {
       "path": "checks/presentation-checks.json",
-      "bytes": 1245,
-      "sha256": "bc921c26c82eab838445ee09092aeb2f9f006797432faa9b5a08c4b35a2c25ad"
+      "bytes": 1388,
+      "sha256": "3135774a547430639e2fc80bbf1a3b804f64a6f682f1978d78eda17d517e496e"
     },
     {
       "path": "checks/video-checks.json",
@@ -374,8 +374,8 @@
     },
     {
       "path": "逐页讲稿.md",
-      "bytes": 8498,
-      "sha256": "56dcd5eed34c39a3a59545b1318923fe6556728886c3fde6ddc4155719dcfb2b"
+      "bytes": 8509,
+      "sha256": "16b3fe081684a91092d98003311aaf38fa1a16690636603b7edc4cdaaba7455d"
     }
   ]
 }

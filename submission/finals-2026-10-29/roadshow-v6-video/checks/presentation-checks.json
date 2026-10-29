@@ -42,7 +42,8 @@
     "playback_observation": {
       "started_at": 1793283543.357,
       "observed_end_at": 1793283836.559,
-      "elapsed": 293.2019999027252
+      "elapsed": 293.2019999027252,
+      "note": "观察间隔包含播放结束后的等待，不是片长或真人讲述时长。片长以video-checks.json中120秒为准。"
     },
     "audio": "wps-audio-output.json",
     "preview": "wps-playback.jpg",
