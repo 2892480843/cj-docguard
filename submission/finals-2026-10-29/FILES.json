@@ -1,12 +1,7 @@
 {
   "algorithm": "SHA-256",
-  "scope": "Files in this directory; manifest itself excluded",
+  "scope": "Git-tracked materials under this directory; manifest itself and OS directory metadata excluded",
   "files": [
-    {
-      "path": ".DS_Store",
-      "bytes": 8196,
-      "sha256": "41a3e8fa3ef9758c202be1cf1ccf6d150dac0d963299c86de26806949e19695a"
-    },
     {
       "path": "CJ-DocGuard-决赛答辩-20261029.pdf",
       "bytes": 317171,
@@ -418,11 +413,6 @@
       "sha256": "cf8f0a8983440aa192bb4ab1ab16d77e3deb1218b35389eff05a22004ea5121d"
     },
     {
-      "path": "roadshow-v4-notebook/.DS_Store",
-      "bytes": 6148,
-      "sha256": "11843cce9887db1358a096919a9b8422b7595456368e6029f77dbfdb90b678d1"
-    },
-    {
       "path": "roadshow-v4-notebook/CHECKS.md",
       "bytes": 1438,
       "sha256": "271d617d6e9caa047150611ee26dac5a57f1887be77943a9cb607e38cbb7e049"
@@ -494,13 +484,13 @@
     },
     {
       "path": "roadshow-v5-rich/CHECKS.md",
-      "bytes": 2039,
-      "sha256": "39ed247867603cf8c4caa1d3c1bab6bc55cfde9ea7423ce93dda527926159c46"
+      "bytes": 2235,
+      "sha256": "b7e14e1b2f35a866175f92f2eefb3a48c3676e9ae47da580759b6cdb19ea23cc"
     },
     {
       "path": "roadshow-v5-rich/FILES.json",
-      "bytes": 3894,
-      "sha256": "904dae3408afc1070c226ce542782fe2bc561d77feb5e68e6d050f9d06891a33"
+      "bytes": 3939,
+      "sha256": "c4e3dd20fca64c21dad021f80594767e30ee25a59c09e6eadfc4f6a7948480c1"
     },
     {
       "path": "roadshow-v5-rich/README.md",
