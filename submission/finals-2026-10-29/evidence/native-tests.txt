@@ -12,14 +12,14 @@ PASS native evidence: valid records, stale environments, missing assertions, lat
 
 === export-1.1.3-run.log ===
 {"error":"example is not eligible for export","example_id":"missing","exit_code":1,"freshness":"UNKNOWN_CURRENT","reason":"No attempt for this target","status":"NOT_RUN"}
-{"attempt_sequence":1,"example_id":"add","exit_code":0,"output":"/private/tmp/tmpDir1an1px/bundle"}
+{"attempt_sequence":1,"example_id":"add","exit_code":0,"output":"/private/tmp/tmpDir3U4KlH/bundle"}
 {"error":"example is not eligible for export","example_id":"add","exit_code":1,"freshness":"STALE","reason":"Registered assertions passed in this recorded environment","status":"RUN_VERIFIED"}
 {"error":"example is not eligible for export","example_id":"add","exit_code":1,"freshness":"CURRENT","reason":"Compilation only; no behavior verification","status":"COMPILE_ONLY"}
 PASS native export: real SDK, frozen bundle, stale/unknown/compile/path refusals
 
 === export-1.2.0-run.log ===
 {"error":"example is not eligible for export","example_id":"missing","exit_code":1,"freshness":"UNKNOWN_CURRENT","reason":"No attempt for this target","status":"NOT_RUN"}
-{"attempt_sequence":1,"example_id":"add","exit_code":0,"output":"/private/tmp/tmpDirPuXn7o/bundle"}
+{"attempt_sequence":1,"example_id":"add","exit_code":0,"output":"/private/tmp/tmpDiruBPKuk/bundle"}
 {"error":"example is not eligible for export","example_id":"add","exit_code":1,"freshness":"STALE","reason":"Registered assertions passed in this recorded environment","status":"RUN_VERIFIED"}
 {"error":"example is not eligible for export","example_id":"add","exit_code":1,"freshness":"CURRENT","reason":"Compilation only; no behavior verification","status":"COMPILE_ONLY"}
 PASS native export: real SDK, frozen bundle, stale/unknown/compile/path refusals

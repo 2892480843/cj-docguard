@@ -1,0 +1,120 @@
+[
+  {
+    "case": "export-cli-build",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "primitives",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "memory",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "extractor",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "evidence",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "report",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "platform",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "bindings",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "index",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "links",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "export",
+    "sdk": "1.1.3",
+    "exit_code": 0
+  },
+  {
+    "case": "export-cli-build",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "primitives",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "memory",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "extractor",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "evidence",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "report",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "platform",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "bindings",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "index",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "links",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "export",
+    "sdk": "1.2.0",
+    "exit_code": 0
+  },
+  {
+    "case": "native-workbench-build",
+    "exit_code": 0
+  },
+  {
+    "case": "python-integration",
+    "exit_code": 0
+  }
+]

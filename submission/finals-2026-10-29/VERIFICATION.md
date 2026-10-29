@@ -1,6 +1,6 @@
 # 最终源码验证记录
 
-功能源码身份以 `SOURCE.json` 和标签解析为准，标签 `finals-source-20261029`。文件身份见 [SOURCE.json](SOURCE.json) 与 [完整冻结树摘要](SOURCE-FILES.json)。后续提交只添加材料或验证回执；默认 `main` 包含这些补充，功能源码身份保持不变。
+功能源码冻结于 `13566db8dc86c130fc0e0a414143ae97328b3410`，标签 `finals-source-20261029`。文件身份见 [SOURCE.json](SOURCE.json) 与 [完整冻结树摘要](SOURCE-FILES.json)。后续提交只添加材料或验证回执；默认 `main` 包含这些补充，功能源码身份保持不变。
 
 | 检查 | 实际结果 | 可公开证据 |
 |---|---|---|
