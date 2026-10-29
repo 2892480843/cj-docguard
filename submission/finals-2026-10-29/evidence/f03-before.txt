@@ -1,0 +1,3 @@
+An exception has occurred:
+Exception: FAIL bindings: legacy short name must not acquire an identity in report
+	 at docguard::main()($REPO/tests/native_bindings.cj:9)

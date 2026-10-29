@@ -1,0 +1,7 @@
+Workbench UI: 20 render scenarios plus search, status, escaping, dates, partial reports, progress and submit regressions passed.
+Native frontend identity, source capability gate/editor, workflow provenance, and query summary regressions passed.
+Explicit capability-gated lock inspection and recovery rendering regressions passed.
+First-observed completion, manual refresh, cancellation and once-only report synchronization regressions passed.
+All-link counts, scoped filters, safe text, original detail indices, empty reports and native assertion values passed.
+Real link filter events preserve global filters/source drafts; PASS detail and native failure dialogs passed.
+Native check dispatch and once-only report refresh on link job completion passed.
