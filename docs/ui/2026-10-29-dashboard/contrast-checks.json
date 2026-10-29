@@ -1,0 +1,65 @@
+[
+  {
+    "component": "正文",
+    "foreground": "#111827",
+    "background": "#ffffff",
+    "contrast": 17.74,
+    "minimum": 4.5
+  },
+  {
+    "component": "次要正文",
+    "foreground": "#647084",
+    "background": "#f9fafb",
+    "contrast": 4.79,
+    "minimum": 4.5
+  },
+  {
+    "component": "主按钮",
+    "foreground": "#ffffff",
+    "background": "#6063eb",
+    "contrast": 4.69,
+    "minimum": 4.5
+  },
+  {
+    "component": "成功状态",
+    "foreground": "#147d50",
+    "background": "#ecfdf5",
+    "contrast": 4.89,
+    "minimum": 4.5
+  },
+  {
+    "component": "警告状态",
+    "foreground": "#946208",
+    "background": "#fffbeb",
+    "contrast": 5.05,
+    "minimum": 4.5
+  },
+  {
+    "component": "失败状态",
+    "foreground": "#b91c1c",
+    "background": "#fef2f2",
+    "contrast": 5.91,
+    "minimum": 4.5
+  },
+  {
+    "component": "图表运行通过数字",
+    "foreground": "#052e23",
+    "background": "#10b981",
+    "contrast": 5.82,
+    "minimum": 4.5
+  },
+  {
+    "component": "图表仅编译数字",
+    "foreground": "#5b3800",
+    "background": "#f59e0b",
+    "contrast": 4.86,
+    "minimum": 4.5
+  },
+  {
+    "component": "图表失败数字",
+    "foreground": "#260505",
+    "background": "#ef4444",
+    "contrast": 5.04,
+    "minimum": 4.5
+  }
+]

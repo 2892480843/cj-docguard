@@ -177,9 +177,9 @@ for(const action of ['doctor','build','verify','check','export'])assert.match(V.
 for(const tool of ['list_symbols','get_verified_examples','get_evidence'])assert.match(V.ai(state),new RegExp(`option value="${tool}"`));
 const queryRows=V.querySummary({...q,items:[{example_id:'ok',status:'RUN_VERIFIED'}],rejected:[{example_id:injection,status:'COMPILE_ONLY',reason:injection}]});
 assert.match(queryRows,/1 条有效记录/);assert.match(queryRows,/1 条被拒绝/);assert.match(queryRows,/仅编译/);assert.doesNotMatch(queryRows,/<img/);
-assert.match(V.overview(state),/源码或工具链变化后/);
+assert.match(V.layout({...state,view:'overview'},V.overview(state)),/源码或工具链变化后/);
 assert.match(appSource,/aria-label="关闭详情"/);assert.match(appSource,/aria-label="详情内容"/);
-assert.match(appSource,/源码或工具链变化后/);
+assert.match(appSource,/V.layout\(state/);
 assert.doesNotMatch(appSource,/证据|准入|快照|承诺|闭环|冻结/);
 // The existing real-event harness must retain raw matrix filter values as well.
 listeners.change({target:{id:'status',value:'COMPILE_ONLY'}});
@@ -209,3 +209,28 @@ const queryJobBody=runInNewContext('evidenceBody()',appContext);
 assert.match(queryJobBody,/0 条有效记录/);
 assert.match(queryJobBody,/<details><summary>查看原始输出<\/summary><pre class="terminal">RAW_QUERY_OUTPUT<\/pre><\/details>/);
 console.log('Completed query job shows readable results and collapses the original output.');
+// Dashboard data must count every record once, including failures and unknown states.
+const dashboardInput={...state,report:{results:[{sdk_version:'1',status:'RUN_VERIFIED'},{sdk_version:'1',status:'COMPILE_ONLY'},{sdk_version:'2',status:'ASSERTION_FAILED'},{sdk_version:'2',status:'FUTURE_STATUS'}]}};
+assert.deepEqual(V.dashboardStats(dashboardInput),{total:4,passed:1,compileOnly:1,failed:1,other:1,sdks:['1','2'],bySdk:[{sdk:'1',passed:1,compileOnly:1,failed:0,other:0,total:2},{sdk:'2',passed:0,compileOnly:0,failed:1,other:1,total:2}]});
+assert.equal(V.dashboardStats({...state,report:null}).total,0);
+assert.match(V.testChart(dashboardInput),/ASSERTION_FAILED|未通过/);
+assert.doesNotMatch(V.testChart({...state,report:null}),/NaN|Infinity/);
+const shell=V.layout({...native,view:'overview',projects:[native.project],jobs:[]},'<p>CONTENT</p>');
+assert.match(shell,/id="global-search-form"/);assert.match(shell,/aria-label="搜索公共接口"/);
+assert.match(shell,/aria-controls="workspace-sidebar"/);assert.match(shell,/CONTENT/);
+runInNewContext('state.view="settings";state.menuOpen=false;state.globalSearch="  divideSafe  ";state.search="old";',appContext);
+appContext.window.scrollTo=()=>{};
+await runInNewContext('act("global-search")',appContext);
+assert.equal(runInNewContext('state.view',appContext),'api');assert.equal(runInNewContext('state.search',appContext),'divideSafe');
+await runInNewContext('act("toggle-menu")',appContext);assert.equal(runInNewContext('state.menuOpen',appContext),true);
+await runInNewContext('act("navigate","matrix")',appContext);assert.equal(runInNewContext('state.menuOpen',appContext),false);
+runInNewContext('state.project={id:"demo"};state.jobs=[{id:"ok",project_id:"demo",action:"verify",status:"succeeded"},{id:"foreign",project_id:"other",status:"failed"}];',appContext);
+await runInNewContext('act("notifications")',appContext);assert.equal(appContext.opened.type,'notifications');
+assert.equal(appContext.opened.data.items.length,1);
+console.log('Dashboard exact counts, empty chart, shell, global search, mobile menu and scoped task notifications passed.');
+
+assert.match(V.overview(state),/class="card-head"/);
+assert.doesNotMatch(V.overview(state),/border-gray-100-head/);
+const drafts=I.captureForms({querySelectorAll(){return [{id:'global-search-form',elements:[{name:'global_search',type:'search',value:'old'}]},{id:'config-form',elements:[{name:'content',type:'textarea',value:'kept'}]}]}});
+assert.equal(drafts['global-search-form'],undefined);assert.equal(drafts['config-form'][0].value,'kept');
+console.log('Panel headers retain their layout and global search cannot be overwritten by per-page drafts.');

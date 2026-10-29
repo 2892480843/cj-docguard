@@ -3,6 +3,8 @@
 export function captureForms(root) {
   const forms = {};
   for (const form of root.querySelectorAll('form[id]')) {
+    // Global search is owned by app state, not by per-page form drafts.
+    if (form.id === 'global-search-form') continue;
     forms[form.id] = [...form.elements]
       .filter(field => (field.name || field.id) && !['file', 'submit', 'button'].includes(field.type))
       .map(field => ({name: field.name, id: field.id, value: field.value, checked: field.checked}));

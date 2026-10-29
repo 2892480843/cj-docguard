@@ -1,0 +1,248 @@
+{
+  "desktop": [
+    {
+      "page": "项目概览",
+      "heading": "项目概览",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "page": "接口文档",
+      "heading": "接口文档",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "page": "示例测试",
+      "heading": "示例测试",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "page": "SDK 测试矩阵",
+      "heading": "SDK 测试矩阵",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "page": "任务中心",
+      "heading": "任务中心",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "page": "链接与问题",
+      "heading": "链接与问题",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "page": "历史记录",
+      "heading": "历史记录",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "page": "测试结果查询",
+      "heading": "测试结果查询",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "page": "源码编辑",
+      "heading": "源码编辑",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "page": "项目配置",
+      "heading": "项目配置",
+      "layout": {
+        "nestedPanels": 0,
+        "scroll": 1440,
+        "width": 1440
+      }
+    }
+  ],
+  "tablet": [
+    {
+      "page": "项目概览",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "page": "接口文档",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "page": "示例测试",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "page": "SDK 测试矩阵",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "page": "任务中心",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "page": "链接与问题",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "page": "历史记录",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "page": "测试结果查询",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "page": "源码编辑",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    },
+    {
+      "page": "项目配置",
+      "layout": {
+        "scroll": 1024,
+        "width": 1024
+      }
+    }
+  ],
+  "mobile": [
+    {
+      "page": "项目概览",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "page": "接口文档",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "page": "示例测试",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "page": "SDK 测试矩阵",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "page": "任务中心",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "page": "链接与问题",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "page": "历史记录",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "page": "测试结果查询",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "page": "源码编辑",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    },
+    {
+      "page": "项目配置",
+      "layout": {
+        "expanded": "false",
+        "scroll": 390,
+        "width": 390
+      }
+    }
+  ]
+}

@@ -14,7 +14,7 @@
 
 ## 本地网页工作台
 
-先按[评委指南](docs/judge-quickstart.md)登记两版 SDK（软件开发工具包）并选择兼容的 Apple 系统 SDK。运行 `bash scripts/build_workbench.sh`，再运行 `bash scripts/workbench.sh --port 8765`，在浏览器打开 `http://127.0.0.1:8765`。正式 HTTP（网页请求服务）进程由仓颉实现。工作台支持接口检索、示例测试、SDK 测试矩阵、任务管理、链接检查、历史对比、测试结果查询、源码编辑、配置管理和示例包导出；默认使用独立演示副本。网页使用离线内置中文黑体，[新版页面与检查记录](docs/ui/2026-10-29/README.md)列出实际操作及截图。
+先按[评委指南](docs/judge-quickstart.md)登记两版 SDK（软件开发工具包）并选择兼容的 Apple 系统 SDK。运行 `bash scripts/build_workbench.sh`，再运行 `bash scripts/workbench.sh --port 8765`，在浏览器打开 `http://127.0.0.1:8765`。正式 HTTP（网页请求服务）进程由仓颉实现。工作台支持接口检索、示例测试、SDK 测试矩阵、任务管理、链接检查、历史对比、测试结果查询、源码编辑、配置管理和示例包导出；默认使用独立演示副本。网页使用离线内置中文黑体，[仪表盘新版页面与检查记录](docs/ui/2026-10-29-dashboard/README.md)列出实际操作及截图。
 
 [仓颉原生服务指南](docs/native-workbench.md) · [服务迁移验收](docs/native-workbench-verification-2026-10-29.md) · [链接与真实库修复验收](docs/links-unicode-verification-2026-10-29.md) · [工作台完整指南](docs/workbench.md)说明首次运行、故障演示、系统 SDK 选择、证据边界和验收方法。原有静态报告继续作为离线快照使用。
 
