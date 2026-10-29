@@ -2,6 +2,7 @@
 
 No Python serving process, mocked compiler, or manufactured evidence is used.
 """
+import concurrent.futures
 import http.client
 import json
 import os
@@ -32,7 +33,7 @@ class NativeWorkbenchTests(unittest.TestCase):
 
     @classmethod
     def launch(cls, state):
-        binary = ROOT / 'build/cj-docguard-workbench'
+        binary = Path(os.environ.get('CJ_DOCGUARD_TEST_WORKBENCH', ROOT / 'build/cj-docguard-workbench'))
         if not binary.is_file():
             raise RuntimeError('build/cj-docguard-workbench missing; run scripts/build_workbench.sh')
         with socket.socket() as sock:
@@ -83,6 +84,34 @@ class NativeWorkbenchTests(unittest.TestCase):
             return response.status, json.loads(payload)
         finally:
             connection.close()
+
+    def test_large_history_concurrent_reads_preserve_all_records(self):
+        # Exercise transport pressure, not fabricated verification evidence. The
+        # synthetic archive is only an HTTP payload and is never executed/qualified.
+        directory, prefix = self.fixture()
+        history = [{'sequence': i, 'eligible': False, 'freshness': 'FROZEN',
+                    'stdout': 'archive-only-' + ('x' * 20000)} for i in range(460)]
+        payload = {'history': history, 'results': [], 'summary': {'TOTAL': 0}}
+        target = directory / '.docguard/report.json'
+        target.parent.mkdir(exist_ok=True)
+        original = json.dumps(payload).encode()
+        target.write_bytes(original)
+
+        def fetch(index):
+            endpoint = 'history' if index % 3 == 0 else 'report'
+            status, body = self.request(prefix + '/' + endpoint)
+            self.assertEqual(status, 200)
+            records = body['items'] if endpoint == 'history' else body['report']['history']
+            self.assertEqual(len(records), 460)
+            self.assertEqual([r['sequence'] for r in records], list(range(460)))
+            self.assertTrue(all(r['stdout'] == history[0]['stdout'] for r in records))
+            self.assertTrue(all(not r['eligible'] for r in records))
+
+        for _ in range(2):
+            with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
+                list(pool.map(fetch, range(12)))
+        self.assertEqual(target.read_bytes(), original)
+        self.assertEqual(self.request('/api/bootstrap')[0], 200)
 
     def raw(self, data):
         with socket.create_connection(('127.0.0.1', self.port), timeout=10) as sock:

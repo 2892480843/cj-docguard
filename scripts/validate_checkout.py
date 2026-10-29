@@ -7,10 +7,11 @@ OUT=ROOT/'build/checkout-validation'/time.strftime('%Y%m%d-%H%M%S');OUT.mkdir(pa
 copy=ROOT
 source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
 source_files={}
-for area in ['src','workbench_native','web','scripts','tests','examples','integrations']:
- for path in sorted((ROOT/area).rglob('*')):
-  if path.is_file() and '__pycache__' not in path.parts and '.docguard' not in path.parts:
-   source_files[path.relative_to(ROOT).as_posix()]=hashlib.sha256(path.read_bytes()).hexdigest()
+# Hash only the published source inventory, excluding Finder/cache/build files.
+tracked=subprocess.check_output(['git','ls-files','-z','--','src','workbench_native','web','scripts','tests','examples','integrations'],cwd=ROOT).decode('utf-8').split('\0')
+for relative in tracked:
+ if relative:
+  source_files[relative]=hashlib.sha256((ROOT/relative).read_bytes()).hexdigest()
 env=os.environ.copy()
 for sdk in ['1.1.3','1.2.0']:env['CJ_DOCGUARD_SDK_'+sdk.replace('.','_')]=str(dev.sdk_home(sdk))
 r=subprocess.run(['bash','scripts/build_workbench.sh'],cwd=copy,env=env,capture_output=True,text=True,timeout=180)

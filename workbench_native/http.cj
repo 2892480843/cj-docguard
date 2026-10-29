@@ -128,6 +128,10 @@ class WorkbenchHttp {
     let app: NativeWorkbench
     let server: TcpServerSocket
     let active = AtomicInt64(0)
+    // Reports retain complete histories. Bound their parsed trees and encoded
+    // response buffers to one application response, even with many polling tabs.
+    // Keep socket reads outside this gate so incomplete headers cannot block it.
+    let responseMutex = Mutex()
     let port: UInt16
     init(app: NativeWorkbench, host: String, port: UInt16) {
         this.app = app; this.port = port
@@ -148,7 +152,12 @@ class WorkbenchHttp {
                 if (let Some(origin) <- request.headers.get("origin")) {
                     if (origin != "http://" + authority) { throw HttpFailure(403, "Origin does not match Host") }
                 }
-                response = app.handle(request)
+                synchronized(responseMutex) {
+                    let ready = app.handle(request)
+                    try { writeResponse(socket, ready) }
+                    catch (_: Exception) { /* Never append an error to a partial response. */ }
+                }
+                return
             }
             catch (e: HttpFailure) { response = httpError(e.status, e.message) }
             catch (e: SocketTimeoutException) { response = httpError(408, "request timed out") }
