@@ -2,4 +2,4 @@
 integrations/leven4cj/patches/*.patch -whitespace
 
 # Keep the fixed-layout finals PDF as a binary artifact.
-submission/finals-2026-10-29/roadshow-v3/output/*.pdf binary
+submission/finals-2026-10-29/roadshow-*/output/*.pdf binary

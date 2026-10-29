@@ -12,7 +12,7 @@ cd cj-docguard
 git rev-parse HEAD
 ```
 
-GitHub 镜像为 `https://github.com/2892480843/cj-docguard.git`。最新版答辩对应功能源码 `068a22a8a4d1987ac0aac837da22b39c8224417f`，固定复现可执行 `git checkout 068a22a8a4d1987ac0aac837da22b39c8224417f`；最新版讲稿及页面入口见[答辩材料](../submission/finals-2026-10-29/roadshow-v3/README.md)。此前冻结批次保留 `finals-source-20261029-r2` 标签；其发布身份以[迭代说明](finals-iteration-2026-10-29.md)和发布记录为准。首次克隆没有本地第三方缓存、验证历史及既有项目 ID，不能直接套用作者机器上的 ID。
+GitHub 镜像为 `https://github.com/2892480843/cj-docguard.git`。最新版答辩对应功能源码 `068a22a8a4d1987ac0aac837da22b39c8224417f`，固定复现可执行 `git checkout 068a22a8a4d1987ac0aac837da22b39c8224417f`；最新版讲稿及页面入口见[答辩材料](../submission/finals-2026-10-29/roadshow-v4-notebook/README.md)。此前冻结批次保留 `finals-source-20261029-r2` 标签；其发布身份以[迭代说明](finals-iteration-2026-10-29.md)和发布记录为准。首次克隆没有本地第三方缓存、验证历史及既有项目 ID，不能直接套用作者机器上的 ID。
 
 ## 2. 准备工具链
 

@@ -19,8 +19,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4554,
-      "sha256": "2ea5d17956da6ebefdb8400b954014169850c01018b3c3b37b60bb9599288f4e"
+      "bytes": 4665,
+      "sha256": "9043b60ac91125f67be8b1db54e712f59184e1e9ba708e8f7f9c20a187589224"
     },
     {
       "path": "SOURCE-FILES.json",
@@ -411,6 +411,76 @@
       "path": "roadshow-v3/逐页讲稿.md",
       "bytes": 6799,
       "sha256": "cf8f0a8983440aa192bb4ab1ab16d77e3deb1218b35389eff05a22004ea5121d"
+    },
+    {
+      "path": "roadshow-v4-notebook/CHECKS.md",
+      "bytes": 1438,
+      "sha256": "271d617d6e9caa047150611ee26dac5a57f1887be77943a9cb607e38cbb7e049"
+    },
+    {
+      "path": "roadshow-v4-notebook/FILES.json",
+      "bytes": 2169,
+      "sha256": "39f3f96e3663a8bc5022d1f10d5cf95c6c5a0d1f64e146d6b1bf7e5adc659f39"
+    },
+    {
+      "path": "roadshow-v4-notebook/README.md",
+      "bytes": 2883,
+      "sha256": "6594b40ea47e0535ab31fe8190cebe58f190552d6b374836f612307940628967"
+    },
+    {
+      "path": "roadshow-v4-notebook/assets/api.png",
+      "bytes": 74733,
+      "sha256": "ebb64007ac9b9b484ccae2a5ecb3b491bb3a850fca5ec4959f8f4bf8057540ba"
+    },
+    {
+      "path": "roadshow-v4-notebook/assets/export.png",
+      "bytes": 49510,
+      "sha256": "6e79fd89d0536c0fa05c657d2dfa64af3557b4d5e5807c5c735b75ba2be28f13"
+    },
+    {
+      "path": "roadshow-v4-notebook/assets/graph-paper.png",
+      "bytes": 2141131,
+      "sha256": "2a0c8b9b5e897588036a21c9d59cc8a99cf4726ee17b7a3b01c019f77dd45b61"
+    },
+    {
+      "path": "roadshow-v4-notebook/assets/links.png",
+      "bytes": 89380,
+      "sha256": "5539c194cafd7e677d2a78bbb4b5ba7cae98bbc5a6a8aa2acc0e05a3e8507bf3"
+    },
+    {
+      "path": "roadshow-v4-notebook/content.json",
+      "bytes": 11050,
+      "sha256": "d01f4ee6201c102e4c560036d707172e204ae0757886eab28bd96b136897efce"
+    },
+    {
+      "path": "roadshow-v4-notebook/facts.json",
+      "bytes": 1350,
+      "sha256": "a4bc7d0a0296f6d06eb00a46b135e8f9d6fc93b517869584b9c28aa5e76d9e15"
+    },
+    {
+      "path": "roadshow-v4-notebook/output/CJ-DocGuard-决赛答辩-手写笔记版-20261029.pdf",
+      "bytes": 45607217,
+      "sha256": "72966f3237a016db559baf1149cfec9c35263e3d0290eb654f0e19c91038a20b"
+    },
+    {
+      "path": "roadshow-v4-notebook/output/CJ-DocGuard-决赛答辩-手写笔记版-20261029.pptx",
+      "bytes": 2270590,
+      "sha256": "3ea2b8d02571721d62dd61c0be2fedfecd85d1c52418a2d54bc097ccd3ef1dcf"
+    },
+    {
+      "path": "roadshow-v4-notebook/source/build.mjs",
+      "bytes": 20582,
+      "sha256": "d4af612eda1f5ba6220b22531f3a1eb705b05b85808f4aec7ae5836821364c41"
+    },
+    {
+      "path": "roadshow-v4-notebook/source/dedup_media.py",
+      "bytes": 1732,
+      "sha256": "e5e0ab21534485907c9f270a13964e19ac24c4667ad09a996187bb634a99e3d6"
+    },
+    {
+      "path": "roadshow-v4-notebook/source/paper-prompt.txt",
+      "bytes": 927,
+      "sha256": "4e080f1a1aa79cccbf1e84abf29f5a8cd3938029c06500c9f7044524317e31e9"
     },
     {
       "path": "slides/QA.md",
