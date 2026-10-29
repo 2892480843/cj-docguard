@@ -1,6 +1,6 @@
 # CJ-DocGuard 参赛材料
 
-**决赛当前材料：[2026-10-29 源码与验证证据](finals-2026-10-29/README.md) · [评委克隆运行指南](../docs/judge-quickstart.md) · [迭代说明](../docs/finals-iteration-2026-10-29.md) · [6～8 分钟网页路演](../docs/finals-demo-runbook-2026-10-29.md)。冻结源码标签为 `finals-source-20261029`，源码提交、测试结果、公开仓库回执在决赛目录分别记录。**
+**决赛当前材料：[2026-10-29 源码与验证证据](finals-2026-10-29/README.md) · [评委克隆运行指南](../docs/judge-quickstart.md) · [迭代说明](../docs/finals-iteration-2026-10-29.md) · [6～8 分钟网页路演](../docs/finals-demo-runbook-2026-10-29.md)。冻结源码标签为 `finals-source-20261029-r2`，源码提交、测试结果、公开仓库回执在决赛目录分别记录。**
 
 决赛准备以作品和代码仓库优化为先；负责人提供的通知说明 10 月 31 日是准备目标，正式决赛时间待后续通知，材料暂时无需提交。以下初赛 PPT、视频、模板与 ZIP 保留原版，不代表本轮已更新成片、本人签字或正式提交。
 

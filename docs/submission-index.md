@@ -1,6 +1,6 @@
 # CJ-DocGuard 提交材料索引
 
-**2026-10-29 决赛当前入口：[源码与验证证据](../submission/finals-2026-10-29/README.md)、[评委克隆运行](judge-quickstart.md)、[迭代说明](finals-iteration-2026-10-29.md)、[6～8 分钟网页演示](finals-demo-runbook-2026-10-29.md)。使用 `finals-source-20261029` 标签固定源码，精确身份与结果以决赛证据目录为准。**
+**2026-10-29 决赛当前入口：[源码与验证证据](../submission/finals-2026-10-29/README.md)、[评委克隆运行](judge-quickstart.md)、[迭代说明](finals-iteration-2026-10-29.md)、[6～8 分钟网页演示](finals-demo-runbook-2026-10-29.md)。使用 `finals-source-20261029-r2` 标签固定源码，精确身份与结果以决赛证据目录为准。**
 
 以下保留 2026-10-07 初赛材料、视频与签字状态；没有把旧附件改写为新源码证据。
 

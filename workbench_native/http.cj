@@ -1,6 +1,7 @@
 package docguard
 
 import std.collection.*
+import std.fs.*
 import std.net.*
 import std.sync.*
 import std.time.*
@@ -19,6 +20,7 @@ class WbResponse {
     let body: Array<Byte>
     let contentType: String
     var download: Bool = false
+    var spoolDirectory: String = ""
     init(status: Int64, body: Array<Byte>, contentType: String) {
         this.status = status; this.body = body; this.contentType = contentType
     }
@@ -104,6 +106,12 @@ private func readRequest(socket: TcpSocket): WbRequest {
     return WbRequest(request[0], target, headers, String.fromUtf8(body))
 }
 private func writeResponse(socket: TcpSocket, response: WbResponse): Unit {
+    try { writeResponseContent(socket, response) }
+    finally {
+        if (!response.spoolDirectory.isEmpty()) { removeIfExists(response.spoolDirectory, recursive: true) }
+    }
+}
+private func writeResponseContent(socket: TcpSocket, response: WbResponse): Unit {
     let reason = match (response.status) {
         case 200 => "OK"
         case 201 => "Created"
@@ -119,10 +127,24 @@ private func writeResponse(socket: TcpSocket, response: WbResponse): Unit {
         case 503 => "Service Unavailable"
         case _ => "Error"
     }
-    var header = "HTTP/1.1 ${response.status} ${reason}\r\nContent-Type: ${response.contentType}\r\nContent-Length: ${response.body.size}\r\nConnection: close\r\nCache-Control: no-store\r\nX-Content-Type-Options: nosniff\r\nReferrer-Policy: no-referrer\r\n"
+    let spool = if (response.spoolDirectory.isEmpty()) { "" } else { join(response.spoolDirectory, "response.json") }
+    let length = if (spool.isEmpty()) { response.body.size } else { FileInfo(spool).size }
+    var header = "HTTP/1.1 ${response.status} ${reason}\r\nContent-Type: ${response.contentType}\r\nContent-Length: ${length}\r\nConnection: close\r\nCache-Control: no-store\r\nX-Content-Type-Options: nosniff\r\nReferrer-Policy: no-referrer\r\n"
     if (response.download) { header += "Content-Disposition: attachment; filename=docguard-export.zip\r\n" }
     socket.write((header + "\r\n").toArray())
-    if (!response.body.isEmpty()) { socket.write(response.body) }
+    if (spool.isEmpty()) {
+        if (!response.body.isEmpty()) { socket.write(response.body) }
+    } else {
+        let file = File(spool, OpenMode.Read)
+        try {
+            let buffer = Array<Byte>(65536, repeat: 0)
+            while (true) {
+                let count = file.read(buffer)
+                if (count == 0) { break }
+                socket.write(buffer[..count])
+            }
+        } finally { file.close() }
+    }
 }
 class WorkbenchHttp {
     let app: NativeWorkbench

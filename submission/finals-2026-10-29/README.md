@@ -6,13 +6,13 @@
 
 ## 源码与复现
 
-固定源码标签为 `finals-source-20261029`。精确源码身份、文件摘要与验证记录随本目录的 `SOURCE.json`、`SOURCE-FILES.json` 和 `VERIFICATION.md` 发布。源码提交与后续证据提交分别记录，避免把尚未产生的提交摘要写进自身。冻结标签保存功能源码；最终验收附件在 `main` 的本目录补充，检出标签时可回到公开 `main` 查看附件。
+固定源码标签为 `finals-source-20261029-r2`。精确源码身份、文件摘要与验证记录随本目录的 `SOURCE.json`、`SOURCE-FILES.json` 和 `VERIFICATION.md` 发布。源码提交与后续证据提交分别记录，避免把尚未产生的提交摘要写进自身。冻结标签保存功能源码、指南和答辩稿；`SOURCE.json`、`SOURCE-FILES.json`、`VERIFICATION.md` 与 `evidence/` 属于最终验收附件，在 `main` 的本目录补充，检出标签时可回到公开 `main` 查看附件。
 
 ```bash
 git clone --branch main https://atomgit.com/c2892480843s/cj-docguard.git
 cd cj-docguard
 git rev-parse HEAD
-git rev-parse 'finals-source-20261029^{commit}'
+git rev-parse 'finals-source-20261029-r2^{commit}'
 ```
 
 主仓库：[AtomGit](https://atomgit.com/c2892480843s/cj-docguard)；镜像：[GitHub](https://github.com/2892480843/cj-docguard)。按照评委指南登记两版真实仓颉 SDK 与兼容的系统 SDK 后，执行：

@@ -1,3 +1,0 @@
-An exception has occurred:
-Exception: FAIL index: actual missing index fragment must be enumerated
-	 at docguard::main()($REPO/tests/native_index.cj:16)

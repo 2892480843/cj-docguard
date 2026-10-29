@@ -8,6 +8,7 @@ import subprocess
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location('real_projects', ROOT / 'scripts/real_projects.py')
@@ -136,6 +137,32 @@ class RealProjectCasesTest(unittest.TestCase):
                         self.assertEqual([int(line) for line in executed.stdout.splitlines()], wanted)
                         print('Unicode probe', version, label, executed.stdout.splitlines(), flush=True)
         self.assertNotEqual(baseline, expected)
+
+    def test_main_preserves_explicit_system_sdk_for_native_audit(self):
+        # Inspect the real launch boundary, then stop before native execution.
+        class LaunchObserved(Exception):
+            pass
+        captured = {}
+        environment = {'PATH': '/usr/bin', 'SDKROOT': '/registered/apple-sdk',
+                       'CJ_DOCGUARD_SYSTEM_SDKROOT': '/registered/apple-sdk',
+                       'PRIVATE_UNRELATED_TOKEN': 'must-not-forward'}
+        def stop_launch(command, **options):
+            captured.update(options['env'])
+            raise LaunchObserved()
+        with tempfile.TemporaryDirectory() as temporary:
+            work = Path(temporary)
+            argv = ['real_projects.py', '--project', 'leven4cj', '--cache', str(work / 'cache'),
+                    '--output', str(work / 'output')]
+            with patch.object(REAL.sys, 'argv', argv), \
+                 patch.object(REAL.DEV, 'sdk_env', return_value=environment), \
+                 patch.object(REAL, 'checked_checkout', return_value=work), \
+                 patch.object(REAL, 'harness', return_value=work / 'docguard.toml'), \
+                 patch.object(REAL.subprocess, 'run', side_effect=stop_launch):
+                with self.assertRaises(LaunchObserved):
+                    REAL.main()
+        self.assertEqual(captured.get('CJ_DOCGUARD_SYSTEM_SDKROOT'), '/registered/apple-sdk')
+        self.assertEqual(captured.get('SDKROOT'), '/registered/apple-sdk')
+        self.assertNotIn('PRIVATE_UNRELATED_TOKEN', captured)
 
     def test_invalid_registry_rejected_before_copy(self):
         valid = REAL.examples_for(self.item)[0]

@@ -92,6 +92,21 @@ class NativeWorkbench {
         return target
     }
     func reply(data: J): WbResponse { WbResponse(200,data.dump().toArray(),"application/json; charset=utf-8") }
+    func replyArchive(data: J): WbResponse {
+        // History grows independently of active clients. Streaming serialization
+        // avoids ArrayList growth plus full String/Byte copies of the response.
+        let parent = join(state, "responses"); mkdir(parent)
+        let directory = Directory.createTemp(parent).toString()
+        try {
+            writeJsonFile(join(directory, "response.json"), data)
+            let response = WbResponse(200, Array<Byte>(0, repeat: 0), "application/json; charset=utf-8")
+            response.spoolDirectory = directory
+            return response
+        } catch (e: Exception) {
+            removeIfExists(directory, recursive: true)
+            throw e
+        }
+    }
     func handle(request: WbRequest): WbResponse {
         try { return dispatch(request) } catch(e: WbError) { return WbResponse(e.status,J.obj().put("error",J.str(e.message)).dump().toArray(),"application/json; charset=utf-8") } catch(e: Exception) { return WbResponse(400,J.obj().put("error",J.str(e.message)).dump().toArray(),"application/json; charset=utf-8") }
     }
@@ -114,13 +129,13 @@ class NativeWorkbench {
         if (path=="/api/projects/init" && post) { return reply(wbInitialize(this,body)) }
         if (parts.size==5 && parts[1]=="api" && parts[2]=="projects") {
             let id=parts[3]; let op=parts[4]; let p=project(id)
-            if (op=="report" && !post) { return reply(report(id)) }
+            if (op=="report" && !post) { return replyArchive(report(id)) }
             if (op=="lock" && !post) { synchronized(mutex) { return reply(wbLockInfo(p)) } }
             if (op=="recover-lock" && post) {
                 if (!flag(body,"acknowledge",false)) { throw WbError("acknowledge:true is required") }
                 synchronized(mutex) { idle(); return reply(wbRecoverLock(p)) }
             }
-            if (op=="history" && !post) { let items=array(v(report(id),"report"),"history"); for (item in items.items) { item.put("freshness",J.str("FROZEN")).put("eligible",J.boolean(false)) }; return reply(J.obj().put("items",items).put("scope",J.str("FROZEN_ARCHIVE_NOT_CURRENT"))) }
+            if (op=="history" && !post) { let items=array(v(report(id),"report"),"history"); for (item in items.items) { item.put("freshness",J.str("FROZEN")).put("eligible",J.boolean(false)) }; return replyArchive(J.obj().put("items",items).put("scope",J.str("FROZEN_ARCHIVE_NOT_CURRENT"))) }
             if (op=="config") { if (post) { synchronized(mutex) { idle(); let content=body.get("content").s(); wbValidateConfig(p.get("config").s(),content); wbAtomic(p.get("config").s(),content); return reply(record(p)) } }; return reply(J.obj().put("content",J.str(readText(p.get("config").s())))) }
             if (op=="jobs" && post) { return reply(wbStartJob(this,p,body)) }
             if (op=="compare" && post) { return reply(wbCompare(body.get("old"),body.get("new"))) }

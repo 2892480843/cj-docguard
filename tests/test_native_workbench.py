@@ -90,7 +90,9 @@ class NativeWorkbenchTests(unittest.TestCase):
         # synthetic archive is only an HTTP payload and is never executed/qualified.
         directory, prefix = self.fixture()
         history = [{'sequence': i, 'eligible': False, 'freshness': 'FROZEN',
-                    'stdout': 'archive-only-' + ('x' * 20000)} for i in range(460)]
+                    'stdout': 'archive-only-' + ('x' * 24000),
+                    'metadata': {f'field-{k}': 'record-' + ('y' * 100) for k in range(64)}}
+                   for i in range(640)]
         payload = {'history': history, 'results': [], 'summary': {'TOTAL': 0}}
         target = directory / '.docguard/report.json'
         target.parent.mkdir(exist_ok=True)
@@ -102,16 +104,28 @@ class NativeWorkbenchTests(unittest.TestCase):
             status, body = self.request(prefix + '/' + endpoint)
             self.assertEqual(status, 200)
             records = body['items'] if endpoint == 'history' else body['report']['history']
-            self.assertEqual(len(records), 460)
-            self.assertEqual([r['sequence'] for r in records], list(range(460)))
+            self.assertEqual(len(records), 640)
+            self.assertEqual([r['sequence'] for r in records], list(range(640)))
             self.assertTrue(all(r['stdout'] == history[0]['stdout'] for r in records))
             self.assertTrue(all(not r['eligible'] for r in records))
+            self.assertTrue(all(r['metadata'] == history[0]['metadata'] for r in records))
 
         for _ in range(2):
             with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
                 list(pool.map(fetch, range(12)))
         self.assertEqual(target.read_bytes(), original)
         self.assertEqual(self.request('/api/bootstrap')[0], 200)
+        # A reader can leave while a large response is being sent. Disk-backed
+        # response resources must be released on disconnect as well as success.
+        for _ in range(2):
+            with socket.create_connection(('127.0.0.1', self.port), timeout=10) as sock:
+                sock.sendall((f'GET {prefix}/report HTTP/1.1\r\n'
+                              f'Host: 127.0.0.1:{self.port}\r\n\r\n').encode())
+                self.assertTrue(sock.recv(4096).startswith(b'HTTP/1.1 200'))
+            self.assertEqual(self.request('/api/bootstrap')[0], 200)
+        responses = self.directory / 'state/responses'
+        self.assertFalse(list(responses.iterdir()) if responses.exists() else [])
+        self.assertEqual(target.read_bytes(), original)
 
     def raw(self, data):
         with socket.create_connection(('127.0.0.1', self.port), timeout=10) as sock:

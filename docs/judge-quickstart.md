@@ -12,7 +12,7 @@ cd cj-docguard
 git rev-parse HEAD
 ```
 
-GitHub 镜像为 `https://github.com/2892480843/cj-docguard.git`。需要固定本轮源码时，检查并使用 `finals-source-20261029` 标签；发布身份以[迭代说明](finals-iteration-2026-10-29.md)和发布记录为准。首次克隆没有本地第三方缓存、验证历史及既有项目 ID，不能直接套用作者机器上的 ID。
+GitHub 镜像为 `https://github.com/2892480843/cj-docguard.git`。需要固定本轮源码时，检查并使用 `finals-source-20261029-r2` 标签；发布身份以[迭代说明](finals-iteration-2026-10-29.md)和发布记录为准。首次克隆没有本地第三方缓存、验证历史及既有项目 ID，不能直接套用作者机器上的 ID。
 
 ## 2. 准备工具链
 
@@ -117,3 +117,5 @@ python3 scripts/validate_finals.py --original-config /absolute/path/original/doc
 ```
 
 该工具会登记两个项目、运行真实任务、保存报告，并核对原版预期失败与修复版通过。含坏链的专用样本严格检查预期退出 1；工具整体退出 0 表示这些正负用例均符合预期。
+
+R2 已修复真实库脚本的环境白名单：显式登记的 `CJ_DOCGUARD_SYSTEM_SDKROOT` 会传递给原生验证进程。只看到编排退出 0 仍须检查审计中的项目退出码和矩阵；如出现全部编译失败，应查看实际编译日志，不能当作预期的四个行为断言失败。

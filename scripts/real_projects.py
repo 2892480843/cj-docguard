@@ -216,7 +216,8 @@ def main() -> int:
     binary_digest = hashlib.sha256(binary.read_bytes()).hexdigest()
     base_env = DEV.sdk_env('1.1.3')
     allowed = {'PATH', 'CANGJIE_HOME', 'DYLD_LIBRARY_PATH', 'LD_LIBRARY_PATH', 'SDKROOT',
-               'CJ_DOCGUARD_SDK_1_1_3', 'CJ_DOCGUARD_SDK_1_2_0', 'CJ_DOCGUARD_RUNNER'}
+               'CJ_DOCGUARD_SDK_1_1_3', 'CJ_DOCGUARD_SDK_1_2_0', 'CJ_DOCGUARD_RUNNER',
+               'CJ_DOCGUARD_SYSTEM_SDKROOT'}
     environment = {key: value for key, value in base_env.items() if key in allowed}
     environment.update(LANG='C', LC_ALL='C')
     results = []
