@@ -1,0 +1,126 @@
+{
+  "algorithm": "SHA-256",
+  "scope": "Files in this directory; manifest itself excluded",
+  "files": [
+    {
+      "path": "CHECKS.md",
+      "bytes": 2039,
+      "sha256": "39ed247867603cf8c4caa1d3c1bab6bc55cfde9ea7423ce93dda527926159c46"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3864,
+      "sha256": "c3146307c57b285afb650d78374ea8a92bfeac1b8f23d0dc38a7b01170456b9f"
+    },
+    {
+      "path": "assets/api.png",
+      "bytes": 74733,
+      "sha256": "ebb64007ac9b9b484ccae2a5ecb3b491bb3a850fca5ec4959f8f4bf8057540ba"
+    },
+    {
+      "path": "assets/config.png",
+      "bytes": 126039,
+      "sha256": "e13c070a5425fac5769decd309b95dc8dece613f5b1a2e9f8fffa2fee1e1a05d"
+    },
+    {
+      "path": "assets/export.png",
+      "bytes": 49510,
+      "sha256": "6e79fd89d0536c0fa05c657d2dfa64af3557b4d5e5807c5c735b75ba2be28f13"
+    },
+    {
+      "path": "assets/graph-paper.png",
+      "bytes": 2141131,
+      "sha256": "2a0c8b9b5e897588036a21c9d59cc8a99cf4726ee17b7a3b01c019f77dd45b61"
+    },
+    {
+      "path": "assets/history.png",
+      "bytes": 56249,
+      "sha256": "07662401a6d0df70449416d26890609ceccb1c69792c8bc858f39f24b92caf5e"
+    },
+    {
+      "path": "assets/links.png",
+      "bytes": 89380,
+      "sha256": "5539c194cafd7e677d2a78bbb4b5ba7cae98bbc5a6a8aa2acc0e05a3e8507bf3"
+    },
+    {
+      "path": "assets/matrix.png",
+      "bytes": 119440,
+      "sha256": "3f7a0d578aeab0cab0711caacba413e0932cf49c1fed1a4dc508ab1cd6699ed6"
+    },
+    {
+      "path": "assets/output-check.png",
+      "bytes": 45687,
+      "sha256": "05e390845ef28ea83c17f831e19feb61aecea0cb431cdadcf13e546de9173a31"
+    },
+    {
+      "path": "assets/overview.png",
+      "bytes": 87632,
+      "sha256": "d2e50c1a5144d6d13972224cb77811b5c8ddf005fe26515d63a7bccf9adc313d"
+    },
+    {
+      "path": "assets/project-options.png",
+      "bytes": 89819,
+      "sha256": "a2c96634d5a4865730194d8dc8a15534dac2173a26d1f8ece83914b0a1071289"
+    },
+    {
+      "path": "assets/query-form.png",
+      "bytes": 86887,
+      "sha256": "c3fedf5dd94a9e9750c887dcfdad8d37684c8465f4c52d42c65973a209b833e1"
+    },
+    {
+      "path": "assets/query-result.png",
+      "bytes": 55893,
+      "sha256": "170a6230ec4ce37017cfbb2b3460bad8805c5ac9b975f882262d45c165c72165"
+    },
+    {
+      "path": "assets/source-editor.png",
+      "bytes": 114816,
+      "sha256": "d8e2e94344db9782610ead3874b435f11384b982302050b0e53860989ebb80d0"
+    },
+    {
+      "path": "assets/task-running.png",
+      "bytes": 39709,
+      "sha256": "dfc1eb4e203f31c1e1ab4fa4fc1284182fad48f1451c30de2269ecb56ef171a4"
+    },
+    {
+      "path": "content.json",
+      "bytes": 11326,
+      "sha256": "8c82bc9f6fde0e508b3261c15e47daa7b7fe50d82e6aa4d61e7eb3ccd97b5ebc"
+    },
+    {
+      "path": "facts.json",
+      "bytes": 1685,
+      "sha256": "6079ec3b9855574e6696603dab339e15586693b42742e36b3190210fcb4e21dd"
+    },
+    {
+      "path": "images.json",
+      "bytes": 3357,
+      "sha256": "7a8a33f259d56ee44f0422d3933552ddaaf7af96d2cabdf6d7c13c81995e8d52"
+    },
+    {
+      "path": "output/CJ-DocGuard-决赛答辩-手写图文增强版-20261029.pdf",
+      "bytes": 27307616,
+      "sha256": "17f4a7eda349fca53899ad56ff559eb5a76f19016f5fbfae01f22797e24296e7"
+    },
+    {
+      "path": "output/CJ-DocGuard-决赛答辩-手写图文增强版-20261029.pptx",
+      "bytes": 2911096,
+      "sha256": "099c6537123c92cce2b8da936a424c8846464ddeed39e7b9659d3e1a57e67173"
+    },
+    {
+      "path": "source/build.mjs",
+      "bytes": 25261,
+      "sha256": "65e74bab46cdc73a482ee7a5e0a141dacbdb8f9f39c276ed448fa0791ebcf4b0"
+    },
+    {
+      "path": "source/dedup_media.py",
+      "bytes": 1732,
+      "sha256": "e5e0ab21534485907c9f270a13964e19ac24c4667ad09a996187bb634a99e3d6"
+    },
+    {
+      "path": "逐页讲稿.md",
+      "bytes": 8984,
+      "sha256": "195141a45da7725be8b8b4aeb49f41199ba7e73e6b564c0f51c1818bec522594"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "background": "assets/graph-paper.png",
+  "background_source": "复用v4内置图像生成的方格纸纹理，非运行记录",
+  "screenshots": [
+    {
+      "slide": 1,
+      "asset": "assets/overview.png",
+      "sha256": "d2e50c1a5144d6d13972224cb77811b5c8ddf005fe26515d63a7bccf9adc313d",
+      "role": "actual product screenshot",
+      "capture_scope": "复用同日当前功能版本截图"
+    },
+    {
+      "slide": 2,
+      "asset": "assets/config.png",
+      "sha256": "e13c070a5425fac5769decd309b95dc8dece613f5b1a2e9f8fffa2fee1e1a05d",
+      "role": "actual product screenshot",
+      "capture_scope": "本次采集"
+    },
+    {
+      "slide": 3,
+      "asset": "assets/api.png",
+      "sha256": "ebb64007ac9b9b484ccae2a5ecb3b491bb3a850fca5ec4959f8f4bf8057540ba",
+      "role": "actual product screenshot",
+      "capture_scope": "复用同日当前功能版本截图"
+    },
+    {
+      "slide": 4,
+      "asset": "assets/query-result.png",
+      "sha256": "170a6230ec4ce37017cfbb2b3460bad8805c5ac9b975f882262d45c165c72165",
+      "role": "actual product screenshot",
+      "capture_scope": "本次采集"
+    },
+    {
+      "slide": 4,
+      "asset": "assets/export.png",
+      "sha256": "6e79fd89d0536c0fa05c657d2dfa64af3557b4d5e5807c5c735b75ba2be28f13",
+      "role": "actual product screenshot",
+      "capture_scope": "复用同日当前功能版本截图"
+    },
+    {
+      "slide": 6,
+      "asset": "assets/matrix.png",
+      "sha256": "3f7a0d578aeab0cab0711caacba413e0932cf49c1fed1a4dc508ab1cd6699ed6",
+      "role": "actual product screenshot",
+      "capture_scope": "本次采集"
+    },
+    {
+      "slide": 7,
+      "asset": "assets/history.png",
+      "sha256": "07662401a6d0df70449416d26890609ceccb1c69792c8bc858f39f24b92caf5e",
+      "role": "actual product screenshot",
+      "capture_scope": "本次采集"
+    },
+    {
+      "slide": 8,
+      "asset": "assets/links.png",
+      "sha256": "5539c194cafd7e677d2a78bbb4b5ba7cae98bbc5a6a8aa2acc0e05a3e8507bf3",
+      "role": "actual product screenshot",
+      "capture_scope": "复用同日当前功能版本截图"
+    },
+    {
+      "slide": 9,
+      "asset": "assets/project-options.png",
+      "sha256": "a2c96634d5a4865730194d8dc8a15534dac2173a26d1f8ece83914b0a1071289",
+      "role": "actual product screenshot",
+      "capture_scope": "复用同日当前功能版本截图"
+    },
+    {
+      "slide": 9,
+      "asset": "assets/task-running.png",
+      "sha256": "dfc1eb4e203f31c1e1ab4fa4fc1284182fad48f1451c30de2269ecb56ef171a4",
+      "role": "actual product screenshot",
+      "capture_scope": "复用同日当前功能版本截图"
+    },
+    {
+      "slide": 10,
+      "asset": "assets/source-editor.png",
+      "sha256": "d8e2e94344db9782610ead3874b435f11384b982302050b0e53860989ebb80d0",
+      "role": "actual product screenshot",
+      "capture_scope": "本次采集"
+    },
+    {
+      "slide": 12,
+      "asset": "assets/output-check.png",
+      "sha256": "05e390845ef28ea83c17f831e19feb61aecea0cb431cdadcf13e546de9173a31",
+      "role": "actual product screenshot",
+      "capture_scope": "本次采集"
+    },
+    {
+      "slide": 14,
+      "asset": "assets/query-form.png",
+      "sha256": "c3fedf5dd94a9e9750c887dcfdad8d37684c8465f4c52d42c65973a209b833e1",
+      "role": "actual product screenshot",
+      "capture_scope": "本次采集"
+    }
+  ]
+}

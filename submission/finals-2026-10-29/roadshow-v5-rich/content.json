@@ -1,0 +1,160 @@
+{
+  "source_commit": "068a22a8a4d1987ac0aac837da22b39c8224417f",
+  "style": "notebook-napkin-math-rich",
+  "main_slides": 10,
+  "appendix_slides": 4,
+  "main_seconds": 450,
+  "short_seconds": 360,
+  "long_seconds": 480,
+  "timing_scope": "排练计划，含80秒现场操作；未声称真人计时",
+  "slides": [
+    {
+      "index": 1,
+      "title": "CJ-DocGuard",
+      "spoken": "各位评委好，CJ-DocGuard 是面向仓颉库维护者的项目级 API 文档生成及测试工作台。它将声明、示例、开发工具包版本和链接检查放在同一处。右边是当前工作区的实际界面。本版有四十七个公共接口、十四个登记示例，使用两版真实仓颉工具链。网页服务和核心处理由仓颉实现。",
+      "action": "指向当前工作台画面与三组数量，说明面向库维护者。",
+      "sources": "facts.json；assets/overview.png；docs/ui/2026-10-29-controls/native-workflow.json",
+      "seconds": 20,
+      "start": "0:00",
+      "end": "0:20",
+      "short_seconds": 15,
+      "long_seconds": 25
+    },
+    {
+      "index": 2,
+      "title": "赛题交付与库维护流程",
+      "spoken": "赛题的三项交付，在工作台里对应明确入口。结构化文档提供声明、参数、返回类型和关联示例；示例测试调用真实编译器和运行库，记录退出状态并核对输出；版本矩阵和链接检查分别给出环境对应关系、失效位置与原因。维护者通过本地配置接入现有项目。登记项目不会自动允许执行，仍需要明确审阅与授权。",
+      "action": "从赛题交付讲到网页入口，再说明登记与执行信任。",
+      "sources": "docs/finals-requirement-evidence-2026-10-29.md；assets/config.png；examples/healthy/docguard.toml",
+      "seconds": 40,
+      "start": "0:20",
+      "end": "1:00",
+      "short_seconds": 30,
+      "long_seconds": 40
+    },
+    {
+      "index": 3,
+      "title": "从接口说明，找到可运行的示例",
+      "spoken": "这里用 add 展开说明。接口页可以检索声明，看到两个整数参数和整数返回类型，关联到 arithmetic 等登记示例，并能跳到源码。左侧示例调用 add 二十和二十二，登记输出是四十二加换行，期望退出码为零。文档提供 JSON、HTML 和 Markdown 产物。接口出现于文档不代表所有输入都已经测试；重名和重载需要明确的符号身份。",
+      "action": "按声明→示例源码→期望输出→关联来源讲清链路。",
+      "sources": "assets/api.png；examples/healthy/programs/arithmetic.cj；examples/healthy/docguard.toml；src/bindings.cj",
+      "seconds": 50,
+      "start": "1:00",
+      "end": "1:50",
+      "short_seconds": 40,
+      "long_seconds": 55
+    },
+    {
+      "index": 4,
+      "title": "网页查询、校验与导出，一次走通",
+      "spoken": "现在切到网页，依次检索接口、查看矩阵，再指定 SDK 一点二点零、当前平台和 arithmetic 查询有效示例。本次实际查询返回一条有效记录，没有被拒绝的记录。随后选择同一环境导出 ZIP。两步都会检查当前输入，导出包中有源码、环境清单和重建脚本。已有矩阵和导出记录是准备阶段的结果，现场新任务若未完成，只说明已经发起。",
+      "action": "0—15秒检索；15—30秒矩阵；30—55秒精确查询；55—75秒导出；75—80秒返回PPT。等待超过8秒切回本页实际图片。",
+      "sources": "assets/query-result.png（本次SDK1.2.0查询）；assets/export.png；src/export.cj；build/workbench/artifacts/278ff8b7c9c5e6dd1d3d98397b829650/native/",
+      "seconds": 80,
+      "start": "1:50",
+      "end": "3:10",
+      "short_seconds": 60,
+      "long_seconds": 90
+    },
+    {
+      "index": 5,
+      "title": "仓颉服务、核心模块与真实工具链",
+      "spoken": "架构分为浏览器、仓颉本地服务、仓颉核心和真实工具链。浏览器负责标准网页交互，仓颉服务处理项目、配置和任务请求。核心使用 std.ast 提取受支持声明，再由符号绑定、执行编排和当前结果判断等模块处理。C 负责子进程监督，Bash 负责构建启动，Python 用于测试和只读协议适配等辅助工作。这里没有把进程资源限制说成完整安全沙箱。",
+      "action": "从服务架构讲到模块表和工具链，简述语言分工。",
+      "sources": "workbench_native/；src/extractor.cj；src/evidence.cj；src/export.cj；scripts/runner.c",
+      "seconds": 50,
+      "start": "3:10",
+      "end": "4:00",
+      "short_seconds": 40,
+      "long_seconds": 55
+    },
+    {
+      "index": 6,
+      "title": "双 SDK 结果：统计与矩阵同时查看",
+      "spoken": "统计图和实际矩阵展示同一组当前记录。每个 SDK 有十三条运行通过和一条仅编译，两版合计二十六条运行通过、两条仅编译。矩阵按示例和工具包分别定位，点开单元格可以查看日志、退出码以及期望和实际输出。仅编译只说明编译完成，没有验证运行行为。这些数量描述本版登记样例，不是项目正确率，也不是全语言覆盖率。",
+      "action": "对照统计图、矩阵截图和原生表格，不把仅编译当作运行通过。",
+      "sources": "facts.json；assets/matrix.png；docs/ui/2026-10-29-controls/native-workflow.json",
+      "seconds": 50,
+      "start": "4:00",
+      "end": "4:50",
+      "short_seconds": 40,
+      "long_seconds": 55
+    },
+    {
+      "index": 7,
+      "title": "当前可用结果，怎样判定？",
+      "spoken": "当前可用的判断同时考虑源码、配置、工具链、平台、记录完整性和相应环境的最新尝试。源码变更后需要重测，最新尝试失败时不能回退旧成功，不同 SDK 或平台也不能相互替代。右侧历史列表仍保留过去的记录，但页面明确说明它们不直接代表当前结果。查询和导出使用同一套判断规则。",
+      "action": "解释三种拒绝情形，指向历史页面上的提示。",
+      "sources": "assets/history.png；src/evidence.cj；src/engine.cj；src/export.cj；tests/native_evidence.cj",
+      "seconds": 45,
+      "start": "4:50",
+      "end": "5:35",
+      "short_seconds": 35,
+      "long_seconds": 45
+    },
+    {
+      "index": 8,
+      "title": "链接检查：发现问题，也解释原因",
+      "spoken": "链接检查会保留来源行号、原始目标和失败原因。右侧是当前专项样例的实际页面：缺失文件和缺失锚点分别定位到 README 第十三和十四行。专项样例共二十六条，二十三条通过、两处预置坏链被识别、一条离线外链未确认；严格检查返回一符合预期。健康工作区另有一百七十八条链接通过，两组数量不混在一起。",
+      "action": "分开说明健康工作区与专项样例，定位两处预置失败。",
+      "sources": "facts.json；assets/links.png；examples/link-checks/README.md；src/links.cj",
+      "seconds": 45,
+      "start": "5:35",
+      "end": "6:20",
+      "short_seconds": 40,
+      "long_seconds": 45
+    },
+    {
+      "index": 9,
+      "title": "决赛当前版本：控件、任务与长期工作区",
+      "spoken": "决赛当前版本完善了真实选项、条件联动、禁用与忙碌反馈，以及排队、运行、结束等任务状态。没有数量进度时不会编造百分比。左下是准备阶段的实际运行画面，现在双 SDK 任务已完成。当前二十三项原生服务专项回归通过，网页脚本覆盖二十种页面场景和交互，三档十页共三十次布局检查。七百三十九条历史完整保留，任务采用显式内存上限。",
+      "action": "结合两个界面画面说明选项和任务，再讲当前检查的各自口径。",
+      "sources": "assets/project-options.png；assets/task-running.png；../roadshow-v3/checks/native-http-current.txt；../roadshow-v3/checks/ui-current.txt；docs/ui/2026-10-29-controls/layout-checks.json",
+      "seconds": 45,
+      "start": "6:20",
+      "end": "7:05",
+      "short_seconds": 35,
+      "long_seconds": 45
+    },
+    {
+      "index": 10,
+      "title": "交付、复现与持续维护",
+      "spoken": "交付内容包括结构化文档、独立环境测试记录、可导出的示例源码及重建脚本。维护者可以在网页审阅登记源码，修改后重新构建和测试。评委可获取固定功能提交，按指南准备两版仓颉工具包与兼容系统 SDK，再启动本地工作台。当前完整实测宿主是 macOS arm64。谢谢各位评委。",
+      "action": "指出交付包内容、源码编辑和固定版本，结束主讲。",
+      "sources": "assets/source-editor.png；src/export.cj；docs/judge-quickstart.md；功能源码068a22a",
+      "seconds": 25,
+      "start": "7:05",
+      "end": "7:30",
+      "short_seconds": 25,
+      "long_seconds": 25
+    },
+    {
+      "index": 11,
+      "title": "备查：支持范围与实现边界",
+      "spoken": "按已实现和已测试范围回答：完整宿主为 macOS arm64，两版 SDK；解析使用 std.ast 和已测试声明子集；输出检查只覆盖登记行为；外链未联网则保留未确认；执行面向维护者明确授权的可信项目。其他宿主和复杂项目需单独复验。",
+      "action": "按问题选择支持范围中的对应行。",
+      "sources": "docs/requirements-status.md；docs/native-workbench.md；src/extractor.cj"
+    },
+    {
+      "index": 12,
+      "title": "备查：状态含义与输出核对",
+      "spoken": "右侧是 arithmetic 的实际输出核对，SDK 一点一点三的记录中，退出码期望和实际均为零，stdout 期望和实际均为四十二加换行。运行通过要求实际执行并通过登记输出检查；仅编译没有运行验证。需重测和历史记录分别保留。",
+      "action": "指向退出码和stdout的期望、实际及通过状态。",
+      "sources": "assets/output-check.png；examples/healthy/docguard.toml；src/engine.cj"
+    },
+    {
+      "index": 13,
+      "title": "备查：评委从源码启动工作台",
+      "spoken": "评委先准备并登记工具链，再克隆仓库并检出固定功能提交，构建原生服务并启动工作台。源码目录首次没有历史报告是正常状态。SDK 安装路径和系统 SDK 必须改为评委机器上实际存在的兼容路径。服务只用于本机。",
+      "action": "按先配置、再构建、后启动的顺序说明。",
+      "sources": "docs/judge-quickstart.md；scripts/build_workbench.sh；scripts/workbench.sh"
+    },
+    {
+      "index": 14,
+      "title": "备查：一份配置连接文档、示例和环境",
+      "spoken": "配置将项目源码、SDK、示例、符号与运行方式联系起来。示例片段声明 arithmetic 关联 add，按 run 模式检查输出四十二加换行与退出码零。网页查询的 SDK、平台和示例选项来自实际配置和记录，界面选择不会绕过服务端的当前结果校验。",
+      "action": "解释配置字段如何映射符号、SDK和查询条件。",
+      "sources": "examples/healthy/docguard.toml；assets/query-form.png；web/views.js；src/bindings.cj"
+    }
+  ]
+}
