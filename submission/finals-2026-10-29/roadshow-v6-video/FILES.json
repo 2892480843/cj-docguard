@@ -209,8 +209,8 @@
     },
     {
       "path": "video/voice-01.srt",
-      "bytes": 834,
-      "sha256": "b36c4d8e4dd119c0bcf9b5f82f218139e8558bb6f1c56f8677457909a8beea29"
+      "bytes": 833,
+      "sha256": "4cd753b69e9e015433a16271f8d41a08c44814e32f0afbc5b1317e5f45e1dda9"
     },
     {
       "path": "video/voice-01.txt",
@@ -229,8 +229,8 @@
     },
     {
       "path": "video/voice-02.srt",
-      "bytes": 1443,
-      "sha256": "99525c68b2cc85e9a810f35caf18b5749361b1e46cdad8529782c40620edac91"
+      "bytes": 1442,
+      "sha256": "4064cc75775ab5cc5b948ebe540145094644d71591ee1f2449eba17c19ecc053"
     },
     {
       "path": "video/voice-02.txt",
@@ -249,8 +249,8 @@
     },
     {
       "path": "video/voice-03.srt",
-      "bytes": 1475,
-      "sha256": "d58eabbe9a2d59d607a877b850ff552269468e7c6806a9c1ab2ecb5cef538118"
+      "bytes": 1474,
+      "sha256": "01165f48601c4dbcc250c6d4faf9d80cf77693f7164f553b38c9f4b16a051858"
     },
     {
       "path": "video/voice-03.txt",
@@ -269,8 +269,8 @@
     },
     {
       "path": "video/voice-04.srt",
-      "bytes": 1844,
-      "sha256": "dc2a87de6365b493a90843e88f445e03a803b3ff0b6d09c53d4dfa6fdef1a8f3"
+      "bytes": 1843,
+      "sha256": "9919425cc2d6c6ace491dad5463c302d16d4dbf4a7ea494f4c13368ca286fdd9"
     },
     {
       "path": "video/voice-04.txt",
@@ -289,8 +289,8 @@
     },
     {
       "path": "video/voice-05.srt",
-      "bytes": 1876,
-      "sha256": "d826fd48dc96875fa00a925055618e2b9b167145767b7cb3ae53a72a759cb20a"
+      "bytes": 1875,
+      "sha256": "153cfd7d861d5ab2c953f530a072a6b4378d5c6a6470ace8a8c1805104b3d6e7"
     },
     {
       "path": "video/voice-05.txt",
@@ -309,8 +309,8 @@
     },
     {
       "path": "video/voice-06.srt",
-      "bytes": 1642,
-      "sha256": "97423d39a52949610f591aa44e52c1364f7ee2a3a6c9e2efb62fd54026855b91"
+      "bytes": 1641,
+      "sha256": "e78b6e35c3ab59e5d37208ff8dcd21e66493d566ffdf099edbef047e99c3a87a"
     },
     {
       "path": "video/voice-06.txt",
@@ -329,8 +329,8 @@
     },
     {
       "path": "video/voice-07.srt",
-      "bytes": 518,
-      "sha256": "54d523e2d154b984df52794314c298a8b27699f5dfa41d665401528dbac97db2"
+      "bytes": 517,
+      "sha256": "33cb6fbf2090d5870e893959b1e66e801daae4c1e50c4459e5fe32f3e120b443"
     },
     {
       "path": "video/voice-07.txt",
