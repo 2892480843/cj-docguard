@@ -1,0 +1,18 @@
+{"step": "original-doctor", "id": "1243731b602bf73e7b23ca071452e7b3", "status": "succeeded", "exit_code": 0}
+{"step": "original-build", "id": "8fa520b820c711ae38bb742b2658fd80", "status": "succeeded", "exit_code": 0}
+{"step": "original-verify", "id": "99ae8b77533c7ed23bcc131b850143ce", "status": "failed", "exit_code": 1}
+{"step": "original-check", "id": "cda9b572a2b48d50e5ea94de6c691959", "status": "failed", "exit_code": 1}
+{"step": "fixed-doctor", "id": "cee72ba3b7297a798287aa17353c6b9f", "status": "succeeded", "exit_code": 0}
+{"step": "fixed-build", "id": "21eb930210f926a5b4915e3395df96fe", "status": "succeeded", "exit_code": 0}
+{"step": "fixed-verify", "id": "2dbff2e00f59a9f63c3db8256bf27027", "status": "succeeded", "exit_code": 0}
+{"step": "fixed-check", "id": "af985c4b260aea27e8b5f71730cca257", "status": "succeeded", "exit_code": 0}
+{"step": "fixed-query-1.1.3-unicode-empty", "id": "f3a6dad4e4b3f99f95818571c207be20", "status": "succeeded", "exit_code": 0}
+{"step": "fixed-query-1.1.3-emoji-empty", "id": "8902df714a211b15d19d0a7e1567a55b", "status": "succeeded", "exit_code": 0}
+{"step": "fixed-export-1.1.3", "id": "914c668a489d31e00792165c675066f9", "status": "succeeded", "exit_code": 0}
+{"step": "fixed-query-1.2.0-unicode-empty", "id": "04092f97740da5b69fa49b3189c7e04a", "status": "succeeded", "exit_code": 0}
+{"step": "fixed-query-1.2.0-emoji-empty", "id": "fa7031ec5ca896e05626a5976fd6034c", "status": "succeeded", "exit_code": 0}
+{"step": "fixed-export-1.2.0", "id": "9f92b0a2d1323466eec7bfe8eb231f10", "status": "succeeded", "exit_code": 0}
+{"step": "links-verify", "id": "e9c2247ee2624f621de5a61490020191", "status": "failed", "exit_code": 1}
+{"step": "links-check", "id": "df4fa2bf0044913839badae1733bd06f", "status": "failed", "exit_code": 1}
+PASS original 36/40 + fixed 40/40 + unchanged 4 assertions + both SDK queries/export/rebuild + native link outcomes
+Evidence: $REPO/build/link-repair-validation/20261029-142841

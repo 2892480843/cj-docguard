@@ -1,0 +1,18 @@
+{"step": "01-restore", "exit_code": 0, "status": "succeeded"}
+{"step": "02-doctor", "exit_code": 0, "status": "succeeded"}
+{"step": "03-build", "exit_code": 0, "status": "succeeded"}
+{"step": "04-verify-matrix", "exit_code": 0, "status": "succeeded"}
+{"step": "05-check", "exit_code": 0, "status": "succeeded"}
+{"step": "06-current", "exit_code": 0, "status": "succeeded"}
+{"step": "07-break", "exit_code": 0, "status": "succeeded"}
+{"step": "08-stale", "exit_code": 0, "status": "succeeded"}
+{"step": "09-stale-check", "exit_code": 1, "status": "failed"}
+{"step": "10-failed-verify", "exit_code": 1, "status": "failed"}
+{"step": "11-latest-failure", "exit_code": 0, "status": "succeeded"}
+{"step": "12-refused-export", "exit_code": 1, "status": "failed"}
+{"step": "13-restore", "exit_code": 0, "status": "succeeded"}
+{"step": "14-reverify", "exit_code": 0, "status": "succeeded"}
+{"step": "15-restored", "exit_code": 0, "status": "succeeded"}
+{"step": "16-export", "exit_code": 0, "status": "succeeded"}
+PASS: dual SDK, current/stale/failure/restore, export/rebuild, frozen history, compare
+Evidence: $REPO/build/workbench-validation/20261029-142016

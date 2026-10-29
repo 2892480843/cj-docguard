@@ -1,0 +1,45 @@
+CJ-DocGuard native Cangjie workbench listening on 127.0.0.1:8765
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError
+An exception has occurred:
+    Out of memory
+An exception has occurred:
+OutOfMemoryError

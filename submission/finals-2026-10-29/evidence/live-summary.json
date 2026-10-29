@@ -1,0 +1,67 @@
+{
+  "source_tag": "finals-source-20261029-r2",
+  "source_commit": "075aeb38fc32d46680f312e8ac3647a0977e1366",
+  "healthy": {
+    "summary": {
+      "COMPILE_ONLY": 2,
+      "CURRENT": 28,
+      "RUN_VERIFIED": 26,
+      "TOTAL": 28,
+      "VERIFIED_CURRENT": 26
+    },
+    "link_summary": {
+      "FAIL": 0,
+      "PASS": 178,
+      "TOTAL": 178,
+      "UNVERIFIED": 0
+    },
+    "history_records": 655
+  },
+  "original": {
+    "summary": {
+      "ASSERTION_FAILED": 4,
+      "CURRENT": 40,
+      "RUN_VERIFIED": 36,
+      "TOTAL": 40,
+      "VERIFIED_CURRENT": 36
+    },
+    "link_summary": {
+      "FAIL": 0,
+      "PASS": 94,
+      "TOTAL": 94,
+      "UNVERIFIED": 0
+    }
+  },
+  "fixed": {
+    "summary": {
+      "CURRENT": 40,
+      "RUN_VERIFIED": 40,
+      "TOTAL": 40,
+      "VERIFIED_CURRENT": 40
+    },
+    "link_summary": {
+      "FAIL": 0,
+      "PASS": 94,
+      "TOTAL": 94,
+      "UNVERIFIED": 0
+    }
+  },
+  "link_fixture": {
+    "summary": {
+      "CURRENT": 2,
+      "RUN_VERIFIED": 2,
+      "TOTAL": 2,
+      "VERIFIED_CURRENT": 2
+    },
+    "link_summary": {
+      "FAIL": 2,
+      "PASS": 23,
+      "TOTAL": 26,
+      "UNVERIFIED": 1
+    }
+  },
+  "all_case_bytes_preserved": true,
+  "dual_sdk_fixed_export_rebuild_stdout": "1\n",
+  "healthy_export_rebuild_stdout": "42\n",
+  "supervisor_unchanged_during_integration": true
+}

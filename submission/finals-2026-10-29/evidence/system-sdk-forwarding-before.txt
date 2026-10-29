@@ -1,0 +1,15 @@
+test_main_preserves_explicit_system_sdk_for_native_audit (test_real_projects.RealProjectCasesTest.test_main_preserves_explicit_system_sdk_for_native_audit) ... FAIL
+
+======================================================================
+FAIL: test_main_preserves_explicit_system_sdk_for_native_audit (test_real_projects.RealProjectCasesTest.test_main_preserves_explicit_system_sdk_for_native_audit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_real_projects.py", line 163, in test_main_preserves_explicit_system_sdk_for_native_audit
+    self.assertEqual(captured.get('CJ_DOCGUARD_SYSTEM_SDKROOT'), '/registered/apple-sdk')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != '/registered/apple-sdk'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+FAILED (failures=1)

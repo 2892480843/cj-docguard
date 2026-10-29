@@ -1,0 +1,13 @@
+{
+  "requests": 120,
+  "concurrent_clients": 12,
+  "rounds": 10,
+  "all_http_200": true,
+  "history_records": 655,
+  "report_bytes": 13465735,
+  "complete_history_equal": true,
+  "file_unchanged": true,
+  "sha256": "6fae12dbeac14d97182217d47f3619b08c97b953c47cf9349d10e6c4ef144c5e",
+  "elapsed_seconds": 29.201,
+  "scope": "actual native server on8765, report/history reads; no manufactured verification evidence"
+}
