@@ -4,13 +4,13 @@
   "files": [
     {
       "path": "CHECKS.md",
-      "bytes": 2688,
-      "sha256": "c301a6c9f43f1bdfa92a8ef6ac1b76480594909756cf9f5a6f7670995ac5dcd7"
+      "bytes": 3062,
+      "sha256": "7ed5ff9558538b5b7ca416c413562a0397be235d0567064da5f003450ed9143c"
     },
     {
       "path": "README.md",
-      "bytes": 4714,
-      "sha256": "62798c099c202cc649b83f8d048d34f5733601788ac35b03af023761dc7ac9b2"
+      "bytes": 4966,
+      "sha256": "a6dd0e61e424ac738173f414afe40cb2bbcd0e0615b43588183b850a2be88f95"
     },
     {
       "path": "assets/api.png",
@@ -84,18 +84,33 @@
     },
     {
       "path": "assets/video-poster.png",
-      "bytes": 324404,
-      "sha256": "7c48ffd8f5a6e732b0ce013c38479e58d173a1812339478f6b14558994afd0fb"
+      "bytes": 343292,
+      "sha256": "c602be03203defa526a655daaefca44c0fcff3afa12475ce046c29b8c3ca6bc8"
     },
     {
       "path": "checks/presentation-checks.json",
-      "bytes": 593,
-      "sha256": "31f14ce4b6b253a6bccd9cbb97d7acec3aa0dbbe9a8b752e3c27b41e0e79b0d3"
+      "bytes": 1245,
+      "sha256": "bc921c26c82eab838445ee09092aeb2f9f006797432faa9b5a08c4b35a2c25ad"
     },
     {
       "path": "checks/video-checks.json",
       "bytes": 1074,
       "sha256": "87ae78db659bf83daa88cec433aa320c1849fa774fe14121fd42b24342a47e1b"
+    },
+    {
+      "path": "checks/wps-audio-output.json",
+      "bytes": 228,
+      "sha256": "4bb325abaa52d94a790c85568f338a41f799342f015c3ce0407a1f4279c61b84"
+    },
+    {
+      "path": "checks/wps-ended.jpg",
+      "bytes": 178000,
+      "sha256": "851ddd43a2f73d507fbb11c694d6ba801f9d1a24bb00fe22183f6579760ca30b"
+    },
+    {
+      "path": "checks/wps-playback.jpg",
+      "bytes": 168329,
+      "sha256": "8629eb04f0b813769bbdf3a11fa10568a82dc5a7b49f48727dc7aa807790e31c"
     },
     {
       "path": "content.json",
@@ -110,17 +125,17 @@
     {
       "path": "images.json",
       "bytes": 3456,
-      "sha256": "7db003a4cb8366519bafa2bbe3373724e8fac02ca91844c7615e6c2db6cd7be1"
+      "sha256": "ffea902cf821e6e9ab0663d6ccc41b39e25531c8d7862c4d4358e2bea1eeda4b"
     },
     {
       "path": "output/CJ-DocGuard-决赛答辩-手写视频版-20261029.pptx",
-      "bytes": 8923009,
-      "sha256": "f444b893fca98cff6b227a53b08a6ad3b14d3684fac0a7b0423cabb7a4cc1d8b"
+      "bytes": 8941427,
+      "sha256": "fd53f883de524c34d64d9a308a31865f3b6beb9e0d44d0aa7e7deeee92b6baff"
     },
     {
       "path": "output/CJ-DocGuard-决赛答辩-手写视频版-静态阅读-20261029.pdf",
-      "bytes": 26654824,
-      "sha256": "2c3c8f8864efe2cf86e27fcf519a8ea93f0e8c726291dc8cbb9714abd3a8ebcc"
+      "bytes": 26670187,
+      "sha256": "3dc9157e746c576edfdfd0be4b67ffed84d901998dafae9554be0f3155362874"
     },
     {
       "path": "output/CJ-DocGuard-系统介绍-2分钟-1080p60.mp4",
@@ -128,9 +143,14 @@
       "sha256": "8749fc5f2595843050b914fd1f02b279539991ae1b3cd206c19644afc5dc29e4"
     },
     {
+      "path": "source/audio_probe.swift",
+      "bytes": 2583,
+      "sha256": "2b300e0f4afd8c143777d80c90f65aeef81c5fa7726cff873455d083ccc14d62"
+    },
+    {
       "path": "source/build.mjs",
-      "bytes": 24785,
-      "sha256": "7ed95b51493bd871d3b7a9a470565fbc0b1f50e86e009bdec95d7994db969621"
+      "bytes": 24783,
+      "sha256": "0ebb80b42c07e313da7e426702a15c403c54d11528332b7fd92e0b0bac5b9be4"
     },
     {
       "path": "source/create_pdf.py",
@@ -149,8 +169,8 @@
     },
     {
       "path": "source/embed_video.py",
-      "bytes": 3900,
-      "sha256": "a38161e557faf0971f107bd31424fae01a0fc9bff48f75951d0fdfe63a90ab2d"
+      "bytes": 3924,
+      "sha256": "56dd8999bbcb81da0bafca52b70d47d101840cdc8fb47befbef62fa621439dbb"
     },
     {
       "path": "source/make_poster.py",
@@ -354,8 +374,8 @@
     },
     {
       "path": "逐页讲稿.md",
-      "bytes": 8452,
-      "sha256": "4fece61fd557a157d1da303f3a175a87ff0e748e06e2caf857361c2dd449aec7"
+      "bytes": 8498,
+      "sha256": "56dcd5eed34c39a3a59545b1318923fe6556728886c3fde6ddc4155719dcfb2b"
     }
   ]
 }

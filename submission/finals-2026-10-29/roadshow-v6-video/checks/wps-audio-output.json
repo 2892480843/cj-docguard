@@ -1,0 +1,11 @@
+{
+  "audio_buffers" : 265,
+  "format_flags" : [
+    41
+  ],
+  "microphone_captured" : false,
+  "peak" : 0.71863192319869995,
+  "rms" : 0.12389653456334157,
+  "samples" : 508800,
+  "scope" : "WPS application system audio only"
+}

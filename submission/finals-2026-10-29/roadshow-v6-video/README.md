@@ -10,7 +10,7 @@
 
 ## 播放与使用
 
-第4页点击视频封面，视频含中文配音与字幕，播放期间不重复讲解。MP4实际嵌入PPT文件内部，不依赖临时文件路径或网络播放链接。另带独立MP4，便于直接使用播放器。PDF显示固定的视频封面。
+第4页点击视频封面，视频含中文配音与字幕，播放期间不重复讲解。播放完成后恢复封面，按Page Down或输入5再回车进入技术实现页。MP4实际嵌入PPT文件内部，不依赖临时文件路径或网络播放链接。另带独立MP4，便于直接使用播放器。PDF显示固定的视频封面。已在本机 WPS Office for macOS 12.1.26046 完成完整成片播放、字幕、声音与结束状态检查。
 
 中文正文使用 Ma Shan Zheng，英文与数字使用 Chalkboard SE，代码使用 Source Han Sans SC。跨电脑编辑需要保留字体并检查换行；视频字幕已直接绘入画面，不依赖播放设备安装字体。
 
@@ -42,6 +42,6 @@
 
 [source/build.mjs](source/build.mjs) 通过 Codex 内置 `@oai/artifact-tool` 编排页面，[source/embed_video.py](source/embed_video.py) 按 PresentationML 媒体关系把MP4附加到第4页，再执行结构和布局检查。该生成环境属于材料制作工具，不是工作台运行依赖。
 
-在具备同版Codex材料运行时的环境，从仓库根目录配置 `RUNTIME_NODE_MODULES`、`PRESENTATIONS_SKILL_DIR` 与 `PRESENTATIONS_PYTHON`，运行 `DECK_REV=04 node submission/finals-2026-10-29/roadshow-v6-video/source/build.mjs` 可生成新的私有草稿及检查文件。最终文件需从检查目录复制到output。
+在具备同版Codex材料运行时的环境，从仓库根目录配置 `RUNTIME_NODE_MODULES`、`PRESENTATIONS_SKILL_DIR` 与 `PRESENTATIONS_PYTHON`，运行 `DECK_REV=07 node submission/finals-2026-10-29/roadshow-v6-video/source/build.mjs` 可生成新的私有草稿及检查文件。重复生成时请将DECK_REV改为未使用的编号。最终文件需从检查目录复制到output。
 
 [video/](video/) 保留配音片段、逐字时间、字幕文件、章节和采集时间；[source/](source/) 保留录制、配音、剪辑与检查脚本。原始窗口录屏保留在本机build目录，未放入公开材料。需要重新剪辑时，在独立工作目录放入 `system-raw.mp4`、`recording.json` 和video目录文件，然后执行 `source/edit_video.py <工作目录>`；需带libass的FFmpeg、相应字体，可通过 `FFMPEG`、`FFPROBE` 和 `DOCGUARD_VIDEO_FONTS` 指定路径。

@@ -23,8 +23,30 @@
     "证据": 0,
     "judge": 0
   },
-  "pptx_sha256": "f444b893fca98cff6b227a53b08a6ad3b14d3684fac0a7b0423cabb7a4cc1d8b",
+  "pptx_sha256": "fd53f883de524c34d64d9a308a31865f3b6beb9e0d44d0aa7e7deeee92b6baff",
   "embedded_video_sha256": "8749fc5f2595843050b914fd1f02b279539991ae1b3cd206c19644afc5dc29e4",
   "media_internal": true,
-  "native_office_playback": "not_tested_mac_locked"
+  "native_office_playback": {
+    "status": "pass",
+    "application": "WPS Office for macOS",
+    "version": "12.1.26046",
+    "platform": "Darwin-arm64",
+    "checks": [
+      "slide4 native media click",
+      "moving product UI and subtitles",
+      "nonzero WPS system audio output",
+      "full 120-second clip",
+      "poster restored after playback",
+      "continued slide navigation"
+    ],
+    "playback_observation": {
+      "started_at": 1793283543.357,
+      "observed_end_at": 1793283836.559,
+      "elapsed": 293.2019999027252
+    },
+    "audio": "wps-audio-output.json",
+    "preview": "wps-playback.jpg",
+    "end_state": "wps-ended.jpg",
+    "physical_display_fps_measured": false
+  }
 }

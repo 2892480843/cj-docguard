@@ -49,7 +49,7 @@ function base(n,title,sub){
 function note(s,x,y,w,h,title,body,{fill='none',color=C.ink,size=28}={}){const a=rough(s,x,y,w,h,{fill,color,width:2.7});text(s,title,x+20,y+18,w-40,43,32,color);if(body)text(s,body,x+20,y+75,w-40,h-87,size,C.muted);return a;}
 function table(s,values,x,y,w,h,widths,font=28){
  const t=s.tables.add({rows:values.length,columns:values[0].length,left:x,top:y,width:w,height:h,columnWidths:widths,values});t.styleOptions={headerRow:true,bandedRows:false};t.borders.assign(line('#a6aa9a',1.2));
- for(let r=0;r<values.length;r++)for(let c=0;c<values[0].length;c++){const a=t.getCell(r,c);a.fill=r===0?'#f6e8a7':'#fffdf3e8';a.text.style={typeface:/^[\x00-\x7F]+$/.test(values[r][c])?L:H,fontSize:font,color:r===0?C.blue:C.ink,bold:false,verticalAlignment:'middle',insets:{left:17,right:12,top:10,bottom:10},wrap:'square',autoFit:'none'};}
+ for(let r=0;r<values.length;r++)for(let c=0;c<values[0].length;c++){const a=t.getCell(r,c);a.fill=r===0?'#f6e8a7':'#fffdf3e8';a.text.style={typeface:/^[\x00-\x7F]+$/.test(values[r][c])?L:H,fontSize:font,color:r===0?C.blue:C.ink,bold:false,verticalAlignment:'middle',insets:{left:17,right:12,top:6,bottom:6},wrap:'square',autoFit:'none'};}
  rough(s,x-2,y-2,w+4,h+4,{color:C.ink,width:2.1});return t;
 }
 function metric(s,val,label,x,y,w=220,color=C.blue){text(s,String(val),x,y,w,88,68,color,L);text(s,label,x,y+88,w+60,40,28,C.ink,H);}
@@ -89,8 +89,8 @@ function shot(s,name,x,y,w,h,crop){rect(s,x,y,w,h,C.white);picture(s,name,x+5,y+
 // 4 · Native embedded MP4, added by the OOXML media helper after export.
 {
  const s=base(4);text(s,'系统介绍 · 02:00',73,69,1120,46,32,C.blue);
- const poster=picture(s,'video-poster.png',128,116,1024,576);poster.name='CJ-DocGuard-System-Video';
  rough(s,126,114,1028,580,{color:C.ink,width:2.5});
+ const poster=picture(s,'video-poster.png',128,116,1024,576);poster.name='CJ-DocGuard-System-Video';
 }
 // 5 · Architecture plus code-module map, actual division of responsibilities.
 {

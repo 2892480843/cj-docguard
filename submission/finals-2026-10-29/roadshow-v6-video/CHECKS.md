@@ -19,8 +19,10 @@
 | 本次真实操作 | 录制中查询SDK1.2.0 / Darwin-arm64 / arithmetic：1有效、0拒绝、退出0；同一环境导出成功、退出0 |
 | 讲稿计时 | 标准440秒（7:20），短版360秒，长版480秒，均包含完整120秒视频；为排练计划 |
 | PDF | 14页最终PPT固定画面；第4页只保留视频封面 |
-| 原生办公软件播放 | 尚未实测。检查时Mac锁屏阻止打开办公软件；没有标为通过，也未声称在Microsoft PowerPoint中完成检查 |
+| 原生办公软件播放 | WPS Office for macOS 12.1.26046 实测通过：第4页点击启动、动态画面与字幕、实际音频输出、完整成片结束后恢复封面及继续翻页。未声称Microsoft PowerPoint实测 |
 
-记录细节见 [facts.json](facts.json)、[checks/video-checks.json](checks/video-checks.json)、[images.json](images.json) 与 [video/recording.json](video/recording.json)。文件摘要见FILES.json。
+修复了视频上层装饰对象遮挡点击的问题，视频保持最上层；媒体结束时恢复封面，避免黑色区域。表格内边距同时收紧。
+
+记录细节见 [facts.json](facts.json)、[checks/video-checks.json](checks/video-checks.json)、[images.json](images.json) 、[WPS播放检查](checks/presentation-checks.json)、[实际播放画面](checks/wps-playback.jpg)、[结束画面](checks/wps-ended.jpg) 与 [video/recording.json](video/recording.json)。文件摘要见FILES.json。
 
 23项原生HTTP专项、20种页面场景及交互、30次布局检查和739条历史数量沿用同一功能版本已有记录，见[既有检查](../roadshow-v3/CHECKS.md)。本次没有重新运行全量功能套件，也没有声称每秒静态内容产生60个不同画面。设备端播放流畅度须在实际投屏电脑上确认。
