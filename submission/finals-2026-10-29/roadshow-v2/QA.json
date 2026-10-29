@@ -1,0 +1,32 @@
+{
+  "source_commit": "075aeb38fc32d46680f312e8ac3647a0977e1366",
+  "source_tag": "finals-source-20261029-r2",
+  "functional_source_files_unchanged": 167,
+  "main_seconds_planned": 440,
+  "short_seconds_planned": 360,
+  "long_seconds_planned": 480,
+  "browser_seconds_in_standard": 90,
+  "human_stopwatch_rehearsal": false,
+  "question_count": 25,
+  "prioritized_questions": 8,
+  "deck_checks": {
+    "主讲10页": {
+      "slides": 10,
+      "notes": 10,
+      "pdf_pages": 10,
+      "pptx_sha256": "2b8d9a84f4f28a84be2fbfcfb15970c634b81e536031fb383e19c3200d5e5791",
+      "pdf_sha256": "d6bec945738e5325d280fb6f280f9a77c46ac168560b9ffef8f2f98805e5958e"
+    },
+    "含备查14页": {
+      "slides": 14,
+      "notes": 14,
+      "pdf_pages": 14,
+      "pptx_sha256": "17b1e4e12da6e8c5b812b896d5f0904b67f8025dd5e28ab73f1ba148f483765f",
+      "pdf_sha256": "82a88c917e18b851b5af5c2e8079767a1a5d95020720113f0072adb9fbba33c4"
+    }
+  },
+  "slides_changed_after_full_visual_review": [
+    "ppt/slides/slide2.xml"
+  ],
+  "renderer": "host LibreOffice26.2.4,Poppler; CJK fallback checked visually"
+}

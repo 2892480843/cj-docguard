@@ -1,0 +1,8 @@
+{
+  "name": "cj-docguard-finals-roadshow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Editable finals slide generator; independent of the native workbench runtime",
+  "scripts": {"build": "node slides/compile.js"},
+  "dependencies": {"pptxgenjs": "4.0.1"}
+}

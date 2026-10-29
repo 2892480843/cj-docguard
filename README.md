@@ -1,6 +1,6 @@
 # CJ-DocGuard
 
-**决赛当前入口：[评委克隆运行指南](docs/judge-quickstart.md) · [决赛源码与验证证据](submission/finals-2026-10-29/README.md) · [6～8 分钟网页演示脚本](docs/finals-demo-runbook-2026-10-29.md)。源码冻结标签为 `finals-source-20261029-r2`；精确提交、测试结果及公开克隆回执见决赛证据目录。**
+**决赛当前入口：[评委克隆运行指南](docs/judge-quickstart.md) · [决赛源码与验证证据](submission/finals-2026-10-29/README.md) · [6～8 分钟PPT、讲稿与评委问答](submission/finals-2026-10-29/roadshow-v2/README.md)。源码冻结标签为 `finals-source-20261029-r2`；精确提交、测试结果及公开克隆回执见决赛证据目录。**
 
 2026-10-07 的[四类初赛材料](submission/正式提交材料/README.md)继续归档，不能代替本轮网页功能与源码验证。
 

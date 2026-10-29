@@ -1,6 +1,8 @@
 # CJ-DocGuard 决赛版本（2026-10-29）
 
-新版答辩：[可编辑 PPTX](CJ-DocGuard-决赛答辩-20261029.pptx) · [PDF 预览](CJ-DocGuard-决赛答辩-20261029.pdf) · [生成源码及逐页检查](slides/QA.md)。
+**最新路演：[主讲10页＋备查4页、6～8分钟讲稿及25题问答](roadshow-v2/README.md)。标准7分20秒已经包含90秒网页演示。**
+
+上一版答辩：[可编辑 PPTX](CJ-DocGuard-决赛答辩-20261029.pptx) · [PDF 预览](CJ-DocGuard-决赛答辩-20261029.pdf) · [生成源码及逐页检查](slides/QA.md)。
 
 验收：[最终123项验证](VERIFICATION.md) · [公开克隆运行回执](PUBLIC-CLONE.md) · [材料文件摘要](FILES.json)。
 

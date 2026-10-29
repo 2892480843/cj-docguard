@@ -19,8 +19,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4156,
-      "sha256": "bd64be6b0fcd6d68b06371bb0e3a293aec4b06673b8d23ae8761c73c7f7bf427"
+      "bytes": 4313,
+      "sha256": "1693f3a02f419557a79e7d649dc09477482f3bc196fba5f88e3c8dcfc5161c05"
     },
     {
       "path": "SOURCE-FILES.json",
@@ -34,8 +34,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "bytes": 5116,
-      "sha256": "9526ee03eacd3981c1b32236df709bc54ab55df0ec52aa48fd9cdde1f3333a6c"
+      "bytes": 5431,
+      "sha256": "be53c56e1f3a7a0a58ea22a05aed8a66139b68dc524370f012359ec1a79f951f"
     },
     {
       "path": "evidence/f01-before.txt",
@@ -146,6 +146,171 @@
       "path": "evidence/web-unicode-original.png",
       "bytes": 140479,
       "sha256": "82d25f973cbaf2a5058effdf847e053a3f4f6008cee1d745afa7affb57c08809"
+    },
+    {
+      "path": "roadshow-v2/.gitignore",
+      "bytes": 14,
+      "sha256": "4d56952b0fb13bf8f9b6c13a6d4c34a075bac3af447636a1df4335d7576e2f97"
+    },
+    {
+      "path": "roadshow-v2/CJ-DocGuard-决赛路演-主讲10页.pdf",
+      "bytes": 639601,
+      "sha256": "d6bec945738e5325d280fb6f280f9a77c46ac168560b9ffef8f2f98805e5958e"
+    },
+    {
+      "path": "roadshow-v2/CJ-DocGuard-决赛路演-主讲10页.pptx",
+      "bytes": 578411,
+      "sha256": "2b8d9a84f4f28a84be2fbfcfb15970c634b81e536031fb383e19c3200d5e5791"
+    },
+    {
+      "path": "roadshow-v2/CJ-DocGuard-决赛路演-含备查14页.pdf",
+      "bytes": 706533,
+      "sha256": "82a88c917e18b851b5af5c2e8079767a1a5d95020720113f0072adb9fbba33c4"
+    },
+    {
+      "path": "roadshow-v2/CJ-DocGuard-决赛路演-含备查14页.pptx",
+      "bytes": 666248,
+      "sha256": "17b1e4e12da6e8c5b812b896d5f0904b67f8025dd5e28ab73f1ba148f483765f"
+    },
+    {
+      "path": "roadshow-v2/DESIGN.md",
+      "bytes": 653,
+      "sha256": "650dbb42e45026a83609c5472f071e666c5b18a9e1d4f17f863f9cd6226e576e"
+    },
+    {
+      "path": "roadshow-v2/QA.json",
+      "bytes": 1095,
+      "sha256": "ebc4e7276cc68cc43d791c2fe48d05ab744ae5334087fc763f97e0429246f7f9"
+    },
+    {
+      "path": "roadshow-v2/QA.md",
+      "bytes": 2308,
+      "sha256": "7b730bffdb4b85c87c8b4f3c70d1ccf54dda405a8257be402d5e0b7528d1f8a6"
+    },
+    {
+      "path": "roadshow-v2/README.md",
+      "bytes": 2968,
+      "sha256": "6650bb5c5d6cdafca840905218f641fb39e072f6747559e4fdb3afafe0d4af19"
+    },
+    {
+      "path": "roadshow-v2/content.json",
+      "bytes": 12330,
+      "sha256": "1e6cfe06574c4447da21d51c5eef742e9b9afe3b24344aa8559d5c0e454d951e"
+    },
+    {
+      "path": "roadshow-v2/package.json",
+      "bytes": 274,
+      "sha256": "03b9bfc2a268d7ef92c84578176df40538840806bb5f4732e39cc2a9dd8b80db"
+    },
+    {
+      "path": "roadshow-v2/preview.jpg",
+      "bytes": 88779,
+      "sha256": "d7630eef743a03fbb21e3b59cda36b5b503c3f47523ccd6ac637185b5daa4605"
+    },
+    {
+      "path": "roadshow-v2/script-guidance.md",
+      "bytes": 1638,
+      "sha256": "ed09c5585ad5ebadbd7fd13f68000a323a4db8660ece1bc7be4d13f44c486e6c"
+    },
+    {
+      "path": "roadshow-v2/slides/compile.js",
+      "bytes": 784,
+      "sha256": "3f3d1050cb3a7a73c194b0cb2e4eac41e57c00e8c547adee1ec9ab658c2aca7d"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-01.js",
+      "bytes": 823,
+      "sha256": "4c35f621d85f7e87c56f93b7ee08d18503a4d30cbb0f6a6df605ede8ff8f4cea"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-02.js",
+      "bytes": 765,
+      "sha256": "97727e56992410ff5c1a32a30846fe77842fe3febdcff646cf7b04c9f63abbd3"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-03.js",
+      "bytes": 890,
+      "sha256": "92b9f8d0ef2c907f1f0a22583949ce9155c60059a559f03ca78f8dc4a1dd03fa"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-04.js",
+      "bytes": 983,
+      "sha256": "fda0e6cd493c44a7be5e5c0081a0798ad4cbc4205724a009088a9c06251b3563"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-05.js",
+      "bytes": 1089,
+      "sha256": "40af1c0b67ae9dc432b68a317039ef390963e1a13ffdd755c07981c07b211a52"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-06.js",
+      "bytes": 1222,
+      "sha256": "4c4f5f0dbfa348cf1a57a1336508ad0e8264bec7c4fad544c0622c9933bd6129"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-07.js",
+      "bytes": 968,
+      "sha256": "8360bba1ab8bbe0478eca8efbce2ad95ee55050de6e60809dfecf9f90a023208"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-08.js",
+      "bytes": 885,
+      "sha256": "7e8edecf72fcd3cf2bc69d2686fa5d1fcfee893860d4f1ba723e549328ee4978"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-09.js",
+      "bytes": 1131,
+      "sha256": "14ac0fef51af37a4c6ef01222921e32c97eb307b62d67001a6b7bd7d2c034974"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-10.js",
+      "bytes": 907,
+      "sha256": "e99c6e02f77b209ed64c0ececeb48ce3ca02855ee5bfda8a33240c567c4d9b0e"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-11.js",
+      "bytes": 1872,
+      "sha256": "64bd13eba8e8e996db066be786ae4263237b7c3149140065de1b82b96734198a"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-12.js",
+      "bytes": 1914,
+      "sha256": "5a6d45e9abbf1bd493437c8927aacc84838b74eb6779ea2ee8a8217548bf2397"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-13.js",
+      "bytes": 1867,
+      "sha256": "823f8fca3129b12a812229568872f2d42d1fa32eaea835e98401031b17e13cff"
+    },
+    {
+      "path": "roadshow-v2/slides/slide-14.js",
+      "bytes": 2045,
+      "sha256": "d02c7874c02ead698224721f1043edb5820a4d8796598512f536ed401ea9bef0"
+    },
+    {
+      "path": "roadshow-v2/slides/theme.js",
+      "bytes": 2060,
+      "sha256": "ceaddf97e7152f044b33cd4b8357049b8232dc283b5b83073afbeaa631ea5ba9"
+    },
+    {
+      "path": "roadshow-v2/slides/write-script.js",
+      "bytes": 2226,
+      "sha256": "0f60d7fc430597d6e037ff3e6722ee7e4bc6f018290a6b19eedc561653fa094c"
+    },
+    {
+      "path": "roadshow-v2/演示讲稿.md",
+      "bytes": 12860,
+      "sha256": "92e6efca541767b9b9ee73834a65458cb59a3da911207c1b5a7f0f127f02a528"
+    },
+    {
+      "path": "roadshow-v2/现场操作卡.md",
+      "bytes": 3938,
+      "sha256": "51ddaddc4c89c5c733719b85288786f1e202fdf46f9175008fd659d2460616e8"
+    },
+    {
+      "path": "roadshow-v2/评委问答.md",
+      "bytes": 24261,
+      "sha256": "ea6b5ef49cccd9c7bac2b722795104d36fc1c90784362a889216ea7d91a5f70b"
     },
     {
       "path": "slides/QA.md",
