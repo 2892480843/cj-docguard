@@ -69,10 +69,8 @@ func rSdk(e: J): String {
 }
 func rSymbolMatch(symbol: J, result: J): Bool {
     let reference = rField(result, "symbol_id")
-    let name = if (reference.kind == "null") { rField(result, "symbol") } else { reference }
-    if (name.kind != "string") { return false }
-    return name.text == rValue(symbol, "id") || name.text == rValue(symbol, "name") ||
-        name.text == rValue(symbol, "package") + "." + rValue(symbol, "name")
+    return reference.kind == "string" && reference.text == rValue(symbol, "id") &&
+        rValue(result, "binding_status") == "RESOLVED"
 }
 func rParameters(symbol: J): String {
     let p = rField(symbol, "parameters")

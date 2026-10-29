@@ -267,6 +267,22 @@ class EvidenceIntegration(NativeCLI):
         self.assertTrue(any(l['status']=='FAIL' for l in self.report()['links']))
         self.assertEqual((self.root/'.docguard/snapshots'/old_fp/'project/binary.dat').read_bytes(),bytes(range(256)))
 
+    def test_actual_index_link_corruption_and_multiline_setext(self):
+        (self.root / 'guide.md').write_text('Title\nwith continuation\n---\n', encoding='utf-8')
+        (self.root / 'README.md').write_text('[full title](guide.md#title-with-continuation)\n', encoding='utf-8')
+        self.command('verify')
+        index = self.root / '.docguard/site/index.html'
+        index.write_text(index.read_text() + '<a href="#missing-api">bad</a><a href="missing.json">bad</a>', encoding='utf-8')
+        self.command('check', '--strict', code=1)
+        links = self.report()['links']
+        for target in ('#missing-api', 'missing.json'):
+            self.assertTrue(any(row['target'] == target and row['status'] == 'FAIL' and row.get('scope') == 'index' for row in links))
+        self.assertTrue(any(row['target'] == 'guide.md#title-with-continuation' and row['status'] == 'PASS' for row in links))
+        self.command('check', '--strict')
+        (self.root / 'README.md').write_text('[incorrect short title](guide.md#with-continuation)\n', encoding='utf-8')
+        self.command('check', '--strict', code=1)
+        self.assertTrue(any(row['target'] == 'guide.md#with-continuation' and row['status'] == 'FAIL' for row in self.report()['links']))
+
     def test_mutation_during_verification(self):
         import time
         original=(self.root/'lib.cj').read_text()

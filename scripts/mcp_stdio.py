@@ -124,7 +124,7 @@ class Server:
             if key in arguments:
                 argv.extend(["--" + key, arguments[key]])
         # Keep only SDK/runtime-related environment, not unrelated credentials.
-        allowed = {"PATH", "CANGJIE_HOME", "DYLD_LIBRARY_PATH", "LD_LIBRARY_PATH", "SDKROOT", "LANG", "LC_ALL", "TZ", "CJ_DOCGUARD_RUNNER"}
+        allowed = {"PATH", "CANGJIE_HOME", "DYLD_LIBRARY_PATH", "LD_LIBRARY_PATH", "SDKROOT", "LANG", "LC_ALL", "TZ", "CJ_DOCGUARD_RUNNER", "CJ_DOCGUARD_SYSTEM_SDKROOT"}
         environment = {key: value for key, value in os.environ.items()
                        if key in allowed or re.fullmatch(r"CJ_DOCGUARD_SDK_[0-9_]+", key)}
         try:

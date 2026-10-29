@@ -38,6 +38,19 @@ def sdk_home(version: str) -> Path:
     raise RuntimeError(f'SDK {version} unavailable; set CJ_DOCGUARD_SDK_{version.replace(".", "_")} to its directory')
 
 
+def system_sdk_root() -> str:
+    """Honor an explicit SDK without changing the machine's Xcode selection."""
+    explicit = os.environ.get('CJ_DOCGUARD_SYSTEM_SDKROOT')
+    candidate = explicit or subprocess.check_output(
+        ['/usr/bin/xcrun', '--sdk', 'macosx', '--show-sdk-path'], text=True).strip()
+    path = Path(candidate)
+    if not path.is_absolute():
+        raise RuntimeError('system SDK path must be absolute')
+    if not (path / 'usr/lib/libSystem.tbd').is_file():
+        raise RuntimeError(f'system SDK lacks usr/lib/libSystem.tbd: {path}')
+    return str(path.resolve())
+
+
 def sdk_env(version: str) -> dict[str, str]:
     home = sdk_home(version)
     system, machine = host_identity()
@@ -49,7 +62,7 @@ def sdk_env(version: str) -> dict[str, str]:
     env['PATH'] = os.pathsep.join([str(home / 'bin'), str(home / 'tools' / 'bin'), '/usr/bin', '/bin', '/usr/sbin', '/sbin'])
     env['DYLD_LIBRARY_PATH' if system == 'Darwin' else 'LD_LIBRARY_PATH'] = str(runtime)
     if system == 'Darwin':
-        env['SDKROOT'] = subprocess.check_output(['/usr/bin/xcrun', '--sdk', 'macosx', '--show-sdk-path'], text=True).strip()
+        env['SDKROOT'] = system_sdk_root()
     for v in ('1.1.3', '1.2.0'):
         try:
             env['CJ_DOCGUARD_SDK_' + v.replace('.', '_')] = str(sdk_home(v))

@@ -6,5 +6,12 @@ Python standard library and system C compiler: development/protocol tooling, not
 Integration source checkouts are fetched at exact commits listed in integrations/upstream-lock.json,
 kept in ignored local build/cache directories, and retain original LICENSE notices.
 leven4cj: Apache-2.0; is-png-cj and compare-versions-cj: MIT.
-The executable integration harness samples are newly authored; upstream files remain unchanged.
+The executable integration harness samples are newly authored. Reviewed pinned upstream
+cache checkouts and the lock file remain unchanged. By default copied upstream sources
+also remain unchanged. Explicit --apply-reviewed-fixes creates a separately marked local
+leven4cj copy with two Unicode empty-string branch repairs; it never patches the cache.
+The reviewed patch, original/modified SHA-256 hashes and provenance are recorded in
+integrations/leven4cj/patches/ and each generated provenance.json.
+Apache-2.0 LICENSE and available NOTICE files are preserved in the generated copy.
+See docs/real-library-unicode-repair-2026-10-29.md for scope and reproduction commands.
 No upstream project adoption, endorsement, or contributor status is implied.

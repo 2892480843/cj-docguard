@@ -1,27 +1,45 @@
 # CJ-DocGuard
 
-**按官方四类编号的最新入口：[正式提交材料总览](submission/正式提交材料/README.md)。01源码、02测试验证、03视频、04统一模板；旧文件保留，正式签字仍待本人完成。**
+**决赛当前入口：[评委克隆运行指南](docs/judge-quickstart.md) · [决赛源码与验证证据](submission/finals-2026-10-29/README.md) · [6～8 分钟网页演示脚本](docs/finals-demo-runbook-2026-10-29.md)。源码冻结标签为 `finals-source-20261029`；精确提交、测试结果及公开克隆回执见决赛证据目录。**
+
+2026-10-07 的[四类初赛材料](submission/正式提交材料/README.md)继续归档，不能代替本轮网页功能与源码验证。
 
 [AtomGit源码仓库](https://atomgit.com/c2892480843s/cj-docguard) · [演示视频](https://www.bilibili.com/video/BV1R5HC6MEDo/) · [参赛材料与模板](submission/README.md) · [独立AI贡献仓库](https://atomgit.com/c2892480843s/cj-docguard-ai)
 
 **为仓颉 API 文档和示例提供实际运行证据；输入变化后拒绝把旧成功当作当前成功。**
 
-适合库维护、发布检查、个人作品集和 AI 辅助编码。源码提取、配置、指纹、实际执行编排、准入判断及报告均使用仓颉实现。Unix 进程组监督器使用 C；构建、测试和只读 MCP 协议适配使用 Python 标准库。核心没有模拟编译器或模型自评。
+适合库维护、发布检查、个人作品集和 AI 辅助编码。源码提取、配置、指纹、实际执行编排、准入判断、报告及本地 HTTP 服务均使用仓颉实现。Unix 进程组监督器使用 C；构建与启动使用 Bash；测试辅助和只读 MCP 协议适配使用 Python 标准库。核心没有模拟编译器或模型自评。
 
-当前实测 **macOS arm64 与 Ubuntu 22.04 Linux aarch64，仓颉 SDK 1.1.3 / 1.2.0**，范围与原始身份见 [Linux 验证](docs/linux-verification.md)。Windows 暂不支持。可执行输入限于审核过的本地、单包项目；广泛第三方依赖、宏展开、完整语义推断不在首版支持范围。
+本轮决赛完整验证宿主为 **macOS arm64，仓颉 SDK 1.1.3 / 1.2.0**；历史版本另有 Ubuntu 22.04 Linux aarch64 工作流验证，范围与原始身份见 [Linux 验证](docs/linux-verification.md)，不能替代本轮 Linux 回归。Windows 暂不支持。可执行输入限于审核过的本地、单包项目；广泛第三方依赖、宏展开、完整语义推断不在首版支持范围。
+
+## 本地网页工作台
+
+先按[评委指南](docs/judge-quickstart.md)登记两版 SDK（软件开发工具包）并选择兼容的 Apple 系统 SDK。运行 `bash scripts/build_workbench.sh`，再运行 `bash scripts/workbench.sh --port 8765`，在浏览器打开 `http://127.0.0.1:8765`。正式 HTTP（网页请求服务）进程由仓颉实现。工作台支持接口检索、示例矩阵、真实验证任务、证据详情、历史对比、AI 只读查询、配置管理和原生导出；默认使用独立演示副本。
+
+[仓颉原生服务指南](docs/native-workbench.md) · [服务迁移验收](docs/native-workbench-verification-2026-10-29.md) · [链接与真实库修复验收](docs/links-unicode-verification-2026-10-29.md) · [工作台完整指南](docs/workbench.md)说明首次运行、故障演示、系统 SDK 选择、证据边界和验收方法。原有静态报告继续作为离线快照使用。
+
+## 决赛三项功能修复
+
+| 问题 | 当前实现与回归入口 |
+|---|---|
+| F01 实际索引链接漏检 | 扫描生成 HTML 的真实 `href`、`src` 等静态 URL，按索引文件所在目录解析，保留预期 API 锚点检查；[原生回归](tests/native_index.cj)与 CLI/HTTP 回归覆盖文件和锚点损坏 |
+| F02 多行 Setext 标题锚点错误 | 按完整标题段落生成锚点，处理容器及重复标题；[链接解析回归](tests/native_links.cj) |
+| F03 同名成员和重载示例错绑 | 先解析完整符号目录，再以所属类型、限定名或精确符号 ID 绑定；歧义/未知绑定明确拒绝成为证据；[绑定回归](tests/test_bindings.py) |
+
+HTML 候选集合、重复属性或 `<base>` 等无法可靠解释的情况明确为 `UNVERIFIED`（未验证）；离线外链也不宣称可访问。完整范围见[决赛迭代说明](docs/finals-iteration-2026-10-29.md)。
 
 ## 评审与真实库复用
 
-[六项评分证据索引](docs/rubric-evidence.md)提供源码、测试、资源控制、实用案例和完成度的直接入口。[10页答辩PPT](submission/CJ-DocGuard-初赛答辩-亲切手绘版-20261007.pptx)为可编辑辅助材料，[真实库接入教程](docs/real-library-walkthrough.md)与[验证附件](submission/CJ-DocGuard-真实库复用证据-20261007.zip)展示固定leven4cj的40格双SDK检查和有效单例导出重建。当前36格有效、4格断言失败，严格检查返回1；有效单例的两版重建输出一致。输入变化后当前查询和导出拒绝旧成功。[架构审阅](docs/architecture.md)、[需求完成度](docs/requirements-status.md)和[贡献指南](CONTRIBUTING.md)说明支持范围及参与方法。
+[六项评分证据索引](docs/rubric-evidence.md)提供源码、测试、资源控制、实用案例和完成度的直接入口。[10页答辩PPT](submission/CJ-DocGuard-初赛答辩-亲切手绘版-20261007.pptx)为可编辑辅助材料，[真实库接入教程](docs/real-library-walkthrough.md)与[验证附件](submission/CJ-DocGuard-真实库复用证据-20261007.zip)展示固定leven4cj的40格双SDK检查和有效单例导出重建。该初赛附件保留原版36格有效、4格断言失败和严格检查返回1。决赛增加显式本地 Unicode（字符码点）修复副本：原版仍保留36/40，修复副本预期40/40，不修改断言或上游缓存；[修复与复现说明](docs/real-library-unicode-repair-2026-10-29.md)及本轮实际结果见决赛证据。有效单例的两版重建输出一致。输入变化后当前查询和导出拒绝旧成功。[架构审阅](docs/architecture.md)、[需求完成度](docs/requirements-status.md)和[贡献指南](CONTRIBUTING.md)说明支持范围及参与方法。
 
 ## 测试与验证证据速览
 
-以下数字均来自实际编译器与测试运行的最新记录，口径与限制见 [验收记录](docs/acceptance.md) 与 [持续优化记录](docs/optimization-log.md)；不同测试的断言数不可相加为普遍准确率。
+**本轮完整回归、真实 HTTP 工作流和公开克隆验收的精确结果，以[2026-10-29 决赛证据](submission/finals-2026-10-29/README.md)为准。** 以下为有固定身份的历史基线和样本口径；不同测试的断言数不可相加为普遍准确率。
 
-| 证据 | 最新结果 |
+| 证据 | 历史基线 / 样本口径 |
 |---|---|
 | 仓颉原生模块断言（每个 SDK 独立执行） | 基础 86 项、AST 提取 37 项、报告 43 项、平台 46 项 |
-| 核心完整回归（R05 冻结源码） | 80 项 Python 通过，零跳过；双 SDK 共 14 个原生程序通过；本轮发布仅整理文档和附件 |
+| 核心完整回归（R05 冻结源码） | 80 项 Python 通过，零跳过；双 SDK 共 14 个原生程序通过；2026-10-07 R05 记录，非本轮决赛套件 |
 | 导出包真实复现 | 26 个当前有效格全部导出、编译运行，登记断言匹配；2 个仅编译格拒绝导出 |
 | 健康样本执行矩阵 | 14 个登记例 × 2 个真实 SDK＝28 格：26 格运行验证、2 格明确仅编译 |
 | 提取覆盖 | 健康样本 47 个公共符号，含位置/注释/重载/泛型边界 |
@@ -157,6 +175,7 @@ python3 scripts/mcp_stdio.py \
 
 ```bash
 python3 scripts/test.py
+node tests/test_workbench_ui.mjs
 # 仅双 SDK 原生模块测试：
 python3 scripts/test.py --native-only
 # 可选：结构与脚本逻辑检查（需要显式 Node 路径；不代替浏览器验收）

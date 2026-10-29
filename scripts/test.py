@@ -16,7 +16,10 @@ CASES = {
     'evidence': ['primitives', 'evidence'],
     'report': ['primitives', 'report'],
     'platform': ['primitives', 'util', 'platform'],
-    'export': ['primitives', 'util', 'extractor', 'evidence', 'platform', 'engine', 'report', 'export'],
+    'bindings': ['primitives', 'bindings', 'report'],
+    'index': ['primitives', 'util', 'extractor', 'evidence', 'platform', 'bindings', 'engine', 'links', 'report', 'export'],
+    'links': ['primitives', 'util', 'extractor', 'evidence', 'platform', 'bindings', 'engine', 'links', 'report', 'export'],
+    'export': ['primitives', 'util', 'extractor', 'evidence', 'platform', 'bindings', 'engine', 'links', 'report', 'export'],
 }
 
 def run(argv, env, log, timeout=600):
@@ -51,7 +54,10 @@ def main():
             if not code: code=run([str(binary)],env,logs/f'{name}-{sdk}-run.log')
             outcomes.append({'case':name,'sdk':sdk,'exit_code':code})
     if not a.native_only:
-        code=run([sys.executable,'-m','unittest','discover','-s','tests','-p','test_*.py','-v'],dev.sdk_env('1.1.3'),logs/'python-integration.log')
+        native_build=run(['bash','scripts/build_workbench.sh'],dev.sdk_env('1.1.3'),logs/'workbench-build.log')
+        outcomes.append({'case':'native-workbench-build','exit_code':native_build})
+        if native_build: return 1
+        code=run([sys.executable,'-m','unittest','discover','-s','tests','-p','test_*.py','-v'],dev.sdk_env('1.1.3'),logs/'python-integration.log', timeout=1200)
         outcomes.append({'case':'python-integration','exit_code':code})
     (logs/'summary.json').write_text(json.dumps(outcomes,ensure_ascii=False,indent=2)+'\n')
     return int(any(o['exit_code'] for o in outcomes))

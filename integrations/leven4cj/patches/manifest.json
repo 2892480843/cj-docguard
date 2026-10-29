@@ -1,0 +1,18 @@
+{
+  "id": "unicode-empty-rune-count",
+  "path": "src/leven.cj",
+  "patch": "unicode-empty.patch",
+  "patch_sha256": "999ac6e4ab93d7113e6c1aa6949c141f20667615e692cfc2efa390018db27bf4",
+  "before_sha256": "8481682b4bc61c821a817aaa8b998542b179c41a5ddb8ddde11eef81b6cd12de",
+  "after_sha256": "f428ecb81b588fb37d91c4cf06c2eb39779e0d11a66f836c82bdce6a4bd362fa",
+  "replacements": [
+    [
+      "return secondString.size",
+      "return secondString.toRuneArray().size"
+    ],
+    [
+      "return firstString.size",
+      "return firstString.toRuneArray().size"
+    ]
+  ]
+}

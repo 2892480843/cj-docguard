@@ -65,12 +65,6 @@ func projectApi(project: Project, manifest: J): J {
         for (symbol in result.get("symbols").items) {
             let id = "s-" + digestText(path + "\n" + text(symbol, "owner", "") + "\n" + symbol.get("declaration").s())[..20]
             symbol.put("id", J.str(id))
-            let examples = J.arr()
-            for (example in array(project.config, "examples").items) {
-                let ref = text(example, "symbol", "")
-                if (ref == symbol.get("name").s() || ref == text(symbol, "package", "") + "." + symbol.get("name").s() || ref == id) { examples.add(example) }
-            }
-            symbol.put("examples", examples)
             api.get("symbols").add(symbol)
         }
         for (d in result.get("diagnostics").items) { api.get("diagnostics").add(d) }
@@ -105,6 +99,7 @@ func projectApi(project: Project, manifest: J): J {
             }
         }
     }
+    bindExamples(api, array(project.config, "examples"))
     api.put("source_count", J.num(sourceCount))
     return api
 }
@@ -298,6 +293,8 @@ func verifyProject(project: Project, manifest: J, api: J, environments: J, selec
                 .put("environment_fingerprint", environment.get("fingerprint")).put("execution_state", J.str("RUNNING"))
                 .put("status", J.str("NOT_RUN")).put("reason", J.str("attempt registered before execution"))
                 .put("started_at", J.str(nowText())).put("assertions", J.arr()).put("required", J.boolean(flag(example, "required", true)))
+            let binding = resolveBinding(api.get("symbols"), text(example, "symbol", ""))
+            record.put("symbol_id", binding.get("symbol_id")).put("binding_status", binding.get("status"))
             // Register before starting any child. A crash/interruption blocks older success.
             writeText(recordPath(project, sequence), record.dump())
             try {
@@ -385,69 +382,70 @@ func findByteString(source: String, pattern: String, start: Int64): Int64 {
     return -1
 }
 
-func headingSlug(s: String): String {
-    var out = ""
-    for (r in s.trimAscii().toRuneArray()) {
-        if (r == r' ' || r == r'\t') { out += "-" }
-        else if ((r >= r'a' && r <= r'z') || (r >= r'0' && r <= r'9') || r == r'-' || r == r'_' || UInt32(r) > 127) { out += r.toString() }
-        else if (r >= r'A' && r <= r'Z') { out += Rune(UInt32(r) + 32).toString() }
-    }
-    return out
-}
-
 func linkCheck(project: Project, from: String, target: String, required: Bool): J {
     let result = J.obj().put("from", J.str(from)).put("target", J.str(target)).put("required", J.boolean(required))
-    if (target.startsWith("https://") || target.startsWith("http://") || target.startsWith("mailto:")) {
-        return result.put("status", J.str("UNVERIFIED")).put("reason", J.str("External link not checked in offline mode"))
-    }
     try {
-        let parts = target.split("#")
-        let file = if (parts[0].isEmpty()) { from } else { join(Path(from).parent.toString(), parts[0]) }
-        let path = resolved(project.root, file)
-        if (!exists(path)) { return result.put("status", J.str("FAIL")).put("reason", J.str("Target file does not exist")) }
-        if (parts.size > 1 && !parts[1].isEmpty()) {
-            let content = readText(path)
-            var anchor = content.contains("id=\"" + parts[1] + "\"") || content.contains("id='" + parts[1] + "'")
-            if (file.endsWith(".md")) {
-                for (line in content.split("\n")) {
-                    if (line.startsWith("#")) {
-                        var first: Int64 = 0
-                        while (first < line.size && line.toArray()[first] == 35) { first++ }
-                        if (headingSlug(line[first..]) == parts[1]) { anchor = true }
-                    }
-                }
-            }
-            if (!anchor) { return result.put("status", J.str("FAIL")).put("reason", J.str("Target anchor does not exist")) }
+        let uri = decodeLinkText(target)
+        let lower = uri.toArray();for(i in 0..lower.size){if(lower[i]>=65 && lower[i]<=90){lower[i]+=32}}
+        let normalized = String.fromUtf8(lower)
+        if(normalized.startsWith("javascript:") || normalized.startsWith("data:") || normalized.startsWith("file:") || normalized.startsWith("vbscript:")){throw Exception("Unsafe link scheme")}
+        let colon=findByteString(uri,":",0);let slash=findByteString(uri,"/",0);let hash=findByteString(uri,"#",0);let query=findByteString(uri,"?",0)
+        if(uri.startsWith("//") || (colon>0 && (slash<0 || colon<slash) && (hash<0 || colon<hash) && (query<0 || colon<query))){
+            return result.put("required",J.boolean(required)).put("status",J.str("UNVERIFIED")).put("reason",J.str("External link not checked in offline mode"))
         }
-        return result.put("status", J.str("PASS")).put("reason", J.str("Local target exists"))
-    } catch (error: Exception) { return result.put("status", J.str("FAIL")).put("reason", J.str(error.message.replace(project.root, "$PROJECT"))) }
+        let fragment=if(hash>=0){decodeLinkPercent(uri[hash+1..])}else{""}
+        var pathEnd=if(hash>=0){hash}else{uri.size};if(query>=0 && query<pathEnd){pathEnd=query}
+        let relative=decodeLinkPercent(uri[..pathEnd]);if(relative.startsWith("/") || relative.contains("\\")){throw Exception("Absolute or backslash link path unsupported")}
+        let file=if(relative.isEmpty()){from}else{join(Path(from).parent.toString(),relative)}
+        let path=resolved(project.root,file)
+        if(!exists(path)){return result.put("status",J.str("FAIL")).put("reason",J.str("Target file does not exist"))}
+        if(!fragment.isEmpty()){
+            if(!FileInfo(path).isRegular()){throw Exception("Anchor target is not a regular file")}
+            if(!markdownAnchors(readText(path), isMarkdown: isMarkdownDocument(file)).contains(fragment)){return result.put("status",J.str("FAIL")).put("reason",J.str("Target anchor does not exist"))}
+        }
+        return result.put("status",J.str("PASS")).put("reason",J.str(if(fragment.isEmpty()){"Local target exists"}else{"Local target and anchor exist"}))
+    } catch(error: Exception){
+        return result.put("status",J.str(if(error.message.startsWith("Unsupported named HTML entity")){"UNVERIFIED"}else{"FAIL"})).put("reason",J.str(error.message.replace(project.root,"$PROJECT")))
+    }
+}
+
+func htmlDocumentName(path: String): Bool {
+    let bytes=path.toArray();for(i in 0..bytes.size){if(bytes[i]>=65 && bytes[i]<=90){bytes[i]+=32}}
+    let lower=String.fromUtf8(bytes);return lower.endsWith(".html") || lower.endsWith(".htm")
+}
+
+func appendLinkRows(project: Project, links: J, from: String, parsed: J, scope: String): Unit {
+    var hasBase=false
+    for(item in parsed.items){if(text(item,"tag","")=="base"){hasBase=true}}
+    for(item in parsed.items){
+        let row=linkCheck(project,from,item.get("target").s(),true)
+            .put("line",item.get("line")).put("syntax",item.get("syntax")).put("scope",J.str(scope))
+        if(text(row,"reason","")=="External link not checked in offline mode"){row.put("required",J.boolean(false))}
+        // Unsupported browser context must never be presented as a verified URL.
+        var unknown=""
+        if(hasBase){unknown="HTML base URL resolution is unsupported; URL context is unverified"}
+        else if(flag(item,"ambiguous",false)){unknown="Duplicate URL attributes are ambiguous"}
+        else if(flag(item,"unsupported",false)){unknown="HTML URL candidate lists are unsupported"}
+        if(!unknown.isEmpty()){row.put("status",J.str("UNVERIFIED")).put("required",J.boolean(true)).put("reason",J.str(unknown))}
+        links.add(row)
+    }
 }
 
 func checkLinks(project: Project, api: J, includeIndex: Bool): J {
-    let links = J.arr()
-    for (document in array(project.config.get("project"), "documents").items) {
-        let from = document.s()
-        let path = resolved(project.root, from)
-        if (!exists(path)) { links.add(J.obj().put("from", J.str(from)).put("target", J.str(from)).put("required", J.boolean(true)).put("status", J.str("FAIL")).put("reason", J.str("Configured document is missing"))); continue }
-        let content = readText(path)
-        var p: Int64 = 0
-        while (true) {
-            let begin = findByteString(content, "](", p)
-            if (begin < 0) { break }
-            let end = findByteString(content, ")", begin + 2)
-            if (end < 0) { break }
-            let target = content[begin + 2..end].trimAscii()
-            let required = !target.startsWith("https://") && !target.startsWith("http://") && !target.startsWith("mailto:")
-            links.add(linkCheck(project, from, target, required)); p = end + 1
-        }
+    let links=J.arr()
+    for(document in array(project.config.get("project"),"documents").items){
+        let from=document.s();let path=resolved(project.root,from)
+        if(!exists(path)){links.add(J.obj().put("from",J.str(from)).put("target",J.str(from)).put("required",J.boolean(true)).put("status",J.str("FAIL")).put("reason",J.str("Configured document is missing")));continue}
+        let content=readText(path)
+        appendLinkRows(project,links,from,if(htmlDocumentName(from)){htmlLinks(content)}else{markdownLinks(content)},"document")
     }
-    for (link in array(project.config, "links").items) { links.add(linkCheck(project, link.get("from").s(), link.get("target").s(), true)) }
-    if (includeIndex) {
-        let file = join(project.output, "site/index.html")
-        for (symbol in api.get("symbols").items) {
-            let target = file[project.root.size + 1..] + "#" + symbol.get("id").s()
-            links.add(linkCheck(project, ".index", target, true))
-        }
+    for(link in array(project.config,"links").items){links.add(linkCheck(project,link.get("from").s(),link.get("target").s(),true).put("syntax",J.str("configured")))}
+    if(includeIndex){
+        let file=join(project.output,"site/index.html");let relative=file[project.root.size+1..]
+        if(exists(file)){appendLinkRows(project,links,relative,htmlLinks(readText(file)),"index")}
+        else{links.add(J.obj().put("from",J.str(relative)).put("target",J.str(relative)).put("syntax",J.str("index-document")).put("required",J.boolean(true)).put("status",J.str("FAIL")).put("reason",J.str("Generated index document is missing")))}
+        // Keep expected API checks too: a missing link must not hide a missing API anchor.
+        for(symbol in api.get("symbols").items){let target=relative+"#"+symbol.get("id").s();links.add(linkCheck(project,".index",target,true).put("syntax",J.str("index")))}
     }
     return links
 }
@@ -466,12 +464,18 @@ func reportFor(project: Project, manifest: J, api: J, environments: J, attempts:
                     .put("sdk_version", J.str(sdk)).put("platform", environment.get("platform"))
                     .put("status", J.str("NOT_RUN")).put("reason", J.str("No attempt for this target"))
             } else { parseJson(latest.dump()) }
+            let binding = resolveBinding(api.get("symbols"), text(example, "symbol", ""))
+            let bindingOk = bindingRecordCurrent(binding, latest)
+            if (!bindingOk) {
+                r.put("symbol_id", J.nil()).put("binding_status", J.str(if (binding.get("status").s() == "RESOLVED") { "UNVERIFIED" } else { binding.get("status").s() }))
+            }
             let fresh = freshness(latest, manifest.get("fingerprint").s(), environment.get("fingerprint").s(), manifest.get("closure_complete").b())
             r.put("freshness", J.str(fresh)).put("required", J.boolean(flag(example, "required", true)))
-            let good = latest.kind != "null" && eligible(latest, manifest.get("fingerprint").s(), environment.get("fingerprint").s(), sdk, environment.get("platform").s(), manifest.get("closure_complete").b()) && evidenceComplete(project, latest)
+            let good = bindingOk && latest.kind != "null" && eligible(latest, manifest.get("fingerprint").s(), environment.get("fingerprint").s(), sdk, environment.get("platform").s(), manifest.get("closure_complete").b()) && evidenceComplete(project, latest)
             r.put("eligible", J.boolean(good))
-            r.put("compile_eligible", J.boolean(latest.kind != "null" && text(example, "mode", "run") == "compile" && text(r, "execution_state", "") == "COMPLETED" && text(r, "status", "") == "COMPILE_ONLY" && fresh == "CURRENT" && evidenceComplete(project, latest)))
+            r.put("compile_eligible", J.boolean(bindingOk && latest.kind != "null" && text(example, "mode", "run") == "compile" && text(r, "execution_state", "") == "COMPLETED" && text(r, "status", "") == "COMPILE_ONLY" && fresh == "CURRENT" && evidenceComplete(project, latest)))
             if (latest.kind != "null" && (text(r, "status", "") == "RUN_VERIFIED" || text(r, "status", "") == "COMPILE_ONLY") && !evidenceComplete(project, latest)) { r.put("freshness", J.str("UNKNOWN_CURRENT")).put("reason", J.str("Evidence logs missing or altered")) }
+            if (!bindingOk) { r.put("reason", J.str("Example symbol binding is unknown, ambiguous, missing or changed; verify with a unique symbol reference")) }
             results.add(publicValue(project, r))
             summary.put("TOTAL", J.num(number(summary, "TOTAL", 0) + 1))
             let status = r.get("status").s()
@@ -489,9 +493,12 @@ func reportFor(project: Project, manifest: J, api: J, environments: J, attempts:
     let diagnostics = J.arr()
     for (d in manifest.get("diagnostics").items) { diagnostics.add(d) }
     for (d in api.get("diagnostics").items) { diagnostics.add(d) }
+    let links=checkLinks(project,api,includeIndex)
+    let linkSummary=J.obj().put("TOTAL",J.num(links.items.size)).put("PASS",J.num(0)).put("FAIL",J.num(0)).put("UNVERIFIED",J.num(0))
+    for(link in links.items){let status=link.get("status").s();linkSummary.put(status,J.num(number(linkSummary,status,0)+1))}
     return J.obj().put("schema_version", J.num(1)).put("engine_version", J.str(ENGINE_VERSION)).put("generated_at", J.str(nowText()))
         .put("project", J.obj().put("name", J.str(project.name()))).put("manifest", manifest).put("api", api)
-        .put("environments", publicEnvs).put("results", results).put("links", checkLinks(project, api, includeIndex))
+        .put("environments", publicEnvs).put("results", results).put("links", links).put("link_summary",linkSummary)
         .put("diagnostics", diagnostics).put("summary", summary).put("history", publicValue(project, attempts))
 }
 

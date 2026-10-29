@@ -106,7 +106,8 @@ private func exportScript(project: Project, record: J, sourcePaths: J, sdk: Stri
         "[[ \"" + dollar + "(\"" + dollar + "CJ_SDK_HOME/bin/cjc\" --version)\" == *" + shellQuote("Cangjie Compiler: " + sdk + " (") + "* ]] || { echo 'SDK differs from recorded evidence' >&2; exit 2; }\n" +
         "if [[ \"" + dollar + "(uname -s)\" == Darwin ]]; then\n" +
         "  export DYLD_LIBRARY_PATH=\"" + dollar + "CJ_SDK_HOME/runtime/lib/darwin_aarch64_cjnative\"\n" +
-        "  export SDKROOT=\"" + dollar + "(xcrun --sdk macosx --show-sdk-path)\"\n" +
+        "  export SDKROOT=\"" + dollar + "{CJ_DOCGUARD_SYSTEM_SDKROOT:-" + dollar + "{SDKROOT:-" + dollar + "(xcrun --sdk macosx --show-sdk-path)}}\"\n" +
+        "  [[ \"" + dollar + "SDKROOT\" == /* && -f \"" + dollar + "SDKROOT/usr/lib/libSystem.tbd\" ]] || { echo 'Invalid system SDK root' >&2; exit 2; }\n" +
         "else\n  export LD_LIBRARY_PATH=\"" + dollar + "CJ_SDK_HOME/runtime/lib/linux_" + dollar + "(uname -m)_cjnative\"\nfi\n" +
         command + "\n./program\n"
 }
@@ -131,6 +132,11 @@ func exportExample(project: Project, manifest: J, environments: J, attempts: J,
     if (!environment.get("available").b()) { throw Exception("SDK environment unavailable: " + environment.get("reason").s()) }
     if (environment.get("platform").s() != platform) {
         return exportReject(id, record.get("status").s(), "UNKNOWN_CURRENT", "No current platform record")
+    }
+    let api = projectApi(project, manifest)
+    let binding = resolveBinding(api.get("symbols"), text(example, "symbol", ""))
+    if (!bindingRecordCurrent(binding, record)) {
+        return exportReject(id, record.get("status").s(), "UNKNOWN_CURRENT", "Example symbol binding is unknown, ambiguous, missing or changed")
     }
     let fp = manifest.get("fingerprint").s()
     let envFp = environment.get("fingerprint").s()
@@ -177,6 +183,7 @@ func exportExample(project: Project, manifest: J, environments: J, attempts: J,
     let evidence = J.obj().put("schema_version", J.num(1)).put("tool", J.str("cj-docguard"))
         .put("tool_version", J.str(ENGINE_VERSION)).put("project", J.str(project.name()))
         .put("example_id", J.str(id)).put("symbol", J.str(text(example, "symbol", "")))
+        .put("symbol_id", record.get("symbol_id")).put("binding_status", record.get("binding_status"))
         .put("sdk_version", J.str(sdk)).put("platform", J.str(platform))
         .put("project_fingerprint", J.str(fp)).put("environment_fingerprint", J.str(envFp))
         .put("attempt_sequence", record.get("sequence"))

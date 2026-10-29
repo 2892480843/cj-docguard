@@ -142,7 +142,15 @@ func inspectSdk(sdk: J, runner: String, workDir: String): J {
         if (os == "Darwin" && (arch == "arm64" || arch == "aarch64")) {
             runtime = "darwin_aarch64_cjnative"
             environment["DYLD_LIBRARY_PATH"] = join(home, "runtime/lib/" + runtime)
-            environment["SDKROOT"] = commandText(runner, ["/usr/bin/xcrun", "--sdk", "macosx", "--show-sdk-path"], workDir, basicEnvironment())
+            // An explicit SDK supports older bundled linkers without changing host Xcode.
+            var systemSdk = envValue("CJ_DOCGUARD_SYSTEM_SDKROOT")
+            if (systemSdk.isEmpty()) {
+                systemSdk = commandText(runner, ["/usr/bin/xcrun", "--sdk", "macosx", "--show-sdk-path"], workDir, basicEnvironment())
+            }
+            if (!Path(systemSdk).isAbsolute() || !exists(join(systemSdk, "usr/lib/libSystem.tbd"))) {
+                throw Exception("system SDK must be absolute and contain usr/lib/libSystem.tbd")
+            }
+            environment["SDKROOT"] = canonicalize(systemSdk).toString()
         } else if (os == "Linux" && (arch == "x86_64" || arch == "aarch64")) {
             runtime = "linux_" + arch + "_cjnative"
             environment["LD_LIBRARY_PATH"] = join(home, "runtime/lib/" + runtime)

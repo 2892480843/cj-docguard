@@ -63,6 +63,17 @@ main():Unit {
     pfExpect(sdk.get("available").b() && sdk.get("version").s()=="1.1.3","actual SDK version inspected")
     pfExpect(sdk.get("fingerprint").s().size==64,"content fingerprint")
     pfExpect(!sdk.get("platform").s().isEmpty(),"actual platform")
+    if (sdk.get("platform").s().startsWith("Darwin")) {
+        let savedSystemSdk = envValue("CJ_DOCGUARD_SYSTEM_SDKROOT")
+        Process.current.setEnv("CJ_DOCGUARD_SYSTEM_SDKROOT", "relative-system-sdk")
+        let invalidSystemSdk = inspectSdk(J.obj().put("version",J.str("1.1.3")).put("home",J.str(home)),runner,dir)
+        pfExpect(!invalidSystemSdk.get("available").b(), "invalid system SDK explicitly rejected")
+        if (savedSystemSdk.isEmpty()) { Process.current.removeEnv("CJ_DOCGUARD_SYSTEM_SDKROOT") }
+        else { Process.current.setEnv("CJ_DOCGUARD_SYSTEM_SDKROOT", savedSystemSdk) }
+        if (!savedSystemSdk.isEmpty()) {
+            pfExpect(sdk.get("environment").get("SDKROOT").s() == canonicalize(savedSystemSdk).toString(), "explicit system SDK recorded in execution identity")
+        }
+    }
     pfExpect(sdk.get("environment").get("CANGJIE_HOME").s()==canonicalize(home).toString(),"explicit canonical SDK environment")
     let registered=inspectSdk(J.obj().put("version",J.str("1.1.3")),runner,dir)
     pfExpect(registered.get("available").b() && registered.get("fingerprint").s()==sdk.get("fingerprint").s(),"environment registration and stable identity")

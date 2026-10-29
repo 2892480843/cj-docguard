@@ -2,6 +2,7 @@ package docguard
 
 import std.collection.*
 import std.fs.*
+import std.process.*
 
 let HELP = "CJ-DocGuard 0.1.0 native Cangjie evidence tool\nCommands: init, doctor, build, verify, check, query, evidence, export, history, diff\n--config docguard.toml; verify --matrix or --sdk VERSION\nquery [--tool list_symbols] [--symbol NAME_OR_ID]\nquery --tool get_verified_examples|get_evidence --sdk VERSION --platform OS-ARCH [--symbol NAME] [--example ID]\nevidence --sdk VERSION --platform OS-ARCH [--symbol NAME] [--example ID]\nexport --config FILE --example ID --sdk VERSION --platform OS-ARCH --out DIRECTORY\ndiff --old report.json --new report.json\nExit: 0 satisfied / 1 quality failure / 2 configuration or environment error\n"
 
@@ -91,10 +92,14 @@ func queryReport(report: J, options: HashMap<String, String>): J {
             if (symbol.isEmpty() || s.get("name").s() == symbol || s.get("id").s() == symbol) { items.add(s) }
         }
     } else if (tool == "get_verified_examples" || tool == "get_evidence") {
+        let binding = resolveBinding(report.get("api").get("symbols"), symbol)
+        if (!symbol.isEmpty() && binding.get("status").s() != "RESOLVED") {
+            throw Exception("query symbol is " + binding.get("status").s() + "; use a unique owner-qualified name or exact s-ID")
+        }
         for (r in report.get("results").items) {
             if (r.get("sdk_version").s() != sdk || r.get("platform").s() != platform) { continue }
             if (!example.isEmpty() && r.get("example_id").s() != example) { continue }
-            if (!symbol.isEmpty() && text(r, "symbol", "") != symbol) { continue }
+            if (!symbol.isEmpty() && text(r, "symbol_id", "") != text(binding, "symbol_id", "")) { continue }
             if (flag(r, "eligible", false) && r.get("freshness").s() == "CURRENT") { items.add(r) }
             else { rejected.add(J.obj().put("example_id", r.get("example_id")).put("status", r.get("status")).put("freshness", r.get("freshness")).put("reason", r.get("reason"))) }
         }
@@ -171,6 +176,7 @@ func operate(command: String, options: HashMap<String, String>): Int64 {
     Directory.create(lock)
     var phase = "input manifest"
     try {
+        writeText(join(lock, "owner.json"), J.obj().put("pid", J.num(Process.current.pid)).put("config", J.str(project.configPath)).put("started_at", J.str(nowText())).dump())
         var manifest = projectManifest(project)
         phase = "API extraction"
         var api = projectApi(project, manifest)

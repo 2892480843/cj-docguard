@@ -200,13 +200,14 @@ class McpUnitFixtureTests(unittest.TestCase):
         spec.loader.exec_module(module)
         server = module.Server(self.config, self.binary)
         completed = subprocess.CompletedProcess([], 0, stdout=b"{}", stderr=b"")
-        with patch.dict(os.environ, {"UNRELATED_SECRET": "unit-only-secret", "CJ_DOCGUARD_SDK_1_1_3": "/unit/sdk", "CJ_DOCGUARD_RUNNER": "/unit/runner"}):
+        with patch.dict(os.environ, {"UNRELATED_SECRET": "unit-only-secret", "CJ_DOCGUARD_SDK_1_1_3": "/unit/sdk", "CJ_DOCGUARD_RUNNER": "/unit/runner", "CJ_DOCGUARD_SYSTEM_SDKROOT": "/unit/system-sdk"}):
             with patch.object(module.subprocess, "run", return_value=completed) as mocked:
                 self.assertFalse(server.native_query("list_symbols", {})["isError"])
         environment = mocked.call_args.kwargs["env"]
         self.assertNotIn("UNRELATED_SECRET", environment)
         self.assertEqual(environment["CJ_DOCGUARD_SDK_1_1_3"], "/unit/sdk")
         self.assertEqual(environment["CJ_DOCGUARD_RUNNER"], "/unit/runner")
+        self.assertEqual(environment["CJ_DOCGUARD_SYSTEM_SDKROOT"], "/unit/system-sdk")
         self.assertEqual(mocked.call_args.kwargs["stdin"], subprocess.DEVNULL)
 
     def test_native_timeout_is_tool_error_unit_mock(self):

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pinned external-source integrations; production sources stay byte-identical upstream."""
+"""Pinned external-source integrations with explicit reviewed local repair opt-in."""
 from __future__ import annotations
 
 import argparse
@@ -106,7 +106,39 @@ def checked_checkout(item: dict, cache: Path, fetch: bool) -> Path:
     return repo
 
 
-def harness(item: dict, repo: Path, destination: Path, sdks: list[str]) -> Path:
+def apply_reviewed_source_fixes(item: dict, destination: Path) -> list[dict]:
+    """Apply only reviewed, hash-bound local repairs to the copied snapshot."""
+    if item['name'] != 'leven4cj':
+        return []
+    folder = ROOT / 'integrations/leven4cj/patches'
+    fix = json.loads((folder / 'manifest.json').read_text(encoding='utf-8'))
+    patch = folder / fix['patch']
+    if hashlib.sha256(patch.read_bytes()).hexdigest() != fix['patch_sha256']:
+        raise RuntimeError('reviewed patch hash mismatch')
+    if item['files_sha256'].get(fix['path']) != fix['before_sha256']:
+        raise RuntimeError('reviewed fix does not match pinned source')
+    target = destination / 'upstream' / fix['path']
+    before = target.read_bytes()
+    if hashlib.sha256(before).hexdigest() != fix['before_sha256']:
+        raise RuntimeError('reviewed fix before hash mismatch')
+    after = before
+    for old, new in fix['replacements']:
+        if after.count(old.encode('utf-8')) != 1:
+            raise RuntimeError('reviewed fix replacement count mismatch')
+        after = after.replace(old.encode('utf-8'), new.encode('utf-8'))
+    if hashlib.sha256(after).hexdigest() != fix['after_sha256']:
+        raise RuntimeError('reviewed fix after hash mismatch')
+    # Bind the human-reviewable patch to the exact transformation actually applied.
+    import difflib
+    expected = ''.join(difflib.unified_diff(before.decode().splitlines(True), after.decode().splitlines(True),
+                                         fromfile='a/' + fix['path'], tofile='b/' + fix['path']))
+    if patch.read_bytes() != expected.encode('utf-8'):
+        raise RuntimeError('reviewed patch differs from applied transformation')
+    target.write_bytes(after)
+    return [{key: value for key, value in fix.items() if key != 'replacements'}]
+
+
+def harness(item: dict, repo: Path, destination: Path, sdks: list[str], apply_reviewed_fixes: bool = False) -> Path:
     destination.mkdir(parents=True)
     # Copy all src files, keeping tests in the hash-bound snapshot but excluding them
     # explicitly from production analysis/build. Preserve bytes and license notices.
@@ -121,6 +153,7 @@ def harness(item: dict, repo: Path, destination: Path, sdks: list[str]) -> Path:
     for extra in ('NOTICE', 'NOTICE.txt'):
         if extra in item['files_sha256']:
             shutil.copyfile(repo / extra, destination / 'upstream' / extra)
+    fixes = apply_reviewed_source_fixes(item, destination) if apply_reviewed_fixes else []
     cases = examples_for(item)
     for case in cases:
         target = destination / case['file']
@@ -129,9 +162,13 @@ def harness(item: dict, repo: Path, destination: Path, sdks: list[str]) -> Path:
     provenance = {key: value for key, value in item.items() if key != 'stdout'}
     provenance.update(scope='full unchanged production src; upstream test files excluded',
                       source_modified=False, third_party_adoption=False)
+    if fixes:
+        provenance.update(scope='full production src with reviewed local Unicode repair; upstream tests excluded',
+                          source_modified=True, reviewed_fixes=fixes,
+                          modified_files_sha256={fix['path']: fix['after_sha256'] for fix in fixes})
     (destination / 'provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     exclusions = [f'upstream/{path}' for path in item['excluded_sources']]
-    lines = ['[project]', f'name = {json.dumps("upstream integration: " + item["name"])}',
+    lines = ['[project]', f'name = {json.dumps(("local fixed integration: " if fixes else "upstream integration: ") + item["name"])}',
              'sources = ["upstream/src"]', 'documents = ["README.md"]',
              'output = ".docguard"', 'trusted = true', 'closed_inputs = true',
              'exclude = ' + json.dumps(exclusions), '']
@@ -153,6 +190,9 @@ def harness(item: dict, repo: Path, destination: Path, sdks: list[str]) -> Path:
               f'明确排除的上游测试：`{", ".join(item["excluded_sources"])}`。'
               '这些测试先经人工审计，不执行测试宏或旧测试依赖；配置显式记录排除，因此封闭输入判定以原生引擎实际报告为准。\n\n'
               '[许可](upstream/LICENSE)、[来源和字节摘要](provenance.json)、[运行样例](sample.cj)。\n')
+    if fixes:
+        readme = readme.replace('上游生产源码按字节完整复制，未作兼容性改写。',
+                                '这是明确标记的本地修复版本；空字符串分支改用 Unicode 码点计数，详情与前后摘要见 provenance.json。')
     (destination / 'README.md').write_text(readme, encoding='utf-8')
     return config
 
@@ -160,6 +200,7 @@ def harness(item: dict, repo: Path, destination: Path, sdks: list[str]) -> Path:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cache', type=Path, default=ROOT / 'build/external-cache')
+    parser.add_argument('--apply-reviewed-fixes', action='store_true', help='opt in to hash-checked reviewed local source repairs')
     parser.add_argument('--fetch', action='store_true', help='fetch only the pre-reviewed pinned commits')
     parser.add_argument('--sdk', action='append', choices=['1.1.3', '1.2.0'])
     parser.add_argument('--project', action='append', choices=[p['name'] for p in LOCK['projects']])
@@ -184,7 +225,7 @@ def main() -> int:
     validate_examples(selected)
     checkouts = {p['name']: checked_checkout(p, args.cache.resolve(), args.fetch) for p in selected}
     for item in selected:
-        config = harness(item, checkouts[item['name']], run_root / item['name'], sdk_versions)
+        config = harness(item, checkouts[item['name']], run_root / item['name'], sdk_versions, args.apply_reviewed_fixes)
         started = datetime.now(timezone.utc).isoformat()
         command = [str(binary), 'verify', '--matrix', '--config', str(config)]
         matrix_cells = len(examples_for(item)) * len(sdk_versions)
@@ -211,6 +252,7 @@ def main() -> int:
                       observed_matrix_cells=len(report.get('results', [])),
                       results=[{k: r.get(k) for k in ('example_id','sdk_version','status','freshness','eligible','reason')}
                                for r in report.get('results', [])], third_party_adoption=False)
+        result['source_provenance'] = json.loads((config.parent / 'provenance.json').read_text(encoding='utf-8'))
         results.append(result)
         print(json.dumps({k: result[k] for k in ('name','exit_code','summary','results')}, ensure_ascii=False), flush=True)
     binary_digest_after = hashlib.sha256(binary.read_bytes()).hexdigest()

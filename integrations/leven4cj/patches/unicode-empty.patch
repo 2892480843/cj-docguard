@@ -1,0 +1,15 @@
+--- a/src/leven.cj
++++ b/src/leven.cj
+@@ -6,10 +6,10 @@
+         return 0
+     }
+     if (firstString.isEmpty()) {
+-        return secondString.size
++        return secondString.toRuneArray().size
+     }
+     if (secondString.isEmpty()) {
+-        return firstString.size
++        return firstString.toRuneArray().size
+     }
+     
+     let firstRuneArray = firstString.toRuneArray()

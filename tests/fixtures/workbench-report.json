@@ -1,0 +1,192 @@
+{
+  "api": {
+    "diagnostics": [],
+    "files": [
+      {
+        "source": "src/demo.cj",
+        "code": "package docguard_demo\npublic func greet(name: String): String { name }"
+      }
+    ],
+    "imports": [],
+    "source_count": 1,
+    "symbols": [
+      {
+        "column": 1,
+        "comment": "两个整数相乘。",
+        "declaration": "public func multiply(a: Int64, b: Int64): Int64",
+        "examples": [],
+        "id": "s-b969f2be18b41a16c4bc",
+        "kind": "function",
+        "line": 8,
+        "name": "multiply",
+        "owner": "",
+        "package": "docguard_demo",
+        "parameters": [
+          {
+            "name": "a",
+            "type": "Int64"
+          },
+          {
+            "name": "b",
+            "type": "Int64"
+          }
+        ],
+        "returns": "Int64",
+        "source": "src/demo.cj",
+        "status": "SUPPORTED"
+      },
+      {
+        "column": 1,
+        "comment": "生成中文问候，保留输入姓名。",
+        "declaration": "public func greet(name: String): String",
+        "examples": [
+          {
+            "expected_exit": 0,
+            "file": "programs/strings.cj",
+            "id": "strings",
+            "kind": "program",
+            "mode": "run",
+            "required": true,
+            "sdks": [
+              "1.1.3",
+              "1.2.0"
+            ],
+            "stdout": "你好，仓颉\n好好\n",
+            "symbol": "greet",
+            "timeout_ms": 10000
+          }
+        ],
+        "id": "s-747c7f068bff67565636",
+        "kind": "function",
+        "line": 23,
+        "name": "greet",
+        "owner": "",
+        "package": "docguard_demo",
+        "parameters": [
+          {
+            "name": "name",
+            "type": "String"
+          }
+        ],
+        "returns": "String",
+        "source": "src/demo.cj",
+        "status": "SUPPORTED"
+      },
+      {
+        "column": 1,
+        "comment": "自建样例使用的问候前缀。",
+        "declaration": "public var globalGreeting: String",
+        "examples": [],
+        "id": "s-8f715986c021cc52e67a",
+        "kind": "variable",
+        "line": 62,
+        "name": "globalGreeting",
+        "owner": "",
+        "package": "docguard_demo",
+        "parameters": [],
+        "returns": "String",
+        "source": "src/demo.cj",
+        "status": "SUPPORTED"
+      }
+    ]
+  },
+  "diagnostics": [],
+  "engine_version": "0.1.0",
+  "environments": [],
+  "generated_at": "2026-10-07T14:05:38.048787+08:00",
+  "history": [
+    {
+      "assertions": [
+        {
+          "actual": 0,
+          "expected": 0,
+          "kind": "exit_code",
+          "passed": true,
+          "required": true
+        },
+        {
+          "actual": "你好，仓颉\n好好\n",
+          "expected": "你好，仓颉\n好好\n",
+          "kind": "stdout",
+          "passed": true,
+          "required": true
+        }
+      ],
+      "eligible": false,
+      "example_id": "strings",
+      "freshness": "FROZEN",
+      "platform": "Darwin-arm64",
+      "sdk_version": "1.1.3",
+      "status": "RUN_VERIFIED",
+      "symbol": "greet"
+    }
+  ],
+  "links": [],
+  "manifest": {
+    "fingerprint": "fixture-only",
+    "files": []
+  },
+  "project": {
+    "name": "Renderer unit fixture, not execution evidence"
+  },
+  "results": [
+    {
+      "assertions": [
+        {
+          "actual": 0,
+          "expected": 0,
+          "kind": "exit_code",
+          "passed": true,
+          "required": true
+        },
+        {
+          "actual": "你好，仓颉\n好好\n",
+          "expected": "你好，仓颉\n好好\n",
+          "kind": "stdout",
+          "passed": true,
+          "required": true
+        }
+      ],
+      "eligible": true,
+      "example_id": "strings",
+      "freshness": "CURRENT",
+      "platform": "Darwin-arm64",
+      "sdk_version": "1.1.3",
+      "status": "RUN_VERIFIED",
+      "symbol": "greet"
+    },
+    {
+      "assertions": [
+        {
+          "actual": 0,
+          "expected": 0,
+          "kind": "exit_code",
+          "passed": true,
+          "required": true
+        },
+        {
+          "actual": "你好，仓颉\n好好\n",
+          "expected": "你好，仓颉\n好好\n",
+          "kind": "stdout",
+          "passed": true,
+          "required": true
+        }
+      ],
+      "eligible": true,
+      "example_id": "strings",
+      "freshness": "CURRENT",
+      "platform": "Darwin-arm64",
+      "sdk_version": "1.2.0",
+      "status": "RUN_VERIFIED",
+      "symbol": "greet"
+    }
+  ],
+  "schema_version": 1,
+  "summary": {
+    "COMPILE_ONLY": 2,
+    "CURRENT": 28,
+    "RUN_VERIFIED": 26,
+    "TOTAL": 28,
+    "VERIFIED_CURRENT": 26
+  }
+}
