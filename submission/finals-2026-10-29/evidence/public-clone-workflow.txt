@@ -1,0 +1,10 @@
+{'action': 'doctor', 'status': 'succeeded', 'exit_code': 0}
+{'action': 'build', 'status': 'succeeded', 'exit_code': 0}
+{'action': 'verify', 'status': 'succeeded', 'exit_code': 0}
+{'action': 'check', 'status': 'succeeded', 'exit_code': 0}
+{'action': 'query', 'status': 'succeeded', 'exit_code': 0}
+{'action': 'export', 'status': 'succeeded', 'exit_code': 0}
+{'action': 'query', 'status': 'succeeded', 'exit_code': 0}
+{'action': 'export', 'status': 'succeeded', 'exit_code': 0}
+PASS checkout native build/start/verify/check/query/export/rebuild
+Evidence: $REPO/build/finals-public-clone-r2/build/checkout-validation/20261029-143930

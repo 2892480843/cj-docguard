@@ -2,6 +2,8 @@
 
 新版答辩：[可编辑 PPTX](CJ-DocGuard-决赛答辩-20261029.pptx) · [PDF 预览](CJ-DocGuard-决赛答辩-20261029.pdf) · [生成源码及逐页检查](slides/QA.md)。
 
+验收：[最终123项验证](VERIFICATION.md) · [公开克隆运行回执](PUBLIC-CLONE.md) · [材料文件摘要](FILES.json)。
+
 入口：[评委克隆运行指南](../../docs/judge-quickstart.md) · [本轮迭代](../../docs/finals-iteration-2026-10-29.md) · [6～8 分钟网页演示提纲](../../docs/finals-demo-runbook-2026-10-29.md)。初赛材料保留原归档身份，不作为新版功能证明。
 
 ## 源码与复现
