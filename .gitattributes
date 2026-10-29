@@ -1,2 +1,5 @@
 # Reviewed patch context preserves upstream whitespace; its bytes are hash checked.
 integrations/leven4cj/patches/*.patch -whitespace
+
+# Keep the fixed-layout finals PDF as a binary artifact.
+submission/finals-2026-10-29/roadshow-v3/output/*.pdf binary
