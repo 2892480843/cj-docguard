@@ -1,0 +1,269 @@
+{
+  "generated_at": "2026-10-29T18:14:58.507127+08:00",
+  "link_summary": {
+    "FAIL": 2,
+    "PASS": 23,
+    "TOTAL": 26,
+    "UNVERIFIED": 1
+  },
+  "links": [
+    {
+      "from": "README.md",
+      "line": 5,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "document",
+      "status": "PASS",
+      "syntax": "inline",
+      "target": "docs/target%20file.md#相同标题-1"
+    },
+    {
+      "from": "README.md",
+      "line": 6,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "document",
+      "status": "PASS",
+      "syntax": "reference",
+      "target": "docs/target%20file.md#相同标题"
+    },
+    {
+      "from": "README.md",
+      "line": 7,
+      "reason": "Local target exists",
+      "required": true,
+      "scope": "document",
+      "status": "PASS",
+      "syntax": "reference",
+      "target": "docs/target%20file.md"
+    },
+    {
+      "from": "README.md",
+      "line": 8,
+      "reason": "Local target exists",
+      "required": true,
+      "scope": "document",
+      "status": "PASS",
+      "syntax": "reference",
+      "target": "docs/part(1).md"
+    },
+    {
+      "from": "README.md",
+      "line": 9,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "document",
+      "status": "PASS",
+      "syntax": "inline",
+      "target": "docs/target file.md#setext-heading"
+    },
+    {
+      "from": "README.md",
+      "line": 10,
+      "reason": "Local target exists",
+      "required": true,
+      "scope": "document",
+      "status": "PASS",
+      "syntax": "inline",
+      "target": "docs/part\\(1\\).md"
+    },
+    {
+      "from": "README.md",
+      "line": 11,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "document",
+      "status": "PASS",
+      "syntax": "inline",
+      "target": "docs/target%20file.md#manual-id"
+    },
+    {
+      "from": "README.md",
+      "line": 12,
+      "reason": "Local target exists",
+      "required": true,
+      "scope": "document",
+      "status": "PASS",
+      "syntax": "image-inline",
+      "target": "assets/icon.svg"
+    },
+    {
+      "from": "README.md",
+      "line": 13,
+      "reason": "Target file does not exist",
+      "required": true,
+      "scope": "document",
+      "status": "FAIL",
+      "syntax": "inline",
+      "target": "docs/intentionally-missing.md"
+    },
+    {
+      "from": "README.md",
+      "line": 14,
+      "reason": "Target anchor does not exist",
+      "required": true,
+      "scope": "document",
+      "status": "FAIL",
+      "syntax": "inline",
+      "target": "docs/target%20file.md#escaped-ghost"
+    },
+    {
+      "from": "README.md",
+      "line": 15,
+      "reason": "External link not checked in offline mode",
+      "required": false,
+      "scope": "document",
+      "status": "UNVERIFIED",
+      "syntax": "autolink",
+      "target": "https://cangjie-lang.cn"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#overview"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#api"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#matrix"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#evidence"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#diagnostics"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target exists",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "../report.json"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target exists",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "../api.json"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target exists",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "../manifest.json"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target exists",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "../report.md"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#file-40bdb226b1a0cfb489e8"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#result-0"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#result-1"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#result-0"
+    },
+    {
+      "from": ".docguard/site/index.html",
+      "line": 1,
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "scope": "index",
+      "status": "PASS",
+      "syntax": "html-href",
+      "target": "#result-1"
+    },
+    {
+      "from": ".index",
+      "reason": "Local target and anchor exist",
+      "required": true,
+      "status": "PASS",
+      "syntax": "index",
+      "target": ".docguard/site/index.html#s-e2e54c742b556e2685b9"
+    }
+  ]
+}

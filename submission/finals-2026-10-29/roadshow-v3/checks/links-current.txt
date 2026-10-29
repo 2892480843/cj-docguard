@@ -1,0 +1,1 @@
+{"report":"/Users/a111/chen/竞赛/仓颉生态创新开发挑战赛/cj-docguard/examples/link-checks/.docguard/report.json","summary":{"CURRENT":2,"RUN_VERIFIED":2,"TOTAL":2,"VERIFIED_CURRENT":2}}

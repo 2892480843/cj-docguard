@@ -1,0 +1,63 @@
+{
+  "source_commit": "068a22a8a4d1987ac0aac837da22b39c8224417f",
+  "platform": "Darwin-arm64",
+  "api_symbols": 47,
+  "registered_examples": 14,
+  "summary": {
+    "COMPILE_ONLY": 2,
+    "CURRENT": 28,
+    "RUN_VERIFIED": 26,
+    "TOTAL": 28,
+    "VERIFIED_CURRENT": 26
+  },
+  "by_sdk": [
+    {
+      "sdk": "1.1.3",
+      "run_verified": 13,
+      "compile_only": 1,
+      "total": 14
+    },
+    {
+      "sdk": "1.2.0",
+      "run_verified": 13,
+      "compile_only": 1,
+      "total": 14
+    }
+  ],
+  "links": {
+    "total": 178,
+    "pass": 178
+  },
+  "history_records": 739,
+  "report_generated_at": "2026-10-29T17:22:24.282584+08:00",
+  "link_negative_check": {
+    "exit_code": 1,
+    "counts": {
+      "PASS": 23,
+      "FAIL": 2,
+      "UNVERIFIED": 1
+    },
+    "failures": [
+      {
+        "from": "README.md",
+        "line": 13,
+        "reason": "Target file does not exist",
+        "required": true,
+        "scope": "document",
+        "status": "FAIL",
+        "syntax": "inline",
+        "target": "docs/intentionally-missing.md"
+      },
+      {
+        "from": "README.md",
+        "line": 14,
+        "reason": "Target anchor does not exist",
+        "required": true,
+        "scope": "document",
+        "status": "FAIL",
+        "syntax": "inline",
+        "target": "docs/target%20file.md#escaped-ghost"
+      }
+    ]
+  }
+}

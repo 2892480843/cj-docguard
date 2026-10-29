@@ -1,0 +1,101 @@
+{
+  "algorithm": "SHA-256",
+  "scope": "Files in this directory; manifest itself excluded",
+  "files": [
+    {
+      "path": "CHECKS.md",
+      "bytes": 1575,
+      "sha256": "093726bb02a84c08d1e5743b700ae6c52f5eedd14c2e661aba1fae607c082a87"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3983,
+      "sha256": "04620423ed70ecfbd3be9189ac364c7c6e52949a252951a7a10eefc244882f9b"
+    },
+    {
+      "path": "assets/api.png",
+      "bytes": 74733,
+      "sha256": "ebb64007ac9b9b484ccae2a5ecb3b491bb3a850fca5ec4959f8f4bf8057540ba"
+    },
+    {
+      "path": "assets/export.png",
+      "bytes": 49510,
+      "sha256": "6e79fd89d0536c0fa05c657d2dfa64af3557b4d5e5807c5c735b75ba2be28f13"
+    },
+    {
+      "path": "assets/links.png",
+      "bytes": 89380,
+      "sha256": "5539c194cafd7e677d2a78bbb4b5ba7cae98bbc5a6a8aa2acc0e05a3e8507bf3"
+    },
+    {
+      "path": "assets/overview.png",
+      "bytes": 66629,
+      "sha256": "4518b80f20a0e8072cb6edf6fbfb449b651dc71295e8dcef27f21a764e58ad93"
+    },
+    {
+      "path": "checks/layout-checks.json",
+      "bytes": 3612,
+      "sha256": "b4bfb89e5531c303042b6ba9b99d3ec6c0b14aac4244230547c7d0331a8dec31"
+    },
+    {
+      "path": "checks/link-results.json",
+      "bytes": 6673,
+      "sha256": "fcb0eebb114a2ac7b540a947f878cb2b1ed500ecb09f7123fcc98f17b1827537"
+    },
+    {
+      "path": "checks/links-current.txt",
+      "bytes": 198,
+      "sha256": "a297c618b47a13fbb7c63e96182c6df90bb88bfa5901fc651636adc7a236767e"
+    },
+    {
+      "path": "checks/native-http-current.txt",
+      "bytes": 3170,
+      "sha256": "6cefcdfb7995d93cbd4225fab90df88a2fdea4ae31aa4a0aa8eceed2f3ea9013"
+    },
+    {
+      "path": "checks/ui-current.txt",
+      "bytes": 1613,
+      "sha256": "22b92fdfc480013e36afdd09bb82306f417522b2154d7b041c9a82aeb5acb350"
+    },
+    {
+      "path": "content.json",
+      "bytes": 11072,
+      "sha256": "92165e4ac42ee88501c54662cb9bbb5d170b37b6971f7d66a02a289b2a61f7a3"
+    },
+    {
+      "path": "facts.json",
+      "bytes": 1350,
+      "sha256": "a4bc7d0a0296f6d06eb00a46b135e8f9d6fc93b517869584b9c28aa5e76d9e15"
+    },
+    {
+      "path": "output/CJ-DocGuard-决赛答辩-最新版-20261029.pdf",
+      "bytes": 4187885,
+      "sha256": "7c37328090366222dfb7e53461b59de53bbcd48fc8e63b918f61d3b0a07a4fd4"
+    },
+    {
+      "path": "output/CJ-DocGuard-决赛答辩-最新版-20261029.pptx",
+      "bytes": 276210,
+      "sha256": "b520a839e62204be197fb7c379c6408ef027afa4c28f40ea6da23f0274153799"
+    },
+    {
+      "path": "source/build.mjs",
+      "bytes": 18429,
+      "sha256": "1e588c2d7d8ca117e3a0a3e0a1f1c3c9a498bd9ada9d3a6f3d2d2ae406ffd922"
+    },
+    {
+      "path": "现场操作卡.md",
+      "bytes": 1168,
+      "sha256": "f46a0c946f8e1ddbdf845d13a85561978df3d6b7f2d9c170d05f456ceb75c948"
+    },
+    {
+      "path": "评委问答.md",
+      "bytes": 6187,
+      "sha256": "3cc4061ed27ac44ea99b2917f40a1ce1727aa7760626d8f1c37feb6073c9b04a"
+    },
+    {
+      "path": "逐页讲稿.md",
+      "bytes": 6799,
+      "sha256": "cf8f0a8983440aa192bb4ab1ab16d77e3deb1218b35389eff05a22004ea5121d"
+    }
+  ]
+}

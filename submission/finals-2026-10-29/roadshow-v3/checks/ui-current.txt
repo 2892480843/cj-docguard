@@ -1,0 +1,16 @@
+Workbench UI: 20 render scenarios plus search, status, escaping, dates, partial reports, progress and submit regressions passed.
+Native frontend identity, source capability gate/editor, workflow provenance, and query summary regressions passed.
+Explicit capability-gated lock inspection and recovery rendering regressions passed.
+First-observed completion, manual refresh, cancellation and once-only report synchronization regressions passed.
+All-link counts, scoped filters, safe text, original detail indices, empty reports and native assertion values passed.
+Real link filter events preserve global filters/source drafts; PASS detail and native failure dialogs passed.
+Native check dispatch and once-only report refresh on link job completion passed.
+Twenty-page plain wording, translated labels with raw values, read-only query, changed/compile-only semantics and filter events passed.
+Unknown protocol strings and user-authored content remain intact and escaped.
+All native declaration type names have readable labels and unchanged filter values.
+Completed query job shows readable results and collapses the original output.
+Dashboard exact counts, empty chart, shell, global search, mobile menu and scoped task notifications passed.
+Panel headers retain their layout and global search cannot be overwritten by per-page drafts.
+Plain project labels, exact pass-rate fill, empty states and disabled-aware option navigation passed.
+Indeterminate task states, actual query/export choices and query field requirements passed.
+Select-level disabled state can be changed without permanently disabling its options.
