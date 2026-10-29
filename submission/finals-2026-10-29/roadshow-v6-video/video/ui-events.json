@@ -1,0 +1,97 @@
+[
+  {
+    "scene": "overview",
+    "at": 1793279249.018,
+    "raw_seconds": 11.281
+  },
+  {
+    "scene": "api",
+    "at": 1793279249.625,
+    "raw_seconds": 11.888
+  },
+  {
+    "scene": "api-lower",
+    "at": 1793279275.956,
+    "raw_seconds": 38.219
+  },
+  {
+    "scene": "matrix",
+    "at": 1793279276.41,
+    "raw_seconds": 38.673
+  },
+  {
+    "scene": "record-detail",
+    "at": 1793279283.727,
+    "raw_seconds": 45.99
+  },
+  {
+    "scene": "output",
+    "at": 1793279289.578,
+    "raw_seconds": 51.841
+  },
+  {
+    "scene": "query-form",
+    "at": 1793279305.786,
+    "raw_seconds": 68.049
+  },
+  {
+    "scene": "query-ready",
+    "at": 1793279336.45,
+    "raw_seconds": 98.713
+  },
+  {
+    "scene": "query-start",
+    "at": 1793279336.783,
+    "raw_seconds": 99.046
+  },
+  {
+    "scene": "query-result",
+    "at": 1793279347.794,
+    "raw_seconds": 110.057
+  },
+  {
+    "scene": "links-all",
+    "at": 1793279366.142,
+    "raw_seconds": 128.405
+  },
+  {
+    "scene": "links-failed",
+    "at": 1793279378.236,
+    "raw_seconds": 140.499
+  },
+  {
+    "scene": "export-form",
+    "at": 1793279402.488,
+    "raw_seconds": 164.751
+  },
+  {
+    "scene": "export-start",
+    "at": 1793279411.784,
+    "raw_seconds": 174.047
+  },
+  {
+    "scene": "export-result",
+    "at": 1793279428.617,
+    "raw_seconds": 190.88
+  },
+  {
+    "scene": "source",
+    "at": 1793279438.4,
+    "raw_seconds": 200.663
+  },
+  {
+    "scene": "source-open",
+    "at": 1793279444.586,
+    "raw_seconds": 206.849
+  },
+  {
+    "scene": "source-code",
+    "at": 1793279455.931,
+    "raw_seconds": 218.194
+  },
+  {
+    "scene": "outro",
+    "at": 1793279466.268,
+    "raw_seconds": 228.531
+  }
+]

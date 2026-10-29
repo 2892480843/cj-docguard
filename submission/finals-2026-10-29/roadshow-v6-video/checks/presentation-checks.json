@@ -1,0 +1,30 @@
+{
+  "slides": 14,
+  "native_table_owner_slides": [
+    2,
+    5,
+    6,
+    7,
+    8,
+    11,
+    12
+  ],
+  "native_chart_owner_slides": [
+    6
+  ],
+  "forbidden_word_scan": {
+    "评委": 0,
+    "评审": 0,
+    "评分": 0,
+    "打分": 0,
+    "得分": 0,
+    "演示": 0,
+    "初赛": 0,
+    "证据": 0,
+    "judge": 0
+  },
+  "pptx_sha256": "f444b893fca98cff6b227a53b08a6ad3b14d3684fac0a7b0423cabb7a4cc1d8b",
+  "embedded_video_sha256": "8749fc5f2595843050b914fd1f02b279539991ae1b3cd206c19644afc5dc29e4",
+  "media_internal": true,
+  "native_office_playback": "not_tested_mac_locked"
+}

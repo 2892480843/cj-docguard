@@ -1,0 +1,33 @@
+{
+  "file": "CJ-DocGuard-系统介绍-2分钟-1080p60.mp4",
+  "sha256": "8749fc5f2595843050b914fd1f02b279539991ae1b3cd206c19644afc5dc29e4",
+  "duration_seconds": 120,
+  "width": 1920,
+  "height": 1080,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "pixel_format": "yuv420p",
+  "fps": "60/1",
+  "decoded_frames": 7200,
+  "frame_interval_min": 0.016665999999986525,
+  "frame_interval_max": 0.016667000000012422,
+  "full_decode": "pass",
+  "raw_capture": {
+    "capture_callbacks": 4959,
+    "completed_at": 1793279477.848353,
+    "duration": 240,
+    "encode_waits": 0,
+    "fps": 60,
+    "frames": 14400,
+    "max_schedule_late_ms": 16.042624666667393,
+    "static_reuses": 9582,
+    "writer_status": 2
+  },
+  "record_before_voice": true,
+  "voice": "zh-CN-XiaoyiNeural",
+  "voice_rate": "+0%",
+  "voice_pitch": "+0Hz",
+  "chapters": 7,
+  "subtitle_cues": 32,
+  "note": "原生窗口按60Hz采集并以固定时钟编码。静态画面保留上一帧，不声称静态页面每秒产生60个不同画面。两分钟从四分钟真实录屏剪辑，未加速操作。"
+}

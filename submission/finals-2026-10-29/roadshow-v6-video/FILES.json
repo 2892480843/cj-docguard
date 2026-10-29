@@ -1,0 +1,361 @@
+{
+  "algorithm": "SHA-256",
+  "scope": "Git-tracked materials under this directory; manifest itself and OS directory metadata excluded",
+  "files": [
+    {
+      "path": "CHECKS.md",
+      "bytes": 2688,
+      "sha256": "c301a6c9f43f1bdfa92a8ef6ac1b76480594909756cf9f5a6f7670995ac5dcd7"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4714,
+      "sha256": "62798c099c202cc649b83f8d048d34f5733601788ac35b03af023761dc7ac9b2"
+    },
+    {
+      "path": "assets/api.png",
+      "bytes": 74733,
+      "sha256": "ebb64007ac9b9b484ccae2a5ecb3b491bb3a850fca5ec4959f8f4bf8057540ba"
+    },
+    {
+      "path": "assets/config.png",
+      "bytes": 126039,
+      "sha256": "e13c070a5425fac5769decd309b95dc8dece613f5b1a2e9f8fffa2fee1e1a05d"
+    },
+    {
+      "path": "assets/export.png",
+      "bytes": 49510,
+      "sha256": "6e79fd89d0536c0fa05c657d2dfa64af3557b4d5e5807c5c735b75ba2be28f13"
+    },
+    {
+      "path": "assets/graph-paper.png",
+      "bytes": 2141131,
+      "sha256": "2a0c8b9b5e897588036a21c9d59cc8a99cf4726ee17b7a3b01c019f77dd45b61"
+    },
+    {
+      "path": "assets/history.png",
+      "bytes": 56249,
+      "sha256": "07662401a6d0df70449416d26890609ceccb1c69792c8bc858f39f24b92caf5e"
+    },
+    {
+      "path": "assets/links.png",
+      "bytes": 89380,
+      "sha256": "5539c194cafd7e677d2a78bbb4b5ba7cae98bbc5a6a8aa2acc0e05a3e8507bf3"
+    },
+    {
+      "path": "assets/matrix.png",
+      "bytes": 119440,
+      "sha256": "3f7a0d578aeab0cab0711caacba413e0932cf49c1fed1a4dc508ab1cd6699ed6"
+    },
+    {
+      "path": "assets/output-check.png",
+      "bytes": 45687,
+      "sha256": "05e390845ef28ea83c17f831e19feb61aecea0cb431cdadcf13e546de9173a31"
+    },
+    {
+      "path": "assets/overview.png",
+      "bytes": 87632,
+      "sha256": "d2e50c1a5144d6d13972224cb77811b5c8ddf005fe26515d63a7bccf9adc313d"
+    },
+    {
+      "path": "assets/project-options.png",
+      "bytes": 89819,
+      "sha256": "a2c96634d5a4865730194d8dc8a15534dac2173a26d1f8ece83914b0a1071289"
+    },
+    {
+      "path": "assets/query-form.png",
+      "bytes": 86887,
+      "sha256": "c3fedf5dd94a9e9750c887dcfdad8d37684c8465f4c52d42c65973a209b833e1"
+    },
+    {
+      "path": "assets/query-result.png",
+      "bytes": 55893,
+      "sha256": "170a6230ec4ce37017cfbb2b3460bad8805c5ac9b975f882262d45c165c72165"
+    },
+    {
+      "path": "assets/source-editor.png",
+      "bytes": 114816,
+      "sha256": "d8e2e94344db9782610ead3874b435f11384b982302050b0e53860989ebb80d0"
+    },
+    {
+      "path": "assets/task-running.png",
+      "bytes": 39709,
+      "sha256": "dfc1eb4e203f31c1e1ab4fa4fc1284182fad48f1451c30de2269ecb56ef171a4"
+    },
+    {
+      "path": "assets/video-poster.png",
+      "bytes": 324404,
+      "sha256": "7c48ffd8f5a6e732b0ce013c38479e58d173a1812339478f6b14558994afd0fb"
+    },
+    {
+      "path": "checks/presentation-checks.json",
+      "bytes": 593,
+      "sha256": "31f14ce4b6b253a6bccd9cbb97d7acec3aa0dbbe9a8b752e3c27b41e0e79b0d3"
+    },
+    {
+      "path": "checks/video-checks.json",
+      "bytes": 1074,
+      "sha256": "87ae78db659bf83daa88cec433aa320c1849fa774fe14121fd42b24342a47e1b"
+    },
+    {
+      "path": "content.json",
+      "bytes": 10752,
+      "sha256": "e7b4cc57a4438d2fe8ff5049cc0dcb204a71afd95d151af6ed85bc8fcef0ce62"
+    },
+    {
+      "path": "facts.json",
+      "bytes": 2087,
+      "sha256": "b1e15159f44fb77a17e4736b5c7180a4884c99f02362fc99c9469973f1f9ac2e"
+    },
+    {
+      "path": "images.json",
+      "bytes": 3456,
+      "sha256": "7db003a4cb8366519bafa2bbe3373724e8fac02ca91844c7615e6c2db6cd7be1"
+    },
+    {
+      "path": "output/CJ-DocGuard-决赛答辩-手写视频版-20261029.pptx",
+      "bytes": 8923009,
+      "sha256": "f444b893fca98cff6b227a53b08a6ad3b14d3684fac0a7b0423cabb7a4cc1d8b"
+    },
+    {
+      "path": "output/CJ-DocGuard-决赛答辩-手写视频版-静态阅读-20261029.pdf",
+      "bytes": 26654824,
+      "sha256": "2c3c8f8864efe2cf86e27fcf519a8ea93f0e8c726291dc8cbb9714abd3a8ebcc"
+    },
+    {
+      "path": "output/CJ-DocGuard-系统介绍-2分钟-1080p60.mp4",
+      "bytes": 6482771,
+      "sha256": "8749fc5f2595843050b914fd1f02b279539991ae1b3cd206c19644afc5dc29e4"
+    },
+    {
+      "path": "source/build.mjs",
+      "bytes": 24785,
+      "sha256": "7ed95b51493bd871d3b7a9a470565fbc0b1f50e86e009bdec95d7994db969621"
+    },
+    {
+      "path": "source/create_pdf.py",
+      "bytes": 704,
+      "sha256": "db6fa84946e9b0d4c4be1ebeb38a4270522c36452a2ba0dc969f76cf6e047f37"
+    },
+    {
+      "path": "source/dedup_media.py",
+      "bytes": 1732,
+      "sha256": "e5e0ab21534485907c9f270a13964e19ac24c4667ad09a996187bb634a99e3d6"
+    },
+    {
+      "path": "source/edit_video.py",
+      "bytes": 7264,
+      "sha256": "4ab12a67218c4d56911d6081002a7e120fd71cf7d254a7a2c96c7788782e7ad6"
+    },
+    {
+      "path": "source/embed_video.py",
+      "bytes": 3900,
+      "sha256": "a38161e557faf0971f107bd31424fae01a0fc9bff48f75951d0fdfe63a90ab2d"
+    },
+    {
+      "path": "source/make_poster.py",
+      "bytes": 858,
+      "sha256": "5b6e52360753fb6f4c5ac26798a0b2b8f19e13b8ee39af4f5593d651ee8387e9"
+    },
+    {
+      "path": "source/record.swift",
+      "bytes": 5284,
+      "sha256": "cff0f434ad85e14669258daf7841db64f51c3c4977cf9ca987a995377d661f05"
+    },
+    {
+      "path": "source/speech.py",
+      "bytes": 1562,
+      "sha256": "a9e58f8da7916d2eb2557a37f58f64fe24854349c5cb5c8daf11af452c70893e"
+    },
+    {
+      "path": "source/verify_video.py",
+      "bytes": 2563,
+      "sha256": "ba784f5b4c3da84e890444049827255f459c95ffea3b36c7f6534691e30ac029"
+    },
+    {
+      "path": "video/chapters.json",
+      "bytes": 3289,
+      "sha256": "69a4c6c5fa05d2a7b5009b6ccadded937a9d9696cf687d3b615287488607bce8"
+    },
+    {
+      "path": "video/recording.json",
+      "bytes": 243,
+      "sha256": "a7a4b4e7df6ea39527c51933393c860c9996c84cf1fef9016053f778ba759156"
+    },
+    {
+      "path": "video/subtitles.ass",
+      "bytes": 19257,
+      "sha256": "ec98d0720c19db95744c328c68ffc4ee55548f3a8e20bf9dc6978cab04e27e49"
+    },
+    {
+      "path": "video/subtitles.srt",
+      "bytes": 2526,
+      "sha256": "69f8fa5a44d55778bb1f08c04277df59c7830b647a401d8788f32a19110ea43a"
+    },
+    {
+      "path": "video/ui-events.json",
+      "bytes": 1668,
+      "sha256": "004990da5639a046bac671f87c63fc833ecc5d80a94ddfbad27a65caa8bb3057"
+    },
+    {
+      "path": "video/voice-01.json",
+      "bytes": 153,
+      "sha256": "8c1e7bc8c6b5fdabcadeaec2d26c718a5ee6268d55979c9bbdd0ed6168b71eae"
+    },
+    {
+      "path": "video/voice-01.mp3",
+      "bytes": 55152,
+      "sha256": "57761f681c16fc0bc3397119533beeb34480e1b5a414dfe2a4cdacb0f45818bd"
+    },
+    {
+      "path": "video/voice-01.srt",
+      "bytes": 834,
+      "sha256": "b36c4d8e4dd119c0bcf9b5f82f218139e8558bb6f1c56f8677457909a8beea29"
+    },
+    {
+      "path": "video/voice-01.txt",
+      "bytes": 123,
+      "sha256": "06b80b95e63eb358ad0e867b2db5ec0379251737a10c12ad3c50980d98f54100"
+    },
+    {
+      "path": "video/voice-02.json",
+      "bytes": 153,
+      "sha256": "ae757542e462a13f6d8344cb98c4f4679b6e7b9b1e683a47ca808db1e17a57ee"
+    },
+    {
+      "path": "video/voice-02.mp3",
+      "bytes": 94032,
+      "sha256": "400f574f200323e8f9b6260eab4a83798cf518203e85a9debdf45e7922a46d8c"
+    },
+    {
+      "path": "video/voice-02.srt",
+      "bytes": 1443,
+      "sha256": "99525c68b2cc85e9a810f35caf18b5749361b1e46cdad8529782c40620edac91"
+    },
+    {
+      "path": "video/voice-02.txt",
+      "bytes": 216,
+      "sha256": "50227035310880c878ca2bdcf33abb19ea5380e0000d49cd67b554c416bbdae9"
+    },
+    {
+      "path": "video/voice-03.json",
+      "bytes": 153,
+      "sha256": "3c43e1ccef161cb10f9d42acdf54fcf095e944fa68d4c5d76a6d39ea26fae316"
+    },
+    {
+      "path": "video/voice-03.mp3",
+      "bytes": 98640,
+      "sha256": "de126b0abac27c81a03c4583265071d029697a75ff6aa7a97065b8360698c0ac"
+    },
+    {
+      "path": "video/voice-03.srt",
+      "bytes": 1475,
+      "sha256": "d58eabbe9a2d59d607a877b850ff552269468e7c6806a9c1ab2ecb5cef538118"
+    },
+    {
+      "path": "video/voice-03.txt",
+      "bytes": 213,
+      "sha256": "eb84a83473a83700a839071e92c02a85e83d1a55ea046c2a20132cf7356266ad"
+    },
+    {
+      "path": "video/voice-04.json",
+      "bytes": 153,
+      "sha256": "ac5487b3fe2446a676bd3ae0137f827179bdece163a45f9af25b049fde2da60e"
+    },
+    {
+      "path": "video/voice-04.mp3",
+      "bytes": 121392,
+      "sha256": "db616c61b387a28a12050f4b08bdbe342c2f19e36f44a0e6023a774e82f22ef5"
+    },
+    {
+      "path": "video/voice-04.srt",
+      "bytes": 1844,
+      "sha256": "dc2a87de6365b493a90843e88f445e03a803b3ff0b6d09c53d4dfa6fdef1a8f3"
+    },
+    {
+      "path": "video/voice-04.txt",
+      "bytes": 273,
+      "sha256": "1dbc83c986635ad726e92c217cf135bec695776617654ed75ab8c921ef9cb081"
+    },
+    {
+      "path": "video/voice-05.json",
+      "bytes": 154,
+      "sha256": "bbf5198baa8f0cf93ae5fedc9d25ea1dbff423dc44e85dde7380420172656d05"
+    },
+    {
+      "path": "video/voice-05.mp3",
+      "bytes": 116784,
+      "sha256": "9d845348308dd45ac0df7c814e7eff259c0e01831a95ffa75b3569ca6de0729b"
+    },
+    {
+      "path": "video/voice-05.srt",
+      "bytes": 1876,
+      "sha256": "d826fd48dc96875fa00a925055618e2b9b167145767b7cb3ae53a72a759cb20a"
+    },
+    {
+      "path": "video/voice-05.txt",
+      "bytes": 267,
+      "sha256": "84f26dcd4b3752c763b51dfa9bfafe6c18e7a9c5e8b35cfc038de1c5f4f0c5e6"
+    },
+    {
+      "path": "video/voice-06.json",
+      "bytes": 153,
+      "sha256": "5156a9dc130ca512137f8f1ebf29691afb7c074061116d36ba6c9727f43e7663"
+    },
+    {
+      "path": "video/voice-06.mp3",
+      "bytes": 111456,
+      "sha256": "a5eb1203d64fc931860affabc12c5efc57beb3c82dcb07730beec540dd62fec8"
+    },
+    {
+      "path": "video/voice-06.srt",
+      "bytes": 1642,
+      "sha256": "97423d39a52949610f591aa44e52c1364f7ee2a3a6c9e2efb62fd54026855b91"
+    },
+    {
+      "path": "video/voice-06.txt",
+      "bytes": 243,
+      "sha256": "78533f1856bcdeeaa69dfb85bfeefa8a7901298eb50a7b188207c270dcb93e5e"
+    },
+    {
+      "path": "video/voice-07.json",
+      "bytes": 153,
+      "sha256": "da9e69db6fd0526677a724e13e65f4358f81ba3b6eb797a12831883fe47e4f92"
+    },
+    {
+      "path": "video/voice-07.mp3",
+      "bytes": 41184,
+      "sha256": "1086c72f300a437be0ab9a5e696f9bfd269b86978e4aa8e467d404b46b13143d"
+    },
+    {
+      "path": "video/voice-07.srt",
+      "bytes": 518,
+      "sha256": "54d523e2d154b984df52794314c298a8b27699f5dfa41d665401528dbac97db2"
+    },
+    {
+      "path": "video/voice-07.txt",
+      "bytes": 81,
+      "sha256": "1c01ef778db880e72280968c9639c27197483b2e685f58997250a54c404112a8"
+    },
+    {
+      "path": "video/配音文稿.md",
+      "bytes": 1738,
+      "sha256": "b8baf0e2610954797aaaadbd03905ee2f04dd9f2c17e4a5965b6e4750e1be0f0"
+    },
+    {
+      "path": "技术问答.md",
+      "bytes": 6759,
+      "sha256": "2922c2b2dd58e6ee388d64aad4b4f5e92cd778d49d242ab1e376e986d6ee30ab"
+    },
+    {
+      "path": "赛题内容对照.md",
+      "bytes": 1775,
+      "sha256": "5ddc3b3ab4f17135653041f0815f79f940c082fd416a903e34292661d9628abf"
+    },
+    {
+      "path": "逐页讲稿.md",
+      "bytes": 8452,
+      "sha256": "4fece61fd557a157d1da303f3a175a87ff0e748e06e2caf857361c2dd449aec7"
+    }
+  ]
+}

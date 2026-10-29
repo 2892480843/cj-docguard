@@ -1,6 +1,6 @@
 # CJ-DocGuard
 
-**决赛当前入口：[评委运行指南](docs/judge-quickstart.md) · [手写图文增强版PPT、6～8分钟讲稿与问答](submission/finals-2026-10-29/roadshow-v5-rich/README.md)。答辩数字对应功能源码 `068a22a`；当前材料只采用本版结果，公开主分支保留后续材料更新。**
+**决赛当前入口：[本地工作台运行指南](docs/native-workbench.md) · [手写视频版PPT、两分钟系统介绍、6～8分钟讲稿与技术问答](submission/finals-2026-10-29/roadshow-v6-video/README.md)。答辩数字对应功能源码 `068a22a`；本版只采用当前结果，公开主分支保留后续材料更新。**
 
 2026-10-07 的[四类初赛材料](submission/正式提交材料/README.md)继续归档，不能代替本轮网页功能与源码验证。
 
